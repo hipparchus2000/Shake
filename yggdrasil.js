@@ -130,6 +130,8 @@ function applyProjectsTemplate() {
 				
 				var hrefNotFound = href.includes("undefined");
 				var onclickNotFound = onclick==null;
+				if (href == "#")
+					hrefNotFound = true;
 				
 				if(hrefNotFound && onclickNotFound) {
 					var classAttribute = allButtons[i].getAttribute("class");
