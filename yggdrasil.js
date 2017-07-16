@@ -89,6 +89,16 @@ function refresh() {
 				projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{siteUrl}}/g, project.siteUrl);
 				projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{url}}/g, project.url);
 				projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{pdfUrl}}/g, project.pdfUrl);
+				
+				//hide buttons with "undefined" as href
+				var allButtons = projectTemplatedInstance.getElementsByClassName("btn");
+				for (var i = 0; i < allButtons.length; i++) {
+					if(allButtons[i].getAttribute("href")=="undefined") {
+						var classAttribute = allButtons[i].getAttribute("class");
+						classAttribute.append(" hidden");
+					}
+				}
+
 				currentRow.append(projectTemplatedInstance);
 				if ((rowcount % 3) == 0) {
 					root.append(currentRow);
@@ -97,14 +107,6 @@ function refresh() {
 			});
 		});
 		
-		//hide buttons with "undefined" as href
-		var allButtons = document.getElementsByClassName("btn");
-		for (var i = 0; i < allButtons.length; i++) {
-			if(allButtons[i].getAttribute("href")=="undefined") {
-				var classAttribute = allButtons[i].getAttribute("class");
-				classAttribute.append(" hidden");
-			}
-		}
 		
 	}
 }
