@@ -124,8 +124,8 @@ function applyProjectsTemplate() {
 			//hide buttons with undefined href and onclick
 			var allButtons = projectTemplatedInstance.getElementsByClassName("btn");
 			for (var i = 0; i < allButtons.length; i++) {
-				var hrefNotFound = allButtons[i].getAttribute("href")=="undefined";
-				var onclickNotFound = allButtons[i].getAttribute("onclick")=="undefined";
+				var hrefNotFound = allButtons[i].getAttribute("href").includes("undefined");
+				var onclickNotFound = allButtons[i].getAttribute("onclick").includes("undefined");
 				
 				if(hrefNotFound && onclickNotFound) {
 					var classAttribute = allButtons[i].getAttribute("class");
