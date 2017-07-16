@@ -53,7 +53,6 @@ function generateUUID(){
 }
 
 
-//REST fetch projects.json
 function getUrlUsingRest(url, callback) {
 	fetch(url).then(function(response) {
 	  return response.json();
@@ -63,6 +62,28 @@ function getUrlUsingRest(url, callback) {
 	  console.log("Failed To Get Url "+err);
 	});
 }
+
+function getUrlAsHtmlUsingRest(url, callback) {
+	fetch(url).then(function(response) {
+	  return response;
+	}).then(function(data) {
+	  callback(data);
+	}).catch(function(err) {
+	  console.log("Failed To Get Url "+err);
+	});
+}
+
+function loadHtmlFragmentToRoot(url) {
+	getUrlAsHtmlUsingRest(url,function(response) {
+		var root = document.getElementById("root");
+		//clear all nodes from root
+		while (root.firstChild) {
+			root.removeChild(root.firstChild);
+		};
+		root.innerHTML = response;
+	});
+}
+
 
 function applyProjectsTemplate() {
 	var templates = document.getElementById("templates");
