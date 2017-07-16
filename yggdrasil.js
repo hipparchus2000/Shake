@@ -80,7 +80,7 @@ function loadHtmlFragmentToRoot(url) {
 		while (root.firstChild) {
 			root.removeChild(root.firstChild);
 		};
-		root.innerHTML = response;
+		root.innerHTML = response.body.innerHTML;
 	});
 }
 
