@@ -147,8 +147,8 @@ function navigateState(stateTitle,templateFunction) {
 
 function refresh() {
 	switch(route) {
-		case "/":     navigateState("Yggsrasil Projects", applyProjectsTemplate()); break;
-		case "/blog": navigateState("Jeff Davies' Blog", applyBlogTemplate()); break;
+		case "/":     navigateState("Yggsrasil Projects", applyProjectsTemplate ); break;
+		case "/blog": navigateState("Jeff Davies' Blog", applyBlogTemplate ); break;
 	} 
 		
 }
