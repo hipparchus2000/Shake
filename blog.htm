@@ -30,11 +30,12 @@
 			<div class="col-sm-12">
 				<div id="{{id}}" class="w3-card-4 w3-dark-grey w3-round-large" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
 					<div class="w3-container w3-center">
-						About this site: I store all config in Git (gitLab), content is autopublished on change from GitLab showing the "pipelines as code" pattern talked about by <a href="https://www.thoughtworks.com/radar/techniques/pipelines-as-code">Thoughtworks</a>. I do cheat a little though in that in the 5 minutes I spent setting this up, I simply used a cronjob on the server to git pull every minute.
+						<h2>About this site</h2>
+						<p>I store all config in Git (gitLab), content is autopublished on change from GitLab showing the "pipelines as code" pattern talked about by <a href="https://www.thoughtworks.com/radar/techniques/pipelines-as-code">Thoughtworks</a>. I do cheat a little though in that in the 5 minutes I spent setting this up, I simply used a cronjob on the server to git pull every minute.
 						If there are no changes (based on the SHA1 hash of the last commit, which expresses the state of the Repo), git simply does nothing.
 						I quite like Meteor as a web development environment from two perspectives: Blaze (the SPA included by default) uses WebSockets which is superior from a Push versus manual or polling refresh, it has built in OAuth from Google etc.
 						I use MongoDb as a backend, and also I find the speed of NodeJS a bit surprising, but the ethos is single thread to avoid especially the time wasted in locking problems.
-						The CSS styles I'm using here are bootstrap, but I like the cards from w3schools. You can play around on the main page by dragging and dropping the cards into each other.
+						The CSS styles I'm using here are bootstrap, but I like the cards from w3schools. You can play around on the main page by dragging and dropping the cards into each other.</p>
 					</div>
 				</div>
 			<div>

@@ -31,33 +31,6 @@
         <h1>Welcome to Yggdrasil Projects</h1>
       </center>
     </div>
-
-	<div id="templates" class="hidden">
-		<div id="card">
-		  <div class="w3-third w3-section" ondrop="drop(event)" ondragover="allowDrop(event)">
-			<div id="{{id}}" class="w3-card-4 w3-dark-grey w3-round-large" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
-			  <div class="w3-container w3-center">
-				<button type="button" class="btn btn-danger marginTop5">{{title}}</button>
-				<p>{{description}} &copy; {{year}}</p>
-				<div class="w3-section">
-				  <a class="btn btn-primary" href="{{pdfUrl}}">PDF</a>
-				  <a class="btn btn-warning" href="{{url}}" role="button">Documents</a>
-				  <a class="btn btn-info" href="{{codeUrl}}">Code on Gitlab</a>
-				  <a class="btn btn-info" href="{{siteUrl}}">Live Site</a>
-				</div>
-			  </div>
-            </div>
-          </div>
-		</div>
-		
-        <div id="cardRow">
-			<div class="w3-row-padding w3-theme">
-			  <div class="template:card"/>
-			</div>
-		</div>
-	</div>
-	
-	<div id="root"/>
 	
     <div class="w3-row-padding w3-theme">
       <div class="w3-third w3-section" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -214,6 +187,33 @@
       </div>
     </div>
 
+		<div id="templates" class="hidden">
+		<div id="card">
+		  <div class="w3-third w3-section" ondrop="drop(event)" ondragover="allowDrop(event)">
+			<div id="{{id}}" class="w3-card-4 w3-dark-grey w3-round-large" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+			  <div class="w3-container w3-center">
+				<button type="button" class="btn btn-danger marginTop5">{{title}}</button>
+				<p>{{description}} &copy; {{year}}</p>
+				<div class="w3-section">
+				  <a class="btn btn-primary" href="{{pdfUrl}}">PDF</a>
+				  <a class="btn btn-warning" href="{{url}}" role="button">Documents</a>
+				  <a class="btn btn-info" href="{{codeUrl}}">Code on Gitlab</a>
+				  <a class="btn btn-info" href="{{siteUrl}}">Live Site</a>
+				</div>
+			  </div>
+            </div>
+          </div>
+		</div>
+		
+        <div id="cardRow">
+			<div class="w3-row-padding w3-theme">
+			  <div class="template:card"/>
+			</div>
+		</div>
+	</div>
+	
+	<div id="root"/>
+	
 <!--<div class="row topmargin borderer">
                  <div class="col-lg-2">Kanban Task Manager and Board</div>
                  <div class="col-lg-3">Allcountjs (node + mongodb) application</div>
