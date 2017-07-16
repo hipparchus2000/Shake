@@ -22,7 +22,6 @@
   <a href="https://stackoverflow.com/users/5292841/jeff-davies">StackOverflow</a>
   <a href="#" onclick="navigate('/')">Projects</a>
   <a href="#" onclick="navigate('/blog')">My Blog</a>
-  <a href="#" onclick="loadHtmlFragmentToRoot('/personalSpendingAnalysis/personalSpendingAnalysis.html')">Test</a>
 </div>
 
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
@@ -45,7 +44,7 @@
 			<p>{{description}} &copy; {{year}}</p>
 			<div class="w3-section">
 			  <a class="btn btn-primary" href="{{pdfUrl}}">PDF</a>
-			  <a class="btn btn-warning" href="{{url}}" role="button">Documents</a>
+			  <a class="btn btn-warning" href="#" role="button" onclick="loadHtmlFragmentToRoot('{{url}}')">Documents</a>
 			  <a class="btn btn-info" href="{{codeUrl}}">Code on Gitlab</a>
 			  <a class="btn btn-info" href="{{siteUrl}}">Live Site</a>
 			</div>
