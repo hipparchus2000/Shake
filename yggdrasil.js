@@ -67,7 +67,7 @@ function getUrlAsHtmlUsingRest(url, callback) {
 	fetch(url).then(function(response) {
 	  return response;
 	}).then(function(data) {
-	  callback(data.blob());
+	  callback(data.text());
 	}).catch(function(err) {
 	  console.log("Failed To Get Url "+err);
 	});
