@@ -116,37 +116,54 @@ function generateUUID(){
 }
 
 
+//REST fetch projects.json
+function getProjectsUsingRest(url, callback) {
+fetch(url).then(function(response) {
+  return response.json();
+}).then(function(data) {
+  callback(data);
+}).catch(function() {
+  console.log("Failed To Get Projects");
+});
 
-
-window.onload = function(){
+function refresh() {
 	var templates = document.getElementById("templates");
 	var root = document.getElementById("root");
 	if(templates!=null) {
 		var cardrowTemplate = document.getElementById("cardRow-template");
 		var cardTemplate = document.getElementById("card-template");
-		var projects = getProjects();
-		var rowcount=0;
-		var currentRow=null;
-		projects.forEach(function (project) {
-			if ((rowcount % 3) == 0) {
-				currentRow = cardrowTemplate.cloneNode(true);
-			}
-			var projectTemplatedInstance = cardTemplate.cloneNode(true);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{title}}/g, project.title);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{id}}/g, project.id);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{description}}/g, project.description);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{year}}/g, project.year);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{codeUrl}}/g, project.codeUrl);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{siteUrl}}/g, project.siteUrl);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{url}}/g, project.url);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{pdfUrl}}/g, project.pdfUrl);
-			currentRow.append(projectTemplatedInstance);
-			if ((rowcount % 3) == 0) {
-				root.append(currentRow);
-			}
-			rowcount++;
+		var projects = getProjectsUsingRest("projects.json",function (response) {
+			projects = response;
+			
+			var rowcount=0;
+			var currentRow=null;
+			projects.forEach(function (project) {
+				if ((rowcount % 3) == 0) {
+					currentRow = cardrowTemplate.cloneNode(true);
+				}
+				var projectTemplatedInstance = cardTemplate.cloneNode(true);
+				projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{title}}/g, project.title);
+				projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{id}}/g, project.id);
+				projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{description}}/g, project.description);
+				projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{year}}/g, project.year);
+				projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{codeUrl}}/g, project.codeUrl);
+				projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{siteUrl}}/g, project.siteUrl);
+				projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{url}}/g, project.url);
+				projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{pdfUrl}}/g, project.pdfUrl);
+				currentRow.append(projectTemplatedInstance);
+				if ((rowcount % 3) == 0) {
+					root.append(currentRow);
+				}
+				rowcount++;
+			});
 		});
+		
+		
 	}
+}
+
+window.onload = function(){
+	refresh();
 }
 
 
