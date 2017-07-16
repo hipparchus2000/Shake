@@ -1,11 +1,11 @@
 [{
   "id":"1",
-  ""title"": "Personal Finance Manager",
-  ""description"": "Windows Desktop Application C# Winforms application (csv import, store in local sql server, autocategorization and charting)",
-  ""year"": "2017",
+  "title": "Personal Finance Manager",
+  "description": "Windows Desktop Application C# Winforms application (csv import, store in local sql server, autocategorization and charting)",
+  "year": "2017",
   "pdfUrl": "/personalSpendingAnalysis/personalSpendingAnalysis.pdf",
   "url":  "/personalSpendingAnalysis/personalSpendingAnalysis.html",
-  ""codeUrl"": "https://gitlab.com/hipparchus2000/PersonalSpendingAnalysis"
+  "codeUrl": "https://gitlab.com/hipparchus2000/PersonalSpendingAnalysis"
 },
 {
   "id":"2",
