@@ -121,9 +121,9 @@ function applyProjectsTemplate() {
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{url}}/g, project.url);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{pdfUrl}}/g, project.pdfUrl);
 			
-			//hide buttons with undefined href and onclick
+			//hide buttons with undefined href and onclick   --> first button (0) is used for title, so ignore
 			var allButtons = projectTemplatedInstance.getElementsByClassName("btn");
-			for (var i = 0; i < allButtons.length; i++) {
+			for (var i = 1; i < allButtons.length; i++) {
 				
 				var href =allButtons[i].getAttribute("href");
 				var onclick = allButtons[i].getAttribute("onclick");
