@@ -65,7 +65,7 @@ function getUrlUsingRest(url, callback) {
 }
 
 function getUrlAsHtmlUsingRest(url, callback) {
-	fetch(url).then(function(response) {
+	fetch(url, { mode: 'no-cors' }).then(function(response) {
 	  return response;
 	}).then(function(data) {
 	  callback(data.text());
