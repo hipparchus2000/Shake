@@ -100,8 +100,8 @@ function refresh() {
 		//hide buttons with "undefined" as href
 		var allButtons = document.getElementsByClassName("btn");
 		for (var i = 0; i < allButtons.length; i++) {
-			if(button[i].getAttribute("href")=="undefined") {
-				var classAttribute = button[i].getAttribute("class");
+			if(allButtons[i].getAttribute("href")=="undefined") {
+				var classAttribute = allButtons[i].getAttribute("class");
 				classAttribute.append(" hidden");
 			}
 		}
