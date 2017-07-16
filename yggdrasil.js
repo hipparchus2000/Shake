@@ -101,8 +101,8 @@ function refresh() {
 		var allButtons = document.getElementsByClassName("btn");
 		allButtons.forEach(function(button) {
 			if(button.getAttribute("href")=="undefined") {
-				var class = button.getAttribute("class");
-				class.append(" hidden");
+				var classAttribute = button.getAttribute("class");
+				classAttribute.append(" hidden");
 			}
 		});
 		
