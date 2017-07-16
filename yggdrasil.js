@@ -125,7 +125,7 @@ function applyProjectsTemplate() {
 			var allButtons = projectTemplatedInstance.getElementsByClassName("btn");
 			for (var i = 0; i < allButtons.length; i++) {
 				var hrefNotFound = allButtons[i].getAttribute("href")=="undefined";
-				var onclickNotFound = allButtons[i].getAttribute("onclick")==null;
+				var onclickNotFound = allButtons[i].getAttribute("onclick")=="undefined";
 				
 				if(hrefNotFound && onclickNotFound) {
 					var classAttribute = allButtons[i].getAttribute("class");
