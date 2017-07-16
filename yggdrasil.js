@@ -154,7 +154,7 @@ function refresh() {
 
 
 function navigate(newroute) {
-	route=newRoute;
+	route=newroute;
 	refresh();
 }
 
