@@ -117,11 +117,14 @@ function generateUUID(){
 
 
 
-var templates = document.getElementById("templates");
-if(templates!=null) {
-	var cardrowTemplate = templates.getElementById("card-row");
-	var cardTemplate = templates.getElementById("card");
-	var projects = getProjects();
+
+window.onload = function(){
+	var templates = document.getElementById("templates");
+	if(templates!=null) {
+		var cardrowTemplate = templates.getElementById("card-row");
+		var cardTemplate = templates.getElementById("card");
+		var projects = getProjects();
+	}
 }
 
 
