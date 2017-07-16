@@ -127,14 +127,14 @@ window.onload = function(){
 		var projects = getProjects();
 		projects.forEach(function (project) {
 			var projectTemplatedInstance = cardTemplate;
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{title}}/g, project.title);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{id}}/g, project.id);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{description}}/g, project.description);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{year}}/g, project.year);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{codeUrl}}/g, project.codeUrl);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{siteUrl}}/g, project.siteUrl);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{url}}/g, project.url);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{pdfUrl}}/g, project.pdfUrl);
+			projectTemplatedInstance = projectTemplatedInstance.replace(/{{title}}/g, project.title);
+			projectTemplatedInstance = projectTemplatedInstance.replace(/{{id}}/g, project.id);
+			projectTemplatedInstance = projectTemplatedInstance.replace(/{{description}}/g, project.description);
+			projectTemplatedInstance = projectTemplatedInstance.replace(/{{year}}/g, project.year);
+			projectTemplatedInstance = projectTemplatedInstance.replace(/{{codeUrl}}/g, project.codeUrl);
+			projectTemplatedInstance = projectTemplatedInstance.replace(/{{siteUrl}}/g, project.siteUrl);
+			projectTemplatedInstance = projectTemplatedInstance.replace(/{{url}}/g, project.url);
+			projectTemplatedInstance = projectTemplatedInstance.replace(/{{pdfUrl}}/g, project.pdfUrl);
 			root.append(projectTemplatedInstance);
 		});
 	}
