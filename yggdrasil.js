@@ -120,10 +120,16 @@ function generateUUID(){
 
 window.onload = function(){
 	var templates = document.getElementById("templates");
+	var root = document.getElementById("root");
 	if(templates!=null) {
-		var cardrowTemplate = templates.getElementById("card-row");
-		var cardTemplate = templates.getElementById("card");
+		var cardrowTemplate = document.getElementById("cardRow-template");
+		var cardTemplate = document.getElementById("card-template");
 		var projects = getProjects();
+		projects.forEach(function (project) {
+			var projectTemplatedInstance = cardTemplate;
+			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{title}}/g, project.title);
+			//.innerHTML =
+		});
 	}
 }
 
