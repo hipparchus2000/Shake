@@ -140,22 +140,16 @@ function applyBlogTemplate() {
 }
 
 function refresh() {
-	
-	if(templates!=null) {
+	switch(route) {
+		case "/":
+			applyProjectsTemplate();
+			break;
+			
+		case "/blog":
+			applyBlogTemplate();
+			break;
+	} 
 		
-		switch(route) {
-			case "/":
-				applyProjectsTemplate();
-				break;
-				
-			case "/blog":
-				applyBlogTemplate();
-				break;
-				
-		} //end of templates switch
-		
-		
-	}
 }
 
 
