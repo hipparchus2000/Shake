@@ -1,4 +1,7 @@
 //yggdrasil.js
+
+var route="/";
+
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
 }
@@ -162,7 +165,6 @@ function navigate(newroute) {
 }
 
 window.onload = function(){
-	var route="/";
 	refresh();
 }
 
