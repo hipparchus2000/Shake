@@ -143,13 +143,13 @@ function refresh() {
 	switch(route) {
 		case "/":
 			var title=document.getElementById("pageTitle");
-			title.innerHTML.replace(/{{pageTitle}}/g, "Yggsrasil Projects");
+			title.innerHTML=title.innerHTML.replace(/{{pageTitle}}/g, "Yggsrasil Projects");
 			applyProjectsTemplate();
 			break;
 			
 		case "/blog":
 			var title=document.getElementById("pageTitle");
-			title.innerHTML.replace(/{{pageTitle}}/g, "Jeff Davies' Blog");
+			title.innerHTML=title.innerHTML.replace(/{{pageTitle}}/g, "Jeff Davies' Blog");
 			applyBlogTemplate();
 			break;
 	} 
