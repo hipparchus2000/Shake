@@ -118,13 +118,14 @@ function generateUUID(){
 
 //REST fetch projects.json
 function getProjectsUsingRest(url, callback) {
-fetch(url).then(function(response) {
-  return response.json();
-}).then(function(data) {
-  callback(data);
-}).catch(function() {
-  console.log("Failed To Get Projects");
-});
+	fetch(url).then(function(response) {
+	  return response.json();
+	}).then(function(data) {
+	  callback(data);
+	}).catch(function() {
+	  console.log("Failed To Get Projects");
+	});
+}
 
 function refresh() {
 	var templates = document.getElementById("templates");
