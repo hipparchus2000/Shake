@@ -67,6 +67,7 @@ function refresh() {
 	if(templates!=null) {
 		var cardrowTemplate = document.getElementById("cardRow-template");
 		var cardTemplate = document.getElementById("card-template");
+		
 		var projects = getProjectsUsingRest("projects.json",function (response) {
 			projects = response;
 			
@@ -96,6 +97,14 @@ function refresh() {
 			});
 		});
 		
+		//hide buttons with "undefined" as href
+		var allButtons = document.getElementsByClassName("btn");
+		allButtons.forEach(function(button) {
+			if(button.getAttribute("href")=="undefined") {
+				var class = button.getAttribute("class");
+				class.append(" hidden");
+			}
+		});
 		
 	}
 }
