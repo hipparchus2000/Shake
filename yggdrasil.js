@@ -104,7 +104,7 @@ function refresh() {
 				var classAttribute = button[i].getAttribute("class");
 				classAttribute.append(" hidden");
 			}
-		});
+		}
 		
 	}
 }
