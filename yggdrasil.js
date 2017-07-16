@@ -74,14 +74,14 @@ function getUrlAsHtmlUsingRest(url, callback) {
 }
 
 function loadHtmlFragmentToRoot(url) {
-	getUrlAsHtmlUsingRest(url,function(response) {
+	getUrlAsHtmlUsingRest(url,function(blobCallback) {
 		var root = document.getElementById("root");
 		//clear all nodes from root
 		while (root.firstChild) {
 			root.removeChild(root.firstChild);
 		};
 		blobCallback.then(function(blob) {
-			root.innerHTML = response.body.innerHTML;
+			root.innerHTML = blob;
 		});
 	});
 }
