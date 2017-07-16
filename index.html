@@ -191,28 +191,25 @@
 	<div id="root"/>
 	
 	<div id="templates" class="hidden">
-		<div id="card-template">
-		  <div class="w3-third w3-section" ondrop="drop(event)" ondragover="allowDrop(event)">
-			<div id="{{id}}" class="w3-card-4 w3-dark-grey w3-round-large" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
-			  <div class="w3-container w3-center">
-				<button type="button" class="btn btn-danger marginTop5">{{title}}</button>
-				<p>{{description}} &copy; {{year}}</p>
-				<div class="w3-section">
-				  <a class="btn btn-primary" href="{{pdfUrl}}">PDF</a>
-				  <a class="btn btn-warning" href="{{url}}" role="button">Documents</a>
-				  <a class="btn btn-info" href="{{codeUrl}}">Code on Gitlab</a>
-				  <a class="btn btn-info" href="{{siteUrl}}">Live Site</a>
-				</div>
-			  </div>
-            </div>
-          </div>
-		</div>
-		
-        <div id="cardRow-template">
-			<div class="w3-row-padding w3-theme">
-			  <div class="template:card"/>
+	  <div id="card-template" class="w3-third w3-section" ondrop="drop(event)" ondragover="allowDrop(event)">
+		<div id="{{id}}" class="w3-card-4 w3-dark-grey w3-round-large" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+		  <div class="w3-container w3-center">
+			<button type="button" class="btn btn-danger marginTop5">{{title}}</button>
+			<p>{{description}} &copy; {{year}}</p>
+			<div class="w3-section">
+			  <a class="btn btn-primary" href="{{pdfUrl}}">PDF</a>
+			  <a class="btn btn-warning" href="{{url}}" role="button">Documents</a>
+			  <a class="btn btn-info" href="{{codeUrl}}">Code on Gitlab</a>
+			  <a class="btn btn-info" href="{{siteUrl}}">Live Site</a>
 			</div>
+		  </div>
 		</div>
+	  </div>
+		
+      <div id="cardRow-template" class="w3-row-padding w3-theme">
+		<div class="template:card"/>
+	  </div>
+
 	</div>
 	
 	

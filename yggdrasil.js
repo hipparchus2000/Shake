@@ -122,8 +122,8 @@ window.onload = function(){
 	var templates = document.getElementById("templates");
 	var root = document.getElementById("root");
 	if(templates!=null) {
-		var cardrowTemplate = document.getElementById("cardRow-template").childNodes;
-		var cardTemplate = document.getElementById("card-template").childNodes;
+		var cardrowTemplate = document.getElementById("cardRow-template");
+		var cardTemplate = document.getElementById("card-template");
 		var projects = getProjects();
 		projects.forEach(function (project) {
 			var projectTemplatedInstance = cardTemplate;
