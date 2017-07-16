@@ -126,7 +126,7 @@ window.onload = function(){
 		var cardTemplate = document.getElementById("card-template");
 		var projects = getProjects();
 		projects.forEach(function (project) {
-			var projectTemplatedInstance = cardTemplate;
+			var projectTemplatedInstance = cardTemplateitm.cloneNode(true);;
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{title}}/g, project.title);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{id}}/g, project.id);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{description}}/g, project.description);
