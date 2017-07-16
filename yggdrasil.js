@@ -142,10 +142,12 @@ function applyBlogTemplate() {
 function refresh() {
 	switch(route) {
 		case "/":
+			document.innerHTML.replace(/{{pageTitle}}/g, "Yggsrasil Projects");
 			applyProjectsTemplate();
 			break;
 			
 		case "/blog":
+			document.innerHTML.replace(/{{pageTitle}}/g, "Jeff Davies' Blog");
 			applyBlogTemplate();
 			break;
 	} 
