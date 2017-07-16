@@ -121,7 +121,7 @@ function applyBlogTemplate() {
 	var root = document.getElementById("root");
 	//clear all nodes from root
 	while (root.firstChild) {
-		root.removeChild(myNode.firstChild);
+		root.removeChild(root.firstChild);
 	}
 
 	var blogTemplate = document.getElementById("blog-template");
