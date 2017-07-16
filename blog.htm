@@ -37,10 +37,10 @@
 				<div class="w3-container w3-center">
 					<div class="row">
 						<div class="col-sm-1">
-							<a class="btn btn-info">16th July 2017</a>
+							<a class="btn btn-info marginTop5">16th July 2017</a>
 						</div>
 						<div class="col-sm-11">
-							<a class="btn btn-warning">About this site</a>
+							<a class="btn btn-warning marginTop5">About this site</a>
 							<div class="blogStory">I store all config in Git (gitLab), content is autopublished on change from GitLab showing the "pipelines as code" pattern talked about by <a href="https://www.thoughtworks.com/radar/techniques/pipelines-as-code">Thoughtworks</a>. I do cheat a little though in that in the 5 minutes I spent setting this up, I simply used a cronjob on the server to git pull every minute.
 							If there are no changes (based on the SHA1 hash of the last commit, which expresses the state of the Repo), git simply does nothing.
 							I quite like Meteor as a web development environment from two perspectives: Blaze (the SPA included by default) uses WebSockets which is superior from a Push versus manual or polling refresh, it has built in OAuth from Google etc.
@@ -68,10 +68,10 @@
 				<div class="w3-container w3-center">
 					<div class="row">
 						<div class="col-sm-1">
-							<a class="btn btn-info">{{date}}</a>
+							<a class="btn btn-info marginTop5">{{date}}</a>
 						</div>
 						<div class="col-sm-11">
-							<a class="btn btn-warning">{{storyName}}</a>
+							<a class="btn btn-warning marginTop5">{{storyName}}</a>
 							<div class="blogStory">{{storyText}}</div>
 						</div>
 					</div>
