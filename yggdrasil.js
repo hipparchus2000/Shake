@@ -125,8 +125,13 @@ window.onload = function(){
 		var cardrowTemplate = document.getElementById("cardRow-template");
 		var cardTemplate = document.getElementById("card-template");
 		var projects = getProjects();
+		var rowcount=0;
+		var currentRow=null;
 		projects.forEach(function (project) {
-			var projectTemplatedInstance = cardTemplate.cloneNode(true);;
+			if ((rowcount % 3) == 0) {
+				currentRow = cardrowTemplate.cloneNode(true);
+			}
+			var projectTemplatedInstance = cardTemplate.cloneNode(true);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{title}}/g, project.title);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{id}}/g, project.id);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{description}}/g, project.description);
@@ -135,7 +140,11 @@ window.onload = function(){
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{siteUrl}}/g, project.siteUrl);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{url}}/g, project.url);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{pdfUrl}}/g, project.pdfUrl);
-			root.append(projectTemplatedInstance);
+			currentRow.append(projectTemplatedInstance);
+			if ((rowcount % 3) == 0) {
+				root.append(currentRow);
+			}
+			rowcount++;
 		});
 	}
 }
