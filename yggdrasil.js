@@ -135,7 +135,7 @@ window.onload = function(){
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{siteUrl}}/g, project.siteUrl);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{url}}/g, project.url);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{pdfUrl}}/g, project.pdfUrl);
-			root.innerHTML.append(projectTemplatedInstance);
+			root.append(projectTemplatedInstance);
 		});
 	}
 }
