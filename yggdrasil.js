@@ -122,8 +122,8 @@ function getProjectsUsingRest(url, callback) {
 	  return response.json();
 	}).then(function(data) {
 	  callback(data);
-	}).catch(function() {
-	  console.log("Failed To Get Projects");
+	}).catch(function(err) {
+	  console.log("Failed To Get Projects "+err);
 	});
 }
 
