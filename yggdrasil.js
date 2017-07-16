@@ -122,19 +122,19 @@ window.onload = function(){
 	var templates = document.getElementById("templates");
 	var root = document.getElementById("root");
 	if(templates!=null) {
-		var cardrowTemplate = document.getElementById("cardRow-template").innerHTML;
-		var cardTemplate = document.getElementById("card-template").innerHTML;
+		var cardrowTemplate = document.getElementById("cardRow-template").childNodes;
+		var cardTemplate = document.getElementById("card-template").childNodes;
 		var projects = getProjects();
 		projects.forEach(function (project) {
 			var projectTemplatedInstance = cardTemplate;
-			projectTemplatedInstance = projectTemplatedInstance.replace(/{{title}}/g, project.title);
-			projectTemplatedInstance = projectTemplatedInstance.replace(/{{id}}/g, project.id);
-			projectTemplatedInstance = projectTemplatedInstance.replace(/{{description}}/g, project.description);
-			projectTemplatedInstance = projectTemplatedInstance.replace(/{{year}}/g, project.year);
-			projectTemplatedInstance = projectTemplatedInstance.replace(/{{codeUrl}}/g, project.codeUrl);
-			projectTemplatedInstance = projectTemplatedInstance.replace(/{{siteUrl}}/g, project.siteUrl);
-			projectTemplatedInstance = projectTemplatedInstance.replace(/{{url}}/g, project.url);
-			projectTemplatedInstance = projectTemplatedInstance.replace(/{{pdfUrl}}/g, project.pdfUrl);
+			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{title}}/g, project.title);
+			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{id}}/g, project.id);
+			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{description}}/g, project.description);
+			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{year}}/g, project.year);
+			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{codeUrl}}/g, project.codeUrl);
+			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{siteUrl}}/g, project.siteUrl);
+			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{url}}/g, project.url);
+			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{pdfUrl}}/g, project.pdfUrl);
 			root.append(projectTemplatedInstance);
 		});
 	}
