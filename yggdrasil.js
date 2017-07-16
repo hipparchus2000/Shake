@@ -121,15 +121,18 @@ function applyProjectsTemplate() {
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{url}}/g, project.url);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{pdfUrl}}/g, project.pdfUrl);
 			
-			//hide buttons with "undefined" as href
+			//hide buttons with undefined href and onclick
 			var allButtons = projectTemplatedInstance.getElementsByClassName("btn");
 			for (var i = 0; i < allButtons.length; i++) {
-				if(allButtons[i].getAttribute("href")=="undefined") {
+				var hrefNotFound = allButtons[i].getAttribute("href")=="undefined";
+				var onclickNotFound = allButtons[i].getAttribute("onclick")=="undefined";
+				
+				if(hrefNotFound && onclickNotFound) {
 					var classAttribute = allButtons[i].getAttribute("class");
 					allButtons[i].className = classAttribute+" hidden";
 				}
 			}
-
+			
 			currentRow.append(projectTemplatedInstance);
 			if ((rowcount % 3) == 0) {
 				root.append(currentRow);
