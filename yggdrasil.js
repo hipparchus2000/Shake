@@ -95,7 +95,7 @@ function refresh() {
 				for (var i = 0; i < allButtons.length; i++) {
 					if(allButtons[i].getAttribute("href")=="undefined") {
 						var classAttribute = allButtons[i].getAttribute("class");
-						classAttribute.append(" hidden");
+						allButtons[i].className = classAttribute+" hidden";
 					}
 				}
 
