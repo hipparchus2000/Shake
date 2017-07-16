@@ -20,8 +20,8 @@
   <a href="https://www.linkedin.com/in/jeff-davies-b13a74b0/">LinkedIn</a>
   <a href="https://gitlab.com/hipparchus2000">GitLab</a>
   <a href="https://stackoverflow.com/users/5292841/jeff-davies">StackOverflow</a>
-  <a href="/index.html">Projects</a>
-  <a href="/blog.htm">My Blog</a>
+  <a href="#" onclick="navigate('/')">Projects</a>
+  <a href="#" onclick="navigate('/blog')">My Blog</a>
 </div>
 
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
@@ -29,7 +29,7 @@
   <div class="container-fluid">
     <div class="jumbotron smallcaps">
       <center>
-        <h1>Welcome to Yggdrasil Projects</h1>
+        <h1 id="title">Welcome to Yggdrasil Projects</h1>
       </center>
     </div>
 	
@@ -53,6 +53,24 @@
 		
       <div id="cardRow-template" class="w3-row-padding w3-theme">
 		<div class="template:card"/>
+	  </div>
+	  
+	  <div id="blog-template" class="row">
+		<div class="col-sm-12">
+			<div id="{{id}}" class="w3-card-4 w3-dark-grey w3-round-large" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+				<div class="w3-container w3-center">
+					<div class="row">
+						<div class="col-sm-1">
+							<a class="btn btn-info marginTop5">{{date}}</a>
+						</div>
+						<div class="col-sm-11">
+							<a class="btn btn-warning marginTop5">{{storyName}}</a>
+							<div class="blogStory">{{storyText}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	  </div>
 
 	</div>
