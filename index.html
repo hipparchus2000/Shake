@@ -10,6 +10,9 @@
   <script src="yggdrasil.js" type="text/javascript"> </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"> </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"> </script>
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
   <title>Yggdrasil Projects</title>
 </head>
 
@@ -29,7 +32,7 @@
 
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onclick="navigate('/')">[ projects ]</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onclick="navigate('/blog')">[ blog ]</a>
   
-  <div class="container-fluid">
+  <div class="container-fluid"  data-role="page" id="pageone">
     <div class="jumbotron smallcaps">
       <center>
         <h1 id="pageTitle">{{pageTitle}}</h1>
