@@ -33,7 +33,7 @@
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onclick="navigate('/')">[ projects ]</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onclick="navigate('/blog')">[ blog ]</a>
   
   <div class="container-fluid"  data-role="page" id="pageone">
-    <div class="jumbotron smallcaps">
+    <div class="jumbotron smallcaps" data-role="header">
       <center>
         <h1 id="pageTitle">{{pageTitle}}</h1>
       </center>
@@ -81,23 +81,22 @@
 
 	</div>
 	
-	<div id="dialogs">
-		<div data-role="page" data-dialog="true" id="dialog">
-		  <div data-role="header">
-			<h1>Login</h1>
-		  </div>
-
-		  <div data-role="main" class="ui-content">
-			<p>Please enter your username and password</p>
-			<a href="#cancel">Cancel</a>
-		  </div>
-
-		  <div data-role="footer">
-			<h1>Login</h1>
-		  </div>
-		</div> 
-	</div>
 	
+	<div data-role="page" data-dialog="true" id="dialog">
+	  <div data-role="header">
+		<h1>Login</h1>
+	  </div>
+
+	  <div data-role="main" class="ui-content">
+		<p>Please enter your username and password</p>
+		<a href="#cancel">Cancel</a>
+	  </div>
+
+	  <div data-role="footer">
+		<h1>Login</h1>
+	  </div>
+	</div> 
+
 <!--<div class="row topmargin borderer">
                  <div class="col-lg-2">Kanban Task Manager and Board</div>
                  <div class="col-lg-3">Allcountjs (node + mongodb) application</div>
