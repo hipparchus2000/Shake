@@ -107,6 +107,7 @@ function applyProjectsTemplate() {
 		
 		var rowcount=0;
 		var currentRow=null;
+		
 		projects.forEach(function (project) {
 			if ((rowcount % 3) == 0) {
 				currentRow = cardrowTemplate.cloneNode(true);
@@ -116,7 +117,7 @@ function applyProjectsTemplate() {
 			//if (project.codeUrl==null)
 			
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{title}}/g, project.title);
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{id}}/g, project.id);
+			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{id}}/g, rowcount);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{description}}/g, project.description);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{year}}/g, project.year);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{codeUrl}}/g, project.codeUrl);
