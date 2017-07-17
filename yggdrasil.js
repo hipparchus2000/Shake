@@ -3,6 +3,9 @@
 var route="/";
 var breadcrumbs=["/"];
 
+var projectsUrl = "projects.json";
+var projectsUrl = "http://www.talkisbetter.com/cgibin/projects.pl";
+
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
 }
@@ -99,7 +102,7 @@ function applyProjectsTemplate() {
 	var cardrowTemplate = document.getElementById("cardRow-template");
 	var cardTemplate = document.getElementById("card-template");
 	
-	var projects = getUrlUsingRest("projects.json",function (response) {
+	var projects = getUrlUsingRest(projectsUrl,function (response) {
 		projects = response;
 		
 		var rowcount=0;
