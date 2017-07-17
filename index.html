@@ -22,6 +22,7 @@
   <a href="https://stackoverflow.com/users/5292841/jeff-davies">StackOverflow</a>
   <a href="#" onclick="navigate('/')">Projects</a>
   <a href="#" onclick="navigate('/blog')">My Blog</a>
+  <a href="#dialog">Login</a>
 </div>
 
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
@@ -77,6 +78,22 @@
 
 	</div>
 	
+	<div id="dialogs">
+		<div data-role="page" data-dialog="true" id="dialog">
+		  <div data-role="header">
+			<h1>Login</h1>
+		  </div>
+
+		  <div data-role="main" class="ui-content">
+			<p>Please enter your username and password</p>
+			<a href="#cancel">Cancel</a>
+		  </div>
+
+		  <div data-role="footer">
+			<h1>Login</h1>
+		  </div>
+		</div> 
+	</div>
 	
 <!--<div class="row topmargin borderer">
                  <div class="col-lg-2">Kanban Task Manager and Board</div>
