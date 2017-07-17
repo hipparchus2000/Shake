@@ -3,7 +3,7 @@
 var route="/";
 var breadcrumbs=["/"];
 
-var projectsUrl = "projects.json";
+//var projectsUrl = "projects.json";
 var projectsUrl = "http://www.talkisbetter.com/cgibin/projects.pl";
 
 function openNav() {
