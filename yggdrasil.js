@@ -221,6 +221,7 @@ window.onload = function(){
 	}
 	
 	refresh();
+	registerServiceWorker();
 }
 
 
