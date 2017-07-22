@@ -6,6 +6,7 @@ var breadcrumbs=["/"];
 //var projectsUrl = "projects.json";
 //var projectsUrl = "http://www.talkisbetter.com/cgibin/projects.pl";
 var projectsUrl = "http://www.talkisbetter.com:13001/projects/";
+var blogsUrl = "http://www.talkisbetter.com:13001/blogs/";
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
@@ -169,7 +170,7 @@ function applyBlogTemplate() {
 
 	var blogTemplate = document.getElementById("blog-template");
 	
-	var projects = getUrlUsingRest("blog.json",function (response) {
+	var projects = getUrlUsingRest(blogsUrl,function (response) {
 		blogEntries = response;
 		
 		blogEntries.forEach(function (story) {
