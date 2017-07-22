@@ -4,7 +4,8 @@ var route="/";
 var breadcrumbs=["/"];
 
 //var projectsUrl = "projects.json";
-var projectsUrl = "http://www.talkisbetter.com/cgibin/projects.pl";
+//var projectsUrl = "http://www.talkisbetter.com/cgibin/projects.pl";
+var projectsUrl = "http://www.talkisbetter.com:13001/projects/";
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
