@@ -1,12 +1,37 @@
 .topmargin { margin-top:30px; }
 .borderer { border: 0px solid; }
 
-.smallcaps {
-  font-variant: small-caps;
-}
-
+html,body{font-family:Verdana,sans-serif;font-size:12px;line-height:1.5}html{overflow-x:hidden}
 body {
     font-family: "Lato", sans-serif;
+}
+
+h3 {
+  font-size:16px;font-weight: bold;font-variant: small-caps;
+
+}
+
+
+.kanban-card {
+  padding:5;
+  margin-top:5px;
+  font-family:Verdana,sans-serif;font-size:12px;
+}
+
+.kanban-slot {
+  height: 700;
+  padding:5;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  border-left-style: solid;
+  border-left: thin single #404040;
+  border-left-width: 1px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.smallcaps {
+  font-variant: small-caps;
 }
 
 .marginTop5 {

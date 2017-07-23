@@ -159,6 +159,54 @@ function applyProjectsTemplate() {
 	});
 }
 
+function applyTasksTemplate() {
+	var templates = document.getElementById("templates");
+	var root = document.getElementById("root");
+	//clear all nodes from root
+	while (root.firstChild) {
+		root.removeChild(root.firstChild);
+	}
+
+	var kanbanTemplate = document.getElementById("kanban-template");
+	var slotTemplate = document.getElementById("kanban-slot-template");
+	var cardTemplate = document.getElementById("kanban-task-template");
+	var kanbanTemplateInstance = kanbanTemplate.cloneNode(true);
+	kanbanTemplateInstance.innerHTML = kanbanTemplateInstance.innerHTML.replace(/kanban-template/g,"kanbanroot");
+	root.append(kanbanTemplateInstance); 
+
+
+
+	//todo change blog to tasks Url
+	var id=0;
+	var tasks = getUrlUsingRest(blogsUrl,function (tasks) {
+		
+		var currentSlot=null;
+		
+		tasks.forEach(function (task) {
+			//todo need to assign tasks to correct slot
+			var taskTemplatedInstance = cardTemplate.cloneNode(true);
+
+			taskTemplatedInstance.innerHTML = taskTemplatedInstance.innerHTML.replace(/{{storyText}}/g, task.storyText);
+			taskTemplatedInstance.innerHTML = taskTemplatedInstance.innerHTML.replace(/{{storyName}}/g, task.storyName);
+			taskTemplatedInstance.innerHTML = taskTemplatedInstance.innerHTML.replace(/{{id}}/g,"task"+id);
+			
+			currentSlot = slotTemplate.cloneNode(true);
+			currentSlot.id = id;
+			currentSlot.innerHTML = currentSlot.innerHTML.replace(/kanban-slot-template/g, "slot"+id);
+			currentSlot.innerHTML = currentSlot.innerHTML.replace(/{{cards}}/g,taskTemplatedInstance.innerHTML);
+			id++;
+			var slots = document.getElementById("kanban-slots");
+			slots.appendChild(currentSlot);
+
+		});
+		//kanbanTemplateInstance.firstChild.append = kanbanTemplateInstance.innerHTML.replace(/{{slots}}/g,kanbanTemplateInstance.innerHTML);
+
+	});
+
+}
+
+
+
 
 function applyBlogTemplate() {
 	var templates = document.getElementById("templates");
@@ -193,6 +241,7 @@ function refresh() {
 	switch(route) {
 		case "/":     navigateState("Yggsrasil Projects", applyProjectsTemplate ); break;
 		case "/blog": navigateState("Jeff Davies' Blog", applyBlogTemplate ); break;
+		case "/tasks": navigateState("Kanban", applyTasksTemplate); break;
 	} 
 		
 }
