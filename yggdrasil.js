@@ -3,13 +3,9 @@
 var route="/";
 var breadcrumbs=["/"];
 
-//var projectsUrl = "projects.json";
-//var projectsUrl = "http://www.talkisbetter.com/cgibin/projects.pl";
-//var projectsUrl = "http://www.talkisbetter.com:13001/projects/";
-//var blogsUrl = "http://www.talkisbetter.com:13001/blogs/";
-var projectsUrl = "http://www.talkisbetter.com/api/projects/";
-var blogsUrl = "http://www.talkisbetter.com/api/blogs/";
-
+var projectsUrl = "/api/projects";
+var blogsUrl = "/api/blogs";
+var authUrl = "/api/auth";
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
@@ -256,6 +252,50 @@ function makeBreadCrumbs () {
 function navigate(newroute) {
 	route=newroute;
 	refresh();
+}
+
+
+function http_post(url,payload,response,callback) {
+	
+}
+
+function login() {
+	var username = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
+	var url = authUrl;
+	var payload = {
+    	"username": username,
+	    "password": password
+	};
+	
+	var json = {
+    	json: JSON.stringify(payload),
+    	delay: 3
+	};
+	fetch(url,
+	{
+    	method: "post", 
+		headers: {
+        	'Accept': 'application/json, text/plain, */*',
+        	'Content-Type': 'application/json'
+    	},
+        body: json = JSON.stringify(payload)
+	})
+	.then(function(res){ 
+		return res.json();
+	})
+	.then(function(token){ 
+        storeJwt(token);
+	})
+}
+
+
+var storeJwt = function (value) {
+	localStorage.setItem('jwt', JSON.stringify(value));
+}
+
+function fetchJwt() {
+	return JSON.parse(localStorage.getItem('jwt'));
 }
 
 window.onload = function(){

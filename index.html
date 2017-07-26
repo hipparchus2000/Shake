@@ -117,23 +117,23 @@
 	  <!-- Modal content -->
 	  <div class="modal-content">
 		<span class="close">&times;</span>
-	        <form role="form" method="POST" action="">
-                    <input type="hidden" name="_token" value="">
+	        <form role="form" method="" action="">
                     <div class="form-group">
+						<div id="loginResult">
                         <label class="control-label">Email Address</label>
                         <div>
-                            <input type="email" class="form-control input-lg" name="email" value="">
+                            <input type="email" class="form-control input-lg" name="email" value="" id="username">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Password</label>
                         <div>
-                            <input type="password" class="form-control input-lg" name="password">
+                            <input type="password" class="form-control input-lg" name="password" id="password">
                         </div>
                     </div>
                     <div class="form-group">
                         <div>
-                            <button type="submit" class="btn btn-success">Login</button>
+                            <button type="submit" class="btn btn-success" onclick="login()">Login</button>
                         </div>
                     </div>
                 </form>
