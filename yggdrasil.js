@@ -15,6 +15,19 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
+function addButton() {
+//	projectModal.style.display = "block";
+	alert("addButton");
+}
+
+function editButton(id) {
+	alert("editButton"+id);
+}
+
+function deleteButton(id) {
+	alert("deleteButton"+id);
+}
+
 function allowDrop(ev) {
     ev.preventDefault();
 }
@@ -28,6 +41,7 @@ function drop(ev) {
     var data = ev.dataTransfer.getData("text");
     ev.target.appendChild(document.getElementById(data));
 }
+
 
 function registerServiceWorker () {
 	//register the service worker
@@ -60,11 +74,11 @@ function generateUUID(){
 
 function getUrlUsingRest(url, callback) {
 	fetch(url).then(function(response) {
-	  return response.json();
+	  	return response.json();
 	}).then(function(data) {
-	  callback(data);
+		callback(data);
 	}).catch(function(err) {
-	  console.log("Failed To Get Url "+err);
+	  	console.log("Failed To Get Url "+err);
 	});
 }
 
@@ -125,6 +139,11 @@ function applyProjectsTemplate() {
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{siteUrl}}/g, project.siteUrl);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{url}}/g, project.url);
 			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{pdfUrl}}/g, project.pdfUrl);
+			var editButton="";
+			if(jwtToken.roles.includes("project-editor")) {
+				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton('+rowcount+')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton('+rowcount+')" aria-hidden="true"></i>';	
+			}
+			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{editButton}}/g, editButton);
 			
 			//hide buttons with undefined href and onclick   --> first button (0) is used for title, so ignore
 			var allButtons = projectTemplatedInstance.getElementsByClassName("btn");
@@ -237,6 +256,13 @@ function navigateState(stateTitle,templateFunction) {
 }
 
 function refresh() {
+	jwtToken = fetchJwt();
+	var addButton = document.getElementById("addButton"); 
+	if (jwtToken.roles.includes("blog-editor")||jwtToken.roles.includes("project-editor")||jwtToken.roles.includes("kanban-editor")) {
+		addButton.style.display = "block";
+	} else {
+		addButton.style.display = "none";
+	}
 	switch(route) {
 		case "/":     navigateState("Yggsrasil Projects", applyProjectsTemplate ); break;
 		case "/blog": navigateState("Jeff Davies' Blog", applyBlogTemplate ); break;
@@ -259,7 +285,12 @@ function http_post(url,payload,response,callback) {
 	
 }
 
+
+var jwtToken={};
+
 function login() {
+	var loginStatus = document.getElementById('loginStatus');
+	loginStatus.innerHTML = "";
 	var username = document.getElementById("username").value;
 	var password = document.getElementById("password").value;
 	var url = authUrl;
@@ -286,7 +317,20 @@ function login() {
 	})
 	.then(function(token){ 
         storeJwt(token);
-	})
+		jwtToken = token;
+		if (jwtToken.loginSuccess==true) {
+			var modal = document.getElementById('myModal');
+			loginModal.style.display = "none";
+			refresh();
+		} else {
+			var modal = document.getElementById('loginStatus');
+			modal.innerHTML = "failed to login";
+		};
+	}).catch(function(err) {
+		var loginStatus = document.getElementById('loginStatus');
+		loginStatus.innerHTML = "failed to login";
+		jwtToken = {};
+	});
 }
 
 
@@ -299,19 +343,36 @@ function fetchJwt() {
 }
 
 window.onload = function(){
-	var modal = document.getElementById('myModal');
-	var btn = document.getElementById("myBtn");
-	var span = document.getElementsByClassName("close")[0];
-	btn.onclick = function() {
-		modal.style.display = "block";
+	var loginModal = document.getElementById('loginModal');
+	var loginBtn = document.getElementById("loginBtn");
+	var loginDialogClose = document.getElementById("loginClose");
+	loginBtn.onclick = function() {
+		loginModal.style.display = "block";
 	}
-	span.onclick = function() {
-		modal.style.display = "none";
+	loginDialogClose.onclick = function() {
+		loginModal.style.display = "none";
 	}
+
+//	var projectModal = document.getElementById('projectModal');
+//    var addProjectButton = document.getElementById("addButton");
+//	var projectDialogClose = document.getElementById("projectModalClose");
+//	addProjectButton.onclick = function() {
+//		projectModal.style.display = "block";
+//	}
+//	projectModalClose.onclick = function() {
+//		projectModal.style.display = "none";
+//	}
+
+	
+
 	window.onclick = function(event) {
-		if (event.target == modal) {
-			modal.style.display = "none";
+		if (event.target == loginModal) {
+			loginModal.style.display = "none";
 		}
+
+//		if (event.target == projectModal) {
+//			projectModal.style.display = "none";
+//		}	
 	}
 	
 	refresh();

@@ -22,7 +22,7 @@
   <a href="https://stackoverflow.com/users/5292841/jeff-davies">StackOverflow</a>
   <a href="#" onclick="navigate('/')">Projects</a>
   <a href="#" onclick="navigate('/blog')">My Blog</a>
-  <a href="#dialog" id="myBtn">Login</a>
+  <a href="#" id="loginBtn">Login</a>
 </div>
 
 <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
@@ -38,10 +38,18 @@
 	    <h1 id="pageTitle">{{pageTitle}}</h1>
 	  </center>
     </div>
+
+	<div class="row">
+		<div class="col-md-1">
+			<a class="btn btn-primary" onclick="addButton()" href="#" id="addButton">Add</a>
+		</div>
+	</div>
+
+
 	
 	<div id="root">
 	</div>
-	
+
 	<div id="templates" class="hidden">
 	  <div id="card-template" class="w3-third w3-section" ondrop="drop(event)" ondragover="allowDrop(event)">
 		<div id="{{id}}" class="w3-card-4 w3-light-grey w3-round-large" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
@@ -52,7 +60,7 @@
 			  <a class="btn btn-primary" href="{{pdfUrl}}">PDF</a>
 			  <a class="btn btn-warning" href="#" role="button" onclick="loadHtmlFragmentToRoot('{{url}}')">Documents</a>
 			  <a class="btn btn-info" role="button" href="{{codeUrl}}">Code on Gitlab</a>
-			  <a class="btn btn-info" role="button" href="{{siteUrl}}">Live Site</a>
+			  <a class="btn btn-info" role="button" href="{{siteUrl}}">Live Site</a>{{editButton}}
 			</div>
 		  </div>
 		</div>
@@ -70,7 +78,7 @@
 							<a class="btn btn-info marginTop5">{{date}}</a>
 						</div>
 						<div class="col-sm-11">
-							<h3>{{storyName}}</h3>
+							<h3>{{storyName}}</h3> 
 							<div class="blogStory">{{storyText}}</div>
 						</div>
 					</div>
@@ -108,17 +116,14 @@
 	</div>
 	</div> <!-- templates -->
 	
-	<!-- Trigger/Open The Modal 
-	<button id="myBtn">Login</button>-->
 
-	<!-- The Modal -->
-	<div id="myModal" class="modal">
+	<!-- Login -->
+	<div id="loginModal" class="modal"">
 
-	  <!-- Modal content -->
 	  <div class="modal-content">
-		<span class="close">&times;</span>
-	        <form role="form" method="" action="">
-                    <div class="form-group">
+		<span id="loginClose">&times;</span>
+	        <div>
+               <div class="form-group">
 						<div id="loginResult">
                         <label class="control-label">Email Address</label>
                         <div>
@@ -134,15 +139,67 @@
                     <div class="form-group">
                         <div>
                             <button type="submit" class="btn btn-success" onclick="login()">Login</button>
-                        </div>
+   	        			</div>
+					</div>
+					<div class="form-group">
+ 						<div id="loginStatus">
+						</div>
                     </div>
-                </form>
-          </div>
-
+                </div>
+          </span>
+		</div>
 	</div>
 
-	
+	<!-- Add or Edit Project 
+	<div id="projectModal" class="projectModal">
 
-  </div>
+	  <div class="modal-content">
+		<span id="projectModalClose">&times;</span>
+	        <div>
+               <div class="form-group">
+					<div id="validationResult">
+						<div>
+						</div>
+					</div>
+                        <label class="control-label">Project Name</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="projectName" value="" id="projectName">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Description</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="projectDescription" id="projectDescription">
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="control-label">Live Url or Download Page</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="projectUrl" id="projectUrl">
+                        </div>
+                    </div>
+                      <div class="form-group">
+                        <label class="control-label">Code Url</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="projectCodeUrl" id="projectCodeUrl">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">PDF Url</label>
+                        <div>
+                            <input type="text" class="form-control input-lg" name="projectPDFUrl" id="projectPDFUrl">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div>
+                            <button type="submit" class="btn btn-success" onclick="saveChanges()">Save Changes</button>
+   	        			</div>
+					</div>
+                </div>
+          </span>
+		</div>
+	</div>-->
+
+
 </body>
 </html>
