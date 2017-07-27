@@ -79,7 +79,7 @@
 						</div>
 						<div class="col-sm-11">
 							<h3>{{storyName}}</h3> 
-							<div class="blogStory">{{storyText}}</div>
+							<div class="blogStory">{{storyText}}</div>{{editButton}}
 						</div>
 					</div>
 				</div>
@@ -93,7 +93,7 @@
         <div id="kanban-task-template" class="w3-third w3-section marginTop5" >
 		<div id="{{id}}" class="w3-card-2 w3-white w3-round-medium kanban-card" draggable="true" ondragstart="drag(event)" ondrop="false" ondragover="false">
 		  <div class="w3-container w3-center">
-			<button type="button" class="btn btn-danger marginTop5">{{storyName}}</button>
+			<button type="button" class="btn btn-danger marginTop5">{{storyName}}</button>{{editButton}}
 			<p>{{storyText}} </p>
 		  </div>
 		</div>

@@ -207,6 +207,11 @@ function applyTasksTemplate() {
 			taskTemplatedInstance.innerHTML = taskTemplatedInstance.innerHTML.replace(/{{storyText}}/g, task.storyText);
 			taskTemplatedInstance.innerHTML = taskTemplatedInstance.innerHTML.replace(/{{storyName}}/g, task.storyName);
 			taskTemplatedInstance.innerHTML = taskTemplatedInstance.innerHTML.replace(/{{id}}/g,"task"+id);
+				var editButton="";
+			if(jwtToken.roles.includes("kanban-editor")) {
+				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton('+id+')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton('+id+')" aria-hidden="true"></i>';	
+			}
+			taskTemplatedInstance.innerHTML = taskTemplatedInstance.innerHTML.replace(/{{editButton}}/g, editButton);
 			
 			currentSlot = slotTemplate.cloneNode(true);
 			currentSlot.id = id;
@@ -235,7 +240,8 @@ function applyBlogTemplate() {
 	}
 
 	var blogTemplate = document.getElementById("blog-template");
-	
+
+    var id=0;	
 	var projects = getUrlUsingRest(blogsUrl,function (response) {
 		blogEntries = response;
 		
@@ -244,7 +250,13 @@ function applyBlogTemplate() {
 			blogTemplatedInstance.innerHTML = blogTemplatedInstance.innerHTML.replace(/{{storyText}}/g, story.storyText);
 			blogTemplatedInstance.innerHTML = blogTemplatedInstance.innerHTML.replace(/{{storyName}}/g, story.storyName);
 			blogTemplatedInstance.innerHTML = blogTemplatedInstance.innerHTML.replace(/{{date}}/g, story.date);
+				var editButton="";
+			if(jwtToken.roles.includes("blog-editor")) {
+				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton('+id+')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton('+id+')" aria-hidden="true"></i>';	
+			}
+			blogTemplatedInstance.innerHTML = blogTemplatedInstance.innerHTML.replace(/{{editButton}}/g, editButton);
 			root.append(blogTemplatedInstance);
+			id++;
 		});
 	});
 }
