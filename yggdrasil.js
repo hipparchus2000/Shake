@@ -268,7 +268,12 @@ function navigateState(stateTitle,templateFunction) {
 }
 
 function refresh() {
-	jwtToken = fetchJwt();
+	//jwtToken = fetchJwt();
+	jwtToken=null;
+	if (jwtToken==null) {
+		jwtToken={ admin: false, username: "Guest", roles: ""};
+		storeJwt();
+	}
 	var addButton = document.getElementById("addButton"); 
 	if (jwtToken.roles.includes("blog-editor")||jwtToken.roles.includes("project-editor")||jwtToken.roles.includes("kanban-editor")) {
 		addButton.style.display = "block";
@@ -350,17 +355,30 @@ var storeJwt = function (value) {
 	localStorage.setItem('jwt', JSON.stringify(value));
 }
 
+//function fetchJwt() {
+//	return JSON.parse(localStorage.getItem('jwt'));
+//}
+
 function fetchJwt() {
-	return JSON.parse(localStorage.getItem('jwt'));
+	var jwtToken = JSON.parse(localStorage.getItem('jwt'));
+	return null;
 }
 
 window.onload = function(){
 	var loginModal = document.getElementById('loginModal');
+
 	var loginBtn = document.getElementById("loginBtn");
-	var loginDialogClose = document.getElementById("loginClose");
 	loginBtn.onclick = function() {
 		loginModal.style.display = "block";
 	}
+
+	var logoutBtn = document.getElementById("logoutBtn");
+	logoutBtn.onclick = function() {
+		var token={};
+		storeJwt(token);
+	}
+
+	var loginDialogClose = document.getElementById("loginClose");
 	loginDialogClose.onclick = function() {
 		loginModal.style.display = "none";
 	}
