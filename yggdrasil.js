@@ -524,7 +524,7 @@ function http_post(url,payload,callback,errorCallback) {
 		headers: {
         	'Accept': 'application/json, text/plain, */*',
         	'Content-Type': 'application/json',
-			'token': jwtToken.token
+			'jwt': jwtToken.token
     	},
         body: json = JSON.stringify(payload)
 	})
