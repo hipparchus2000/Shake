@@ -407,9 +407,9 @@ function applyUsersTemplate () {
 
     var id=0;	
 	http_get_json_restricted(usersUrl,function (response) {
-		blogEntries = response;
+		var users = response;
 		
-		blogEntries.forEach(function (story) {
+		users.forEach(function (story) {
 			var node = blogTemplate.cloneNode(true);
 			updateField( node, "username", story.storyName);
 			
