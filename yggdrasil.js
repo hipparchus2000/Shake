@@ -267,8 +267,7 @@ function navigateState(stateTitle,templateFunction) {
 }
 
 function refresh() {
-	jwtToken1 = fetchJwt();
-	jwtToken=null;
+	jwtToken = fetchJwt();
 	if (jwtToken==null) {
 		jwtToken={ admin: false, username: "Guest", roles: ""};
 		storeJwt();
@@ -365,12 +364,15 @@ var storeJwt = function (value) {
 	localStorage.setItem('jwt', JSON.stringify(value));
 }
 
-//function fetchJwt() {
-//	return JSON.parse(localStorage.getItem('jwt'));
-//}
 
 function fetchJwt() {
-	var jwtToken = JSON.parse(localStorage.getItem('jwt'));
+	var token = localStorage.getItem('jwt');
+	if (token == null || token =="") {
+		jwtToken = emptyJwt();
+		storeJwt();
+	} else {
+		var jwtToken = JSON.parse(token);
+	}
 	return null;
 }
 
