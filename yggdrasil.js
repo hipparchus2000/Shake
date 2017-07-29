@@ -176,46 +176,6 @@ function generateUUID(){
     return uuid;
 }
 
-function http_get_json(url, callback) {
-	fetch(url).then(function(response) {
-	  	return response.json();
-	}).then(function(data) {
-		rewriteUrlFromRoute();	
-		callback(data);
-	}).catch(function(err) {
-	  	console.log("Failed To Get Url "+err);
-	});
-}
-
-function http_get_html(url, callback) {
-	fetch(url, { mode: 'no-cors' }).then(function(response) {
-		return response;
-	}).then(function(data) {
-		rewriteUrlFromRoute();	
-		callback(data.text());
-	}).catch(function(err) {
-		console.log("Failed To Get Url "+err);
-	});
-}
-
-function http_get_json_restricted(url, callback) {
-	fetch(url,
-	{
-    	method: "get", 
-		headers: {
-        	'Accept': 'application/json, text/plain, */*',
-        	'Content-Type': 'application/json',
-			'jwt': jwtToken.token
-    	},
-        body: json = JSON.stringify(payload)
-	}).then(function(data){ 
-		rewriteUrlFromRoute();	
-		callback(data);
-	}).catch(function(err) {
-	  	console.log("Failed To Get Url "+err);
-	});
-}
-
 function loadHtmlFragmentToRoot(url) {
 	http_get_html(url,function(blobCallback) {
 		var root = document.getElementById("root");
@@ -537,6 +497,46 @@ function makeBreadCrumbs () {
 function navigate(newroute) {
 	route=newroute;
 	refresh();
+}
+
+
+function http_get_json(url, callback) {
+	fetch(url).then(function(response) {
+	  	return response.json();
+	}).then(function(data) {
+		rewriteUrlFromRoute();	
+		callback(data);
+	}).catch(function(err) {
+	  	console.log("Failed To Get Url "+err);
+	});
+}
+
+function http_get_html(url, callback) {
+	fetch(url, { mode: 'no-cors' }).then(function(response) {
+		return response;
+	}).then(function(data) {
+		rewriteUrlFromRoute();	
+		callback(data.text());
+	}).catch(function(err) {
+		console.log("Failed To Get Url "+err);
+	});
+}
+
+function http_get_json_restricted(url, callback) {
+	fetch(url,
+	{
+    	method: "get", 
+		headers: {
+        	'Accept': 'application/json, text/plain, */*',
+        	'Content-Type': 'application/json',
+			'jwt': jwtToken.token
+    	}
+	}).then(function(data){ 
+		rewriteUrlFromRoute();	
+		callback(data);
+	}).catch(function(err) {
+	  	console.log("Failed To Get Url "+err);
+	});
 }
 
 function http_post(url,payload,callback,errorCallback) {
