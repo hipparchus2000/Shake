@@ -316,7 +316,7 @@ function refresh() {
 	}
 	switch(route) {
 		
-		case "/":     navigateState("Yggsrasil Projects", applyProjectsTemplate ); break;
+		case "/project":     navigateState("Yggsrasil Projects", applyProjectsTemplate ); break;
 		case "/project/add": navigateState("Add Project", applyAddProjectTemplate); break;
 		case "/project/edit": navigateState("Edit Project", applyEditProjectTemplate); break;
 		
