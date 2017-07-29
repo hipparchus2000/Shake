@@ -447,8 +447,9 @@ function refresh() {
 	}
 	
 	var adminButton = document.getElementById("adminButton"); 
-	if (jwtToken.admin == true) {
-		adminButton.style.display = "block";
+	if (hideButtons == false) {
+		if (jwtToken.admin == true)
+			adminButton.style.display = "block";
 	} else {
 		adminButton.style.display = "none";
 	}
