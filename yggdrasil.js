@@ -410,7 +410,7 @@ function applyUsersTemplate () {
 		var users = response;
 		
 		users.forEach(function (user) {
-			var node = blogTemplate.cloneNode(true);
+			var node = userTemplate.cloneNode(true);
 			updateField( node, "username", user.username);
 			
 			var editButton="";
