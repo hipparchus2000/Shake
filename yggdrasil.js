@@ -7,6 +7,7 @@ var projectsUrl = "/api/projects";
 var blogsUrl = "/api/blogs";
 var usersUrl = "/api/users";
 var tasksUrl = "/api/tasks";
+
 var authUrl = "/api/auth";
 
 //initialise global variables used for edit
@@ -30,6 +31,7 @@ function admin() {
 function addButton() {
 	//alert("addButton");
 	route = route+"/add";
+	id=null;
 	refresh();
 }
 
@@ -58,6 +60,39 @@ function allowDrop(ev) {
 
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function navigateBack() {
+	var lastSlashIndex = route.lastIndexOf("/");
+	var newRoute = route.slice(route,lastSlashIndex);
+	route = newRoute;
+	refresh();
+}
+
+function cancelChanges() {
+	navigateBack();
+}
+
+function saveChanges() {
+	//find resource
+	var lastSlashIndex = route.lastIndexOf("/");
+	var urlAndRoute = route.slice(route,lastSlashIndex);
+	var chunks = urlAndRoute.split(#");
+	resource = chunks[1].replace("/","")+"s";
+	var url="api/"+resource;
+	
+	refresh();
+	
+	if(id==null) { //then save with post
+		http_post(url,payload,navigateBack,updateFailed);
+	} else { //then update with put
+		http_put(url,payload,navigateBack,updateFailed);
+	}
+	
+}
+
+function updateFailed() {
+	alert("update failed");
 }
 
 function drop(ev) {
@@ -439,8 +474,44 @@ function navigate(newroute) {
 	refresh();
 }
 
-function http_post(url,payload,response,callback) {
-	
+function http_post(url,payload,callback,errorCallback) {
+	var json = {
+    	json: JSON.stringify(payload),
+    	delay: 3
+	};
+	fetch(url,
+	{
+    	method: "post", 
+		headers: {
+        	'Accept': 'application/json, text/plain, */*',
+        	'Content-Type': 'application/json'
+    	},
+        body: json = JSON.stringify(payload)
+	})
+	.then(function(res){ 
+		return res.json();
+	})
+	.then(callback).catch(errorCallback);
+}
+
+function http_put(url,payload,callback,errorCallback) {
+	var json = {
+    	json: JSON.stringify(payload),
+    	delay: 3
+	};
+	fetch(url,
+	{
+    	method: "put", 
+		headers: {
+        	'Accept': 'application/json, text/plain, */*',
+        	'Content-Type': 'application/json'
+    	},
+        body: json = JSON.stringify(payload)
+	})
+	.then(function(res){ 
+		return res.json();
+	})
+	.then(callback).catch(errorCallback);
 }
 
 function emptyJwt() {
@@ -518,6 +589,8 @@ function fetchJwt() {
 }
 
 window.onload = function(){
+	var id=null;
+	
 	var jwtToken=emptyJwt();
 	
 	var loginModal = document.getElementById('loginModal');
