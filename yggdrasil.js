@@ -29,15 +29,13 @@ function admin() {
 }
 
 function addButton() {
-	//alert("addButton");
 	route = route+"/add";
 	id=null;
 	refresh();
 }
 
 function editButton(id) {
-	//alert("editButton"+id);
-	var id=id;
+	id=id;
 	route = route+"/edit";
 	refresh();
 }
@@ -364,12 +362,20 @@ function applyBlogTemplate() {
 }
 
 function applyAddBlogTemplate () {
+	var storyText = "";
+	var storyName = "";
+	var date= "";	
+	if(id!=null) {
+		var item = blogEntries.filter(function (entry) { return entry._id === id; })[0];
+		storyText = item.storyText,
+		storyName = item.storyName,
+		date = item.date,
+		id = item.id
+	}
 	clearRootNode();
 	var blogTemplate = document.getElementById("edit-blog-template");
 	var node = blogTemplate.cloneNode(true);
-	var storyText = "";
-	var storyName = "";
-	var date=Date.now();
+	updateField( node, "id", id);
 	updateField( node, "editBlogStorytext", storyText);
 	updateField( node, "editBlogStoryname", storyName);
 	updateField( node, "date", date);
@@ -662,7 +668,6 @@ function fetchJwt() {
 
 window.onload = function(){
 	var id=null;
-	
 	var jwtToken=emptyJwt();
 	
 	var loginModal = document.getElementById('loginModal');
