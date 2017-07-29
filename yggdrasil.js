@@ -5,7 +5,7 @@ var breadcrumbs=["/"];
 
 var projectsUrl = "/api/projects";
 var blogsUrl = "/api/blogs";
-var usersUrl = "/api/users";
+var usersUrl = "/api/login";
 var tasksUrl = "/api/tasks";
 
 var authUrl = "/api/auth";
