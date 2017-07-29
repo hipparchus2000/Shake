@@ -531,6 +531,8 @@ function http_get_json_restricted(url, callback) {
         	'Content-Type': 'application/json',
 			'jwt': jwtToken.token
     	}
+	}).then(function(res){ 
+		return res.json();
 	}).then(function(data){ 
 		rewriteUrlFromRoute();	
 		callback(data);
