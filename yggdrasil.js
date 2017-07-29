@@ -283,7 +283,7 @@ function refresh() {
 	var url = window.location.href;
 	var parts = url.split("#");
 	//window.location.href = parts[0] + "#" + route;
-	window.location.replace(parts[0] + "#" + route;);
+	window.location.replace(parts[0] + "#" + route);
 	
 	jwtToken = fetchJwt();
 	if (jwtToken==null) {
