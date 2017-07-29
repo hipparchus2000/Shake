@@ -367,7 +367,7 @@ var storeJwt = function (value) {
 
 function fetchJwt() {
 	var token = localStorage.getItem('jwt');
-	if (token == null || token =="") {
+	if (token == null || token =="" || token == "undefined") {
 		jwtToken = emptyJwt();
 		storeJwt();
 	} else {
