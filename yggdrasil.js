@@ -281,7 +281,7 @@ function navigateState(stateTitle,templateFunction) {
 function refresh() {
 	
 	var url = window.location.href;
-	var poundIndex = url.indexOf(#);
+	var poundIndex = url.indexOf('#');
 	if (poundIndex==0) {
 		docroot = url = "#";
 	} else {
