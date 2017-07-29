@@ -437,7 +437,7 @@ function refresh() {
 		storeJwt();
 	}
 	
-	var hideButtons = route.includes("edit") || (route.includes("add");
+	var hideButtons = route.includes("edit") || route.includes("add");
 	var addButton = document.getElementById("addButton"); 
 	if (hideButtons == false) {
 		var requiredRole = route.replace("/","")+"-editor";
