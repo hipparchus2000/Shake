@@ -281,10 +281,8 @@ function applyAddTasksTemplate () {
 	var node = blogTemplate.cloneNode(true);
 	var storyText = "";
 	var storyName = "";
-	var date=Date.now();
 	updateField( node, "editTaskStorytext", storyText);
 	updateField( node, "editTaskStoryname", storyName);
-	updateField( node, "date", story.date);
 	root.append(node);
 }
 
