@@ -44,14 +44,10 @@ function editButton(id) {
 
 function deleteButton(id) {
 	var r = confirm("Are you sure you want to delete this?");
-	var txt="";
 	if (r == true) {
-		txt = "You pressed OK!";
-	} else {
-		txt = "You pressed Cancel!";
-	}
-	alert(txt);
-	refresh();
+		deleteRecord(id);
+		refresh();
+	} 
 }
 
 function allowDrop(ev) {
@@ -132,6 +128,18 @@ function saveChanges() {
 
 function updateFailed() {
 	alert("update failed");
+}
+
+function deleteRecord(id) {
+	var lastSlashIndex = route.lastIndexOf("/");
+	var routeWithoutAdd = route.slice(route,lastSlashIndex);
+	resource = routeWithoutAdd.replace("/","")+"s";
+	var url="/api/"+resource+"/"+id;
+	http_del(url,deleteFailed);
+}
+
+function deleteFailed() {
+	alert("delete failed");
 }
 
 function drop(ev) {
@@ -544,12 +552,29 @@ function http_put(url,payload,callback,errorCallback) {
     	method: "put", 
 		headers: {
         	'Accept': 'application/json, text/plain, */*',
-        	'Content-Type': 'application/json'
+        	'Content-Type': 'application/json',
+			'jwt': jwtToken.token
     	},
         body: json = JSON.stringify(payload)
 	})
 	.then(function(res){ 
 		return res.json();
+	})
+	.then(callback).catch(errorCallback);
+}
+
+function http_del(url,errorCallback) {
+	fetch(url,
+	{
+    	method: "delete", 
+		headers: {
+        	'Accept': 'application/json, text/plain, */*',
+        	'Content-Type': 'application/json',
+			'jwt': jwtToken.token
+    	}
+	})
+	.then(function(res){
+		return;
 	})
 	.then(callback).catch(errorCallback);
 }
