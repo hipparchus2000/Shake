@@ -23,6 +23,10 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
+function admin() {
+	navigate('/user');
+}
+
 function addButton() {
 	//alert("addButton");
 	route = route+"/add";
@@ -395,6 +399,14 @@ function refresh() {
 	} else {
 		addButton.style.display = "none";
 	}
+	
+	var adminButton = document.getElementById("adminButton"); 
+	if (jwtToken.admin == true) {
+		adminButton.style.display = "block";
+	} else {
+		adminButton.style.display = "none";
+	}
+
 	switch(route) {
 		
 		case "/project":     navigateState("Yggsrasil Projects", applyProjectsTemplate ); break;
