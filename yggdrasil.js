@@ -106,8 +106,8 @@ function getPayloadForResource(resource) {
 			break;
 		case "tasks":
 			payload = {
-				"storyName": document.getElementById("editTaskStoryname").value
-				"storyText": document.getElementById("editTaskStorytext").value,
+				"storyName": document.getElementById("editTaskStoryname").value,
+				"storyText": document.getElementById("editTaskStorytext").value
 			};
 			break;
 	}
