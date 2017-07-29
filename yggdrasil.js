@@ -359,7 +359,6 @@ function applyBlogTemplate() {
 			updateField( node, "id", story._id);
 			updateField( node, "editButton", makeEditAndDeleteButtons(story._id));
 			root.append(node);
-			id++;
 		});
 	});
 }
