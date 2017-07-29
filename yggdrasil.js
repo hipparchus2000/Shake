@@ -223,7 +223,8 @@ function applyProjectsTemplate() {
 			}
 			var node = cardTemplate.cloneNode(true);
 			updateField( node, "title", project.title);
-			updateField( node, "id", rowcount);
+			//updateField( node, "id", rowcount);
+			updateField( node, "id", project._id);
 			updateField( node, "description", project.description);
 			updateField( node, "year", project.year);
 			updateField( node, "codeUrl", project.codeUrl);
@@ -233,7 +234,7 @@ function applyProjectsTemplate() {
 
 			var editButton="";
 			if(jwtToken.roles.includes("project-editor")) {
-				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton('+rowcount+')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton('+rowcount+')" aria-hidden="true"></i>';	
+				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton('+project._id+')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton('+project._id+')" aria-hidden="true"></i>';	
 			}
 			updateField( node, "editButton", editButton);
 			
@@ -317,7 +318,8 @@ function applyTasksTemplate() {
 			var node = cardTemplate.cloneNode(true);
 			updateField( node, "storyText", task.storyText);
 			updateField( node, "storyName", task.storyName);
-			updateField( node, "id", "task"+id );
+			//updateField( node, "id", "task"+id );
+			updateField( node, "id", project._id);
 			
 			var editButton="";
 			if(jwtToken.roles.includes("kanban-editor")) {
@@ -372,6 +374,7 @@ function applyBlogTemplate() {
 			updateField( node, "storyText", story.storyText);
 			updateField( node, "storyName", story.storyName);
 			updateField( node, "date", story.date);
+			updateField( node, "id", project._id);
 			
 			var editButton="";
 			if(jwtToken.roles.includes("blog-editor")) {

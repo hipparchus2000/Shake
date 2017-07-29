@@ -61,6 +61,7 @@
 				<div id="card-template" class="w3-third w3-section" ondrop="drop(event)" ondragover="allowDrop(event)">
 					<div id="{{id}}" class="w3-card-4 w3-light-grey w3-round-large" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
 					  <div class="w3-container w3-center">
+  						<input type="hidden" name="id" value="{{id}}" id="projectId">
 						<button type="button" class="btn btn-danger marginTop5">{{title}}</button>
 						<p>{{description}} &copy; {{year}}</p>
 						<div class="w3-section">
@@ -85,6 +86,7 @@
 										<a class="btn btn-info marginTop5">{{date}}</a>
 									</div>
 									<div class="col-sm-11">
+										<input type="hidden" name="id" value="{{id}}" id="storyId">
 										<h3>{{storyName}}</h3> 
 										<div class="blogStory">{{storyText}}</div>{{editButton}}
 									</div>
@@ -97,6 +99,7 @@
 				<div id="kanban-task-template" class="w3-third w3-section marginTop5" >
 					<div id="{{id}}" class="w3-card-2 w3-white w3-round-medium kanban-card" draggable="true" ondragstart="drag(event)" ondrop="false" ondragover="false">
 					  <div class="w3-container w3-center">
+  						<input type="hidden" name="id" value="{{id}}" id="taskId">
 						<button type="button" class="btn btn-danger marginTop5">{{storyName}}</button>{{editButton}}
 						<p>{{storyText}} </p>
 					  </div>
@@ -121,6 +124,7 @@
 				<div id="user-template" class="row marginTop5">
 					<div class="col-sm-12">
 						<div class="row">
+							<input type="hidden" name="id" value="{{id}}" id="userId">
 							<div class="col-sm-6">
 								{{editButton}} {{username}}
 							</div>
@@ -134,6 +138,7 @@
 							<div>
 							</div>
 						</div>
+						<input type="hidden" name="id" value="{{id}}" id="editProjectId">
 						<div class="form-group">
 							<label class="control-label">Project Name</label>
 							<div>
@@ -200,6 +205,7 @@
 							<div>
 							</div>
 						</div>
+						<input type="hidden" name="id" value="{{id}}" id="editBlogId">
 						<div class="form-group">
 							<label class="control-label">Story Name</label>
 							<div>
@@ -238,6 +244,7 @@
 							<div>
 							</div>
 						</div>
+						<input type="hidden" name="id" value="{{id}}" id="editTaskId">
 						<div class="form-group">
 							<label class="control-label">Task Name</label>
 							<div>
@@ -270,6 +277,7 @@
 							<div>
 							</div>
 						</div>
+						<input type="hidden" name="id" value="{{id}}" id="userEditId">
 						<div class="form-group">
 							<label class="control-label">User Name</label>
 							<div>
