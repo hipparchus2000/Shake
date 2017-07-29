@@ -74,10 +74,11 @@ function cancelChanges() {
 }
 
 function getPayloadForResource(resource) {
+	var payload = {};
 	switch (resource) {
 		
 		case "projects": 
-			var payload = {
+			payload = {
 				"title":       document.getElementById("editProjectProjectName").value,
 				"id":          document.getElementById("editProjectProjectId").value,
 				"description": document.getElementById("editProjectProjectDescription").value,
@@ -89,14 +90,14 @@ function getPayloadForResource(resource) {
 			break;
 			
 		case "blogs":
-			var payload = {
+			payload = {
 				"storyText": document.getElementById("username").value,
 				"storyName": document.getElementById("username").value,
 				"date":      document.getElementById("username").value
 			};
 			break;
 		case "users":
-			var payload = {
+			payload = {
 				"username": document.getElementById("userEditUsername").value,
 				"password": document.getElementById("userEditPassword").value,
 				"roles":      document.getElementById("userEditRoles").value,
@@ -104,12 +105,13 @@ function getPayloadForResource(resource) {
 			};
 			break;
 		case "tasks":
-			var payload = {
+			payload = {
 				"storyText": document.getElementById("editTaskStoryname").value,
 				"storyName": document.getElementById("editTaskStorytext").value
 			};
 			break;
 	}
+	return payload;
 }
 
 function saveChanges() {
