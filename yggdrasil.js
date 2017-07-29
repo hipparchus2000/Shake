@@ -279,6 +279,16 @@ function navigateState(stateTitle,templateFunction) {
 }
 
 function refresh() {
+	
+	var url = window.location.href;
+	var poundIndex = url.indexOf(#);
+	if (poundIndex==0) {
+		docroot = url = "#";
+	} else {
+		var docroot = url.subString(1,poundIndex);
+	}
+	window.location.href = docroot + "#" + route;
+	
 	jwtToken = fetchJwt();
 	if (jwtToken==null) {
 		jwtToken={ admin: false, username: "Guest", roles: ""};
