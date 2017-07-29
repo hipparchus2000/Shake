@@ -76,9 +76,8 @@ function cancelChanges() {
 function saveChanges() {
 	//find resource
 	var lastSlashIndex = route.lastIndexOf("/");
-	var urlAndRoute = route.slice(route,lastSlashIndex);
-	var chunks = urlAndRoute.split("#");
-	resource = chunks[1].replace("/","")+"s";
+	var routeWithoutAdd = route.slice(route,lastSlashIndex);
+	resource = routeWithoutAdd.replace("/","")+"s";
 	var url="api/"+resource;
 	
 	refresh();
