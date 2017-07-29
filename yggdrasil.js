@@ -331,7 +331,7 @@ function applyAddBlogTemplate () {
 	var date=Date.now();
 	updateField( node, "editBlogStorytext", storyText);
 	updateField( node, "editBlogStoryname", storyName);
-	updateField( node, "date", story.date);
+	updateField( node, "date", date);
 	root.append(node);
 }
 
