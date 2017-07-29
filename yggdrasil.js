@@ -402,7 +402,7 @@ function applyEditBlogTemplate () {
 }
 
 function makeEditAndDeleteButtons(id,) {
-	var editButton='<i class="fa fa-trash fa-3x pull-right" onclick="deleteButton(\''+id+'\')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton(\''+id+'\'")" aria-hidden="true"></i>';
+	var editButton='<i class="fa fa-trash fa-3x pull-right" onclick="deleteButton(\''+id+'\')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton(\''+id+'\')" aria-hidden="true"></i>';
 	return editButton;
 }
 
