@@ -9,6 +9,9 @@ var authUrl = "/api/auth";
 
 //initialise global variables used for edit
 var projects={};
+var tasks={};
+var users={};
+var blogEntries={};
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
@@ -57,7 +60,6 @@ function drop(ev) {
     ev.target.appendChild(document.getElementById(data));
 }
 
-
 function registerServiceWorker () {
 	//register the service worker
 	if ('serviceWorker' in navigator) {
@@ -85,7 +87,6 @@ function generateUUID(){
     });
     return uuid;
 }
-
 
 function getUrlUsingRest(url, callback) {
 	fetch(url).then(function(response) {
@@ -207,45 +208,38 @@ function applyEditProjectTemplate () {}
 
 
 function applyTasksTemplate() {
-	var templates = document.getElementById("templates");
-	var root = document.getElementById("root");
-	//clear all nodes from root
-	while (root.firstChild) {
-		root.removeChild(root.firstChild);
-	}
-
+	clearRootNode();
 	var kanbanTemplate = document.getElementById("kanban-template");
 	var slotTemplate = document.getElementById("kanban-slot-template");
 	var cardTemplate = document.getElementById("kanban-task-template");
-	var kanbanTemplateInstance = kanbanTemplate.cloneNode(true);
-	kanbanTemplateInstance.innerHTML = kanbanTemplateInstance.innerHTML.replace(/kanban-template/g,"kanbanroot");
-	root.append(kanbanTemplateInstance); 
+	var kanbanRoot = kanbanTemplate.cloneNode(true);
+	kanbanRoot.innerHTML = kanbanRoot.innerHTML.replace(/kanban-template/g,"kanbanroot");
+	root.append(kanbanRoot); 
 
-
-
-	//todo change blog to tasks Url
+	//todo change blog to use tasks Url (currently using blog items for example
 	var id=0;
-	var tasks = getUrlUsingRest(blogsUrl,function (tasks) {
+	getUrlUsingRest(blogsUrl,function (response) {
 		
+		tasks = response;
 		var currentSlot=null;
 		
 		tasks.forEach(function (task) {
 			//todo need to assign tasks to correct slot
-			var taskTemplatedInstance = cardTemplate.cloneNode(true);
-
-			taskTemplatedInstance.innerHTML = taskTemplatedInstance.innerHTML.replace(/{{storyText}}/g, task.storyText);
-			taskTemplatedInstance.innerHTML = taskTemplatedInstance.innerHTML.replace(/{{storyName}}/g, task.storyName);
-			taskTemplatedInstance.innerHTML = taskTemplatedInstance.innerHTML.replace(/{{id}}/g,"task"+id);
-				var editButton="";
+			var node = cardTemplate.cloneNode(true);
+			updateField( node, "storyText", task.storyText);
+			updateField( node, "storyName", task.storyName);
+			updateField( node, "id", "task"+id );
+			
+			var editButton="";
 			if(jwtToken.roles.includes("kanban-editor")) {
 				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton('+id+')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton('+id+')" aria-hidden="true"></i>';	
 			}
-			taskTemplatedInstance.innerHTML = taskTemplatedInstance.innerHTML.replace(/{{editButton}}/g, editButton);
+			node.innerHTML = node.innerHTML.replace(/{{editButton}}/g, editButton);
 			
 			currentSlot = slotTemplate.cloneNode(true);
 			currentSlot.id = id;
-			currentSlot.innerHTML = currentSlot.innerHTML.replace(/kanban-slot-template/g, "slot"+id);
-			currentSlot.innerHTML = currentSlot.innerHTML.replace(/{{cards}}/g,taskTemplatedInstance.innerHTML);
+			updateField( currentSlot, "kanban-slot-template",  "slot"+id );
+			updateField( currentSlot, "cards",  node.innerHTML );
 			id++;
 			var slots = document.getElementById("kanban-slots");
 			slots.appendChild(currentSlot);
@@ -261,34 +255,33 @@ function applyEditTasksTemplate () {}
 function applyEditKanbanSlotsTemplate () {}
 
 function applyBlogTemplate() {
-	var templates = document.getElementById("templates");
-	var root = document.getElementById("root");
-	//clear all nodes from root
-	while (root.firstChild) {
-		root.removeChild(root.firstChild);
-	}
-
+	clearRootNode();
 	var blogTemplate = document.getElementById("blog-template");
 
     var id=0;	
-	var projects = getUrlUsingRest(blogsUrl,function (response) {
+	getUrlUsingRest(blogsUrl,function (response) {
 		blogEntries = response;
 		
 		blogEntries.forEach(function (story) {
-			var blogTemplatedInstance = blogTemplate.cloneNode(true);
-			blogTemplatedInstance.innerHTML = blogTemplatedInstance.innerHTML.replace(/{{storyText}}/g, story.storyText);
-			blogTemplatedInstance.innerHTML = blogTemplatedInstance.innerHTML.replace(/{{storyName}}/g, story.storyName);
-			blogTemplatedInstance.innerHTML = blogTemplatedInstance.innerHTML.replace(/{{date}}/g, story.date);
-				var editButton="";
+			var node = blogTemplate.cloneNode(true);
+			
+			updateField( node, "storyText", story.storyText);
+			updateField( node, "storyName", story.storyName);
+			updateField( node, "date", story.date);
+			
+			var editButton="";
 			if(jwtToken.roles.includes("blog-editor")) {
 				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton('+id+')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton('+id+')" aria-hidden="true"></i>';	
 			}
-			blogTemplatedInstance.innerHTML = blogTemplatedInstance.innerHTML.replace(/{{editButton}}/g, editButton);
-			root.append(blogTemplatedInstance);
+			updateField( node, "editButton", editButton);
+			root.append(node);
 			id++;
 		});
 	});
 }
+
+function applyAddBlogTemplate () {}
+function applyEditBlogTemplate () {}
 
 function applyUsersTemplate () {}
 function applyAddUsersTemplate () {}
@@ -353,11 +346,9 @@ function navigate(newroute) {
 	refresh();
 }
 
-
 function http_post(url,payload,response,callback) {
 	
 }
-
 
 function emptyJwt() {
 	return {
@@ -418,11 +409,9 @@ function login() {
 	});
 }
 
-
 var storeJwt = function (value) {
 	localStorage.setItem('jwt', JSON.stringify(value));
 }
-
 
 function fetchJwt() {
 	var token = localStorage.getItem('jwt');
