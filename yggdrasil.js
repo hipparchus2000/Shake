@@ -216,7 +216,6 @@ function applyAddProjectTemplate () {
 	var siteUrl="";
 	var url="";
 	var pdfUrl="";
-	var date=Date.now();
 
 	updateField( node, "editProjectProjectName", title);
 	updateField( node, "editProjectProjectDescription", description);
@@ -225,10 +224,6 @@ function applyAddProjectTemplate () {
 	//updateField( node, "editProjectProjectSiteUrl", siteUrl);
 	updateField( node, "editProjectProjectUrl", url);
 	updateField( node, "editProjectProjectPdfUrl", pdfUrl);
-
-	updateField( node, "editTaskStorytext", storyText);
-	updateField( node, "editTaskStoryname", storyName);
-	updateField( node, "date", date);
 	root.append(node);
 }
 
