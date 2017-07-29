@@ -281,13 +281,8 @@ function navigateState(stateTitle,templateFunction) {
 function refresh() {
 	
 	var url = window.location.href;
-	var poundIndex = url.indexOf('#');
-	if (poundIndex==0) {
-		docroot = url = "#";
-	} else {
-		var docroot = url.subString(1,poundIndex);
-	}
-	window.location.href = docroot + "#" + route;
+	var parts = url.split("#");
+	window.location.href = parts[0] + "#" + route;
 	
 	jwtToken = fetchJwt();
 	if (jwtToken==null) {
