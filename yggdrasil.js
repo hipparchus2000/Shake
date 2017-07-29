@@ -91,9 +91,9 @@ function getPayloadForResource(resource) {
 			
 		case "blogs":
 			payload = {
-				"storyText": document.getElementById("username").value,
-				"storyName": document.getElementById("username").value,
-				"date":      document.getElementById("username").value
+				"storyName": document.getElementById("editBlogStoryname").value,
+				"storyText": document.getElementById("editBlogStorytext").value,
+				"date":      document.getElementById("editBlogStorydate").value
 			};
 			break;
 		case "users":
@@ -106,8 +106,8 @@ function getPayloadForResource(resource) {
 			break;
 		case "tasks":
 			payload = {
-				"storyText": document.getElementById("editTaskStoryname").value,
-				"storyName": document.getElementById("editTaskStorytext").value
+				"storyName": document.getElementById("editTaskStoryname").value
+				"storyText": document.getElementById("editTaskStorytext").value,
 			};
 			break;
 	}
