@@ -207,7 +207,7 @@ function applyProjectsTemplate() {
 
 function applyAddProjectTemplate () {
 	clearRootNode();
-	var blogTemplate = document.getElementById("edit-blog-template");
+	var blogTemplate = document.getElementById("edit-project-template");
 	var node = blogTemplate.cloneNode(true);
 	var title = "";
 	var description = "";
