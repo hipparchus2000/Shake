@@ -5,6 +5,8 @@ var breadcrumbs=["/"];
 
 var projectsUrl = "/api/projects";
 var blogsUrl = "/api/blogs";
+var usersUrl = "/api/users";
+var tasksUrl = "/api/tasks";
 var authUrl = "/api/auth";
 
 //initialise global variables used for edit
@@ -203,8 +205,36 @@ function applyProjectsTemplate() {
 	});
 }
 
-function applyAddProjectTemplate () {}
-function applyEditProjectTemplate () {}
+function applyAddProjectTemplate () {
+	clearRootNode();
+	var blogTemplate = document.getElementById("edit-blog-template");
+	var node = blogTemplate.cloneNode(true);
+	var title = "";
+	var description = "";
+	var year="";
+	var codeUrl="";
+	var siteUrl="";
+	var url="";
+	var pdfUrl="";
+	var date=Date.now();
+
+	updateField( node, "editProjectProjectName", title);
+	updateField( node, "editProjectProjectDescription", description);
+	updateField( node, "editProjectProjectYear", year);
+	updateField( node, "editProjectProjectCodeUrl", codeUrl);
+	//updateField( node, "editProjectProjectSiteUrl", siteUrl);
+	updateField( node, "editProjectProjectUrl", url);
+	updateField( node, "editProjectProjectPdfUrl", pdfUrl);
+
+	updateField( node, "editTaskStorytext", storyText);
+	updateField( node, "editTaskStoryname", storyName);
+	updateField( node, "date", date);
+	root.append(node);
+}
+
+function applyEditProjectTemplate () {
+	applyAddProjectTemplate();
+}
 
 
 function applyTasksTemplate() {
@@ -250,9 +280,26 @@ function applyTasksTemplate() {
 
 }
 
-function applyAddTasksTemplate () {}
-function applyEditTasksTemplate () {}
-function applyEditKanbanSlotsTemplate () {}
+function applyAddTasksTemplate () {
+	clearRootNode();
+	var blogTemplate = document.getElementById("edit-task-template");
+	var node = blogTemplate.cloneNode(true);
+	var storyText = "";
+	var storyName = "";
+	var date=Date.now();
+	updateField( node, "editTaskStorytext", storyText);
+	updateField( node, "editTaskStoryname", storyName);
+	updateField( node, "date", story.date);
+	root.append(node);
+}
+
+function applyEditTasksTemplate () {
+	applyAddTasksTemplate();
+}
+
+function applyEditKanbanSlotsTemplate () {
+	
+}
 
 function applyBlogTemplate() {
 	clearRootNode();
@@ -280,12 +327,53 @@ function applyBlogTemplate() {
 	});
 }
 
-function applyAddBlogTemplate () {}
-function applyEditBlogTemplate () {}
+function applyAddBlogTemplate () {
+	clearRootNode();
+	var blogTemplate = document.getElementById("edit-blog-template");
+	var node = blogTemplate.cloneNode(true);
+	var storyText = "";
+	var storyName = "";
+	var date=Date.now();
+	updateField( node, "editBlogStorytext", storyText);
+	updateField( node, "editBlogStoryname", storyName);
+	updateField( node, "date", story.date);
+	root.append(node);
+}
 
-function applyUsersTemplate () {}
-function applyAddUsersTemplate () {}
-function applyEditUsersTemplate () {}
+function applyEditBlogTemplate () {
+	applyAddBlogTemplate();
+}
+
+function applyUsersTemplate () {
+	clearRootNode();
+	var userTemplate = document.getElementById("user-template");
+
+    var id=0;	
+	getUrlUsingRest(usersUrl,function (response) {
+		blogEntries = response;
+		
+		blogEntries.forEach(function (story) {
+			var node = blogTemplate.cloneNode(true);
+			updateField( node, "username", story.storyName);
+			
+			var editButton="";
+			if(jwtToken.roles.includes("blog-editor")) {
+				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton('+id+')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton('+id+')" aria-hidden="true"></i>';	
+			}
+			updateField( node, "editButton", editButton);
+			root.append(node);
+			id++;
+		});
+	});
+}
+
+function applyAddUsersTemplate () {
+	
+}
+
+function applyEditUsersTemplate () {
+	
+}
 
 function navigateState(stateTitle,templateFunction) {
 	var title=document.getElementById("pageTitle");
