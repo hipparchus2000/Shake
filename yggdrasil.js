@@ -88,6 +88,7 @@ function getUrlUsingRest(url, callback) {
 	fetch(url).then(function(response) {
 	  	return response.json();
 	}).then(function(data) {
+		rewriteUrlFromRoute();	
 		callback(data);
 	}).catch(function(err) {
 	  	console.log("Failed To Get Url "+err);
@@ -96,11 +97,12 @@ function getUrlUsingRest(url, callback) {
 
 function getUrlAsHtmlUsingRest(url, callback) {
 	fetch(url, { mode: 'no-cors' }).then(function(response) {
-	  return response;
+		return response;
 	}).then(function(data) {
-	  callback(data.text());
+		rewriteUrlFromRoute();	
+		callback(data.text());
 	}).catch(function(err) {
-	  console.log("Failed To Get Url "+err);
+		console.log("Failed To Get Url "+err);
 	});
 }
 
@@ -278,12 +280,15 @@ function navigateState(stateTitle,templateFunction) {
 	templateFunction();
 }
 
-function refresh() {
-	
+function rewriteUrlFromRoute() {
 	var url = window.location.href;
 	var parts = url.split("#");
-	//window.location.href = parts[0] + "#" + route;
 	window.location.replace(parts[0] + "#" + route);
+}
+
+function refresh() {
+
+	rewriteUrlFromRoute();	
 	
 	jwtToken = fetchJwt();
 	if (jwtToken==null) {
