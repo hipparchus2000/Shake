@@ -458,18 +458,21 @@ function refresh() {
 		jwtToken={ admin: false, username: "Guest", roles: ""};
 		storeJwt();
 	}
-	var addButton = document.getElementById("addButton"); 
-	if (jwtToken.roles.includes("blog-editor")||jwtToken.roles.includes("project-editor")||jwtToken.roles.includes("kanban-editor")) {
-		addButton.style.display = "block";
-	} else {
-		addButton.style.display = "none";
-	}
 	
-	var adminButton = document.getElementById("adminButton"); 
-	if (jwtToken.admin == true) {
-		adminButton.style.display = "block";
-	} else {
-		adminButton.style.display = "none";
+	if ((route.includes("edit")==false) && (route.includes("add") == false)) {
+		var addButton = document.getElementById("addButton"); 
+		if (jwtToken.roles.includes("blog-editor")||jwtToken.roles.includes("project-editor")||jwtToken.roles.includes("kanban-editor")) {
+			addButton.style.display = "block";
+		} else {
+			addButton.style.display = "none";
+		}
+		
+		var adminButton = document.getElementById("adminButton"); 
+		if (jwtToken.admin == true) {
+			adminButton.style.display = "block";
+		} else {
+			adminButton.style.display = "none";
+		}
 	}
 
 	switch(route) {
