@@ -150,21 +150,21 @@ function applyProjectsTemplate() {
 			
 			//node.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{title}}/g, project.title);
 			updateField( node, "title", project.title);
-			node.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{id}}/g, rowcount);
-			node.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{description}}/g, project.description);
-			node.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{year}}/g, project.year);
-			node.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{codeUrl}}/g, project.codeUrl);
-			node.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{siteUrl}}/g, project.siteUrl);
-			node.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{url}}/g, project.url);
-			node.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{pdfUrl}}/g, project.pdfUrl);
+			node.innerHTML = node.innerHTML.replace(/{{id}}/g, rowcount);
+			node.innerHTML = node.innerHTML.replace(/{{description}}/g, project.description);
+			node.innerHTML = node.innerHTML.replace(/{{year}}/g, project.year);
+			node.innerHTML = node.innerHTML.replace(/{{codeUrl}}/g, project.codeUrl);
+			node.innerHTML = node.innerHTML.replace(/{{siteUrl}}/g, project.siteUrl);
+			node.innerHTML = node.innerHTML.replace(/{{url}}/g, project.url);
+			node.innerHTML = node.innerHTML.replace(/{{pdfUrl}}/g, project.pdfUrl);
 			var editButton="";
 			if(jwtToken.roles.includes("project-editor")) {
 				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton('+rowcount+')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton('+rowcount+')" aria-hidden="true"></i>';	
 			}
-			projectTemplatedInstance.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{editButton}}/g, editButton);
+			node.innerHTML = node.innerHTML.replace(/{{editButton}}/g, editButton);
 			
 			//hide buttons with undefined href and onclick   --> first button (0) is used for title, so ignore
-			var allButtons = projectTemplatedInstance.getElementsByClassName("btn");
+			var allButtons = node.getElementsByClassName("btn");
 			for (var i = 1; i < allButtons.length; i++) {
 				
 				var href =allButtons[i].getAttribute("href");
@@ -186,7 +186,7 @@ function applyProjectsTemplate() {
 				}
 			}
 			
-			currentRow.append(projectTemplatedInstance);
+			currentRow.append(node);
 			if ((rowcount % 3) == 0) {
 				root.append(currentRow);
 			}
