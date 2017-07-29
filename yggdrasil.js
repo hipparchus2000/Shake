@@ -422,9 +422,9 @@ function refresh() {
 		case "/task/edit": navigateState("Edit Task", applyEditTasksTemplate); break;
 		case "/task/edit-slots": navigateState("Edit Kanban Slots", applyEditKanbanSlotsTemplate); break;
 		
-		case "/users": navigateState("Users", applyUsersTemplate); break;
-		case "/users/add": navigateState("Add User", applyAddUsersTemplate); break;
-		case "/users/edit": navigateState("Edit User", applyEditUsersTemplate); break;
+		case "/user": navigateState("Users", applyUsersTemplate); break;
+		case "/user/add": navigateState("Add User", applyAddUsersTemplate); break;
+		case "/user/edit": navigateState("Edit User", applyEditUsersTemplate); break;
 
 	} 
 		
