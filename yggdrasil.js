@@ -149,7 +149,7 @@ function applyProjectsTemplate() {
 			//if (project.codeUrl==null)
 			
 			//node.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{title}}/g, project.title);
-			updateField("title", project.title);
+			updateField( node, "title", project.title);
 			node.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{id}}/g, rowcount);
 			node.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{description}}/g, project.description);
 			node.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{year}}/g, project.year);
