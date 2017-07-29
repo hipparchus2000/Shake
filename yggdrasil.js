@@ -222,8 +222,7 @@ function applyTasksTemplate() {
 			slots.appendChild(currentSlot);
 
 		});
-		//kanbanTemplateInstance.firstChild.append = kanbanTemplateInstance.innerHTML.replace(/{{slots}}/g,kanbanTemplateInstance.innerHTML);
-
+		
 	});
 
 }
@@ -268,7 +267,7 @@ function navigateState(stateTitle,templateFunction) {
 }
 
 function refresh() {
-	//jwtToken = fetchJwt();
+	jwtToken1 = fetchJwt();
 	jwtToken=null;
 	if (jwtToken==null) {
 		jwtToken={ admin: false, username: "Guest", roles: ""};
@@ -303,7 +302,20 @@ function http_post(url,payload,response,callback) {
 }
 
 
-var jwtToken={};
+var jwtToken=emptyJwt();
+
+function emptyJwt() {
+	return {
+		"admin" : false,
+		"roles" : "",
+		"username" : "guest"
+	};
+}
+
+function logout() {
+	jwtToken = emptyJwt();
+	storeJwt();
+}
 
 function login() {
 	var loginStatus = document.getElementById('loginStatus');
@@ -374,8 +386,7 @@ window.onload = function(){
 
 	var logoutBtn = document.getElementById("logoutBtn");
 	logoutBtn.onclick = function() {
-		var token={};
-		storeJwt(token);
+		logout();
 	}
 
 	var loginDialogClose = document.getElementById("loginClose");
