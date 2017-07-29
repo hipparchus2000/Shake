@@ -78,7 +78,7 @@ function saveChanges() {
 	var lastSlashIndex = route.lastIndexOf("/");
 	var routeWithoutAdd = route.slice(route,lastSlashIndex);
 	resource = routeWithoutAdd.replace("/","")+"s";
-	var url="api/"+resource;
+	var url="/api/"+resource;
 	
 	refresh();
 	
