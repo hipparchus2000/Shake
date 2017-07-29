@@ -228,12 +228,7 @@ function applyProjectsTemplate() {
 			updateField( node, "siteUrl", project.siteUrl);
 			updateField( node, "url", project.url);
 			updateField( node, "pdfUrl", project.pdfUrl);
-
-			var editButton="";
-			if(jwtToken.roles.includes("project-editor")) {
-				editButton = makeEditAndDeleteButtons(project._id);			
-			}
-			updateField( node, "editButton", editButton);
+			updateField( node, "editButton", makeEditAndDeleteButtons(project._id));
 			
 			//hide buttons with undefined href and onclick   --> first button (0) is used for title, so ignore
 			var allButtons = node.getElementsByClassName("btn");
@@ -315,14 +310,8 @@ function applyTasksTemplate() {
 			var node = cardTemplate.cloneNode(true);
 			updateField( node, "storyText", task.storyText);
 			updateField( node, "storyName", task.storyName);
-			//updateField( node, "id", "task"+id );
 			updateField( node, "id", task._id);
-			
-			var editButton="";
-			if(jwtToken.roles.includes("kanban-editor")) {
-				editButton = makeEditAndDeleteButtons(task._id);
-			}
-			node.innerHTML = node.innerHTML.replace(/{{editButton}}/g, editButton);
+			updateField( node, "editButton", makeEditAndDeleteButtons(task._id));
 			
 			currentSlot = slotTemplate.cloneNode(true);
 			currentSlot.id = id;
@@ -360,24 +349,15 @@ function applyEditKanbanSlotsTemplate () {
 function applyBlogTemplate() {
 	clearRootNode();
 	var blogTemplate = document.getElementById("blog-template");
-
-    var id=0;	
 	http_get_json(blogsUrl,function (response) {
 		blogEntries = response;
-		
 		blogEntries.forEach(function (story) {
 			var node = blogTemplate.cloneNode(true);
-			
 			updateField( node, "storyText", story.storyText);
 			updateField( node, "storyName", story.storyName);
 			updateField( node, "date", story.date);
 			updateField( node, "id", story._id);
-			
-			var editButton="";
-			if(jwtToken.roles.includes("blog-editor")) {
-				editButton = makeEditAndDeleteButtons(story._id);	
-			}
-			updateField( node, "editButton", editButton);
+			updateField( node, "editButton", makeEditAndDeleteButtons(story._id));
 			root.append(node);
 			id++;
 		});
@@ -402,7 +382,10 @@ function applyEditBlogTemplate () {
 }
 
 function makeEditAndDeleteButtons(id,) {
-	var editButton='<i class="fa fa-trash fa-3x pull-right" onclick="deleteButton(\''+id+'\')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton(\''+id+'\')" aria-hidden="true"></i>';
+	var requiredRole = route.replace("/","")+"-editor";
+	var editButton="";
+	if (jwtToken.roles.includes(requiredRole))
+		editButton='<i class="fa fa-trash fa-3x pull-right" onclick="deleteButton(\''+id+'\')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton(\''+id+'\')" aria-hidden="true"></i>';
 	return editButton;
 }
 
@@ -417,12 +400,7 @@ function applyUsersTemplate () {
 		users.forEach(function (user) {
 			var node = userTemplate.cloneNode(true);
 			updateField( node, "username", user.username);
-			
-			var editButton="";
-			if(jwtToken.roles.includes("blog-editor")) {
-				editButton = makeEditAndDeleteButtons(user._id);	
-			}
-			updateField( node, "editButton", editButton);
+			updateField( node, "editButton", makeEditAndDeleteButtons(user._id));
 			root.append(node);
 			id++;
 		});
@@ -459,20 +437,21 @@ function refresh() {
 		storeJwt();
 	}
 	
-	if ((route.includes("edit")==false) && (route.includes("add") == false)) {
-		var addButton = document.getElementById("addButton"); 
-		if (jwtToken.roles.includes("blog-editor")||jwtToken.roles.includes("project-editor")||jwtToken.roles.includes("kanban-editor")) {
+	var hideButtons = route.includes("edit") || (route.includes("add");
+	var addButton = document.getElementById("addButton"); 
+	if (hideButtons == false) {
+		var requiredRole = route.replace("/","")+"-editor";
+		if (jwtToken.roles.includes(requiredRole)
 			addButton.style.display = "block";
-		} else {
-			addButton.style.display = "none";
-		}
-		
-		var adminButton = document.getElementById("adminButton"); 
-		if (jwtToken.admin == true) {
-			adminButton.style.display = "block";
-		} else {
-			adminButton.style.display = "none";
-		}
+	} else {
+		addButton.style.display = "none";
+	}
+	
+	var adminButton = document.getElementById("adminButton"); 
+	if (jwtToken.admin == true) {
+		adminButton.style.display = "block";
+	} else {
+		adminButton.style.display = "none";
 	}
 
 	switch(route) {
