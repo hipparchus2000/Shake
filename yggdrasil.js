@@ -302,8 +302,6 @@ function http_post(url,payload,response,callback) {
 }
 
 
-var jwtToken=emptyJwt();
-
 function emptyJwt() {
 	return {
 		"admin" : false,
@@ -377,6 +375,8 @@ function fetchJwt() {
 }
 
 window.onload = function(){
+	var jwtToken=emptyJwt();
+	
 	var loginModal = document.getElementById('loginModal');
 
 	var loginBtn = document.getElementById("loginBtn");
@@ -394,26 +394,11 @@ window.onload = function(){
 		loginModal.style.display = "none";
 	}
 
-//	var projectModal = document.getElementById('projectModal');
-//    var addProjectButton = document.getElementById("addButton");
-//	var projectDialogClose = document.getElementById("projectModalClose");
-//	addProjectButton.onclick = function() {
-//		projectModal.style.display = "block";
-//	}
-//	projectModalClose.onclick = function() {
-//		projectModal.style.display = "none";
-//	}
-
-	
-
 	window.onclick = function(event) {
 		if (event.target == loginModal) {
 			loginModal.style.display = "none";
 		}
 
-//		if (event.target == projectModal) {
-//			projectModal.style.display = "none";
-//		}	
 	}
 	
 	refresh();
