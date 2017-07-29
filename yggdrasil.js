@@ -405,7 +405,7 @@ function applyEditBlogTemplate () {
 }
 
 function makeEditAndDeleteButtons(id,) {
-	var editButton='<i class="fa fa-trash fa-2x" onclick="deleteButton(\''+id+'\')" aria-hidden="true"></i><i class="fa fa-pencil fa-2x" onclick="editButton(\''+id+'\'")" aria-hidden="true"></i>';
+	var editButton='<i class="fa fa-trash fa-3x pullright" onclick="deleteButton(\''+id+'\')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pullright" onclick="editButton(\''+id+'\'")" aria-hidden="true"></i>';
 	return editButton;
 }
 
