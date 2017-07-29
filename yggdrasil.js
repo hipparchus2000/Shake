@@ -342,8 +342,8 @@ function login() {
 		return res.json();
 	})
 	.then(function(token){ 
-        storeJwt(token);
 		jwtToken = token;
+        storeJwt(token);
 		if (jwtToken.loginSuccess==true) {
 			var modal = document.getElementById('myModal');
 			loginModal.style.display = "none";
