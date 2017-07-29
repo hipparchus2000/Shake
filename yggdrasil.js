@@ -319,11 +319,11 @@ function applyTasksTemplate() {
 			updateField( node, "storyText", task.storyText);
 			updateField( node, "storyName", task.storyName);
 			//updateField( node, "id", "task"+id );
-			updateField( node, "id", project._id);
+			updateField( node, "id", task._id);
 			
 			var editButton="";
 			if(jwtToken.roles.includes("kanban-editor")) {
-				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton('+id+')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton('+id+')" aria-hidden="true"></i>';	
+				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton('+task._id+')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton('+task._id+')" aria-hidden="true"></i>';	
 			}
 			node.innerHTML = node.innerHTML.replace(/{{editButton}}/g, editButton);
 			
@@ -374,11 +374,11 @@ function applyBlogTemplate() {
 			updateField( node, "storyText", story.storyText);
 			updateField( node, "storyName", story.storyName);
 			updateField( node, "date", story.date);
-			updateField( node, "id", project._id);
+			updateField( node, "id", story._id);
 			
 			var editButton="";
 			if(jwtToken.roles.includes("blog-editor")) {
-				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton('+id+')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton('+id+')" aria-hidden="true"></i>';	
+				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton('+story._id+')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton('+story._id+')" aria-hidden="true"></i>';	
 			}
 			updateField( node, "editButton", editButton);
 			root.append(node);
