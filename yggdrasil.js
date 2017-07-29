@@ -80,8 +80,6 @@ function saveChanges() {
 	resource = routeWithoutAdd.replace("/","")+"s";
 	var url="/api/"+resource;
 	
-	refresh();
-	
 	if(id==null) { //then save with post
 		http_post(url,payload,navigateBack,updateFailed);
 	} else { //then update with put
