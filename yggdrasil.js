@@ -120,7 +120,8 @@ function loadHtmlFragmentToRoot(url) {
 }
 
 function updateField(node, name,value) {
-	node.innerHTML = node.innerHTML.replace(/{{name}}/g, value);
+	var re = new RegExp("{{"+name+"}}","g");
+	node.innerHTML = node.innerHTML.replace(re, value);
 }
 
 function applyProjectsTemplate() {
