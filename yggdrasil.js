@@ -73,12 +73,52 @@ function cancelChanges() {
 	navigateBack();
 }
 
+function getPayloadForResource(resource) {
+	switch (resource) {
+		
+		case "projects": 
+			var payload = {
+				"title":       document.getElementById("editProjectProjectName").value,
+				"id":          document.getElementById("editProjectProjectId").value,
+				"description": document.getElementById("editProjectProjectDescription").value,
+				"year":        document.getElementById("editProjectProjectYear").value,
+				"codeUrl":     document.getElementById("editProjectProjectCodeUrl").value,
+				"url":         document.getElementById("editProjectProjectUrl").value,
+				"pdfUrl":      document.getElementById("editProjectProjectPdfUrl").value
+			};
+			break;
+			
+		case "blogs":
+			var payload = {
+				"storyText": document.getElementById("username").value,
+				"storyName": document.getElementById("username").value,
+				"date":      document.getElementById("username").value
+			};
+			break;
+		case "users":
+			var payload = {
+				"username": document.getElementById("userEditUsername").value,
+				"password": document.getElementById("userEditPassword").value,
+				"roles":      document.getElementById("userEditRoles").value,
+				"admin":      false
+			};
+			break;
+		case "tasks":
+			var payload = {
+				"storyText": document.getElementById("editTaskStoryname").value,
+				"storyName": document.getElementById("editTaskStorytext").value
+			};
+			break;
+	}
+}
+
 function saveChanges() {
 	//find resource
 	var lastSlashIndex = route.lastIndexOf("/");
 	var routeWithoutAdd = route.slice(route,lastSlashIndex);
 	resource = routeWithoutAdd.replace("/","")+"s";
 	var url="/api/"+resource;
+	var payload = getPayloadForResource(resource);
 	
 	if(id==null) { //then save with post
 		http_post(url,payload,navigateBack,updateFailed);
@@ -249,15 +289,15 @@ function applyAddProjectTemplate () {
 	var description = "";
 	var year="";
 	var codeUrl="";
-	var siteUrl="";
+	var id="";
 	var url="";
 	var pdfUrl="";
 
 	updateField( node, "editProjectProjectName", title);
 	updateField( node, "editProjectProjectDescription", description);
+	updateField( node, "editProjectProjectId", id);
 	updateField( node, "editProjectProjectYear", year);
 	updateField( node, "editProjectProjectCodeUrl", codeUrl);
-	//updateField( node, "editProjectProjectSiteUrl", siteUrl);
 	updateField( node, "editProjectProjectUrl", url);
 	updateField( node, "editProjectProjectPdfUrl", pdfUrl);
 	root.append(node);
