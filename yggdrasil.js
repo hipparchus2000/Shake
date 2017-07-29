@@ -45,8 +45,7 @@ function editButton(id) {
 function deleteButton(id) {
 	var r = confirm("Are you sure you want to delete this?");
 	if (r == true) {
-		deleteRecord(id);
-		refresh();
+		deleteRecord(id, refresh);
 	} 
 }
 
@@ -130,12 +129,12 @@ function updateFailed() {
 	alert("update failed");
 }
 
-function deleteRecord(id) {
+function deleteRecord(id, callback) {
 	var lastSlashIndex = route.lastIndexOf("/");
 	var routeWithoutAdd = route.slice(route,lastSlashIndex);
 	resource = routeWithoutAdd.replace("/","")+"s";
 	var url="/api/"+resource+"/"+id;
-	http_del(url,deleteFailed);
+	http_del(url,deleteFailed, callback);
 }
 
 function deleteFailed() {
@@ -591,7 +590,7 @@ function http_put(url,payload,callback,errorCallback) {
 	.then(callback).catch(errorCallback);
 }
 
-function http_del(url,errorCallback) {
+function http_del(url,errorCallback, callback) {
 	fetch(url,
 	{
     	method: "delete", 
