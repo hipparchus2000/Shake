@@ -146,23 +146,20 @@ function applyProjectsTemplate() {
 				currentRow = cardrowTemplate.cloneNode(true);
 			}
 			var node = cardTemplate.cloneNode(true);
-			
-			//if (project.codeUrl==null)
-			
-			//node.innerHTML = projectTemplatedInstance.innerHTML.replace(/{{title}}/g, project.title);
 			updateField( node, "title", project.title);
-			node.innerHTML = node.innerHTML.replace(/{{id}}/g, rowcount);
-			node.innerHTML = node.innerHTML.replace(/{{description}}/g, project.description);
-			node.innerHTML = node.innerHTML.replace(/{{year}}/g, project.year);
-			node.innerHTML = node.innerHTML.replace(/{{codeUrl}}/g, project.codeUrl);
-			node.innerHTML = node.innerHTML.replace(/{{siteUrl}}/g, project.siteUrl);
-			node.innerHTML = node.innerHTML.replace(/{{url}}/g, project.url);
-			node.innerHTML = node.innerHTML.replace(/{{pdfUrl}}/g, project.pdfUrl);
+			updateField( node, "id", rowcount);
+			updateField( node, "description", project.description);
+			updateField( node, "year", project.year);
+			updateField( node, "codeUrl", project.codeUrl);
+			updateField( node, "siteUrl", project.siteUrl);
+			updateField( node, "url", project.url);
+			updateField( node, "pdfUrl", project.pdfUrl);
+
 			var editButton="";
 			if(jwtToken.roles.includes("project-editor")) {
 				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton('+rowcount+')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton('+rowcount+')" aria-hidden="true"></i>';	
 			}
-			node.innerHTML = node.innerHTML.replace(/{{editButton}}/g, editButton);
+			updateField( node, "editButton", editButton);
 			
 			//hide buttons with undefined href and onclick   --> first button (0) is used for title, so ignore
 			var allButtons = node.getElementsByClassName("btn");
