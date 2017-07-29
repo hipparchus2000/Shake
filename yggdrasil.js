@@ -16,16 +16,25 @@ function closeNav() {
 }
 
 function addButton() {
-//	projectModal.style.display = "block";
-	alert("addButton");
+	//alert("addButton");
+	route = route+"/add";
 }
 
 function editButton(id) {
-	alert("editButton"+id);
+	//alert("editButton"+id);
+	route = route+"/edit";
 }
 
 function deleteButton(id) {
-	alert("deleteButton"+id);
+	var r = confirm("Are you sure you want to delete this?");
+	var txt="";
+	if (r == true) {
+		txt = "You pressed OK!";
+	} else {
+		txt = "You pressed Cancel!";
+	}
+	alert(txt);
+	refresh();
 }
 
 function allowDrop(ev) {
@@ -282,6 +291,21 @@ function refresh() {
 		case "/":     navigateState("Yggsrasil Projects", applyProjectsTemplate ); break;
 		case "/blog": navigateState("Jeff Davies' Blog", applyBlogTemplate ); break;
 		case "/tasks": navigateState("Kanban", applyTasksTemplate); break;
+		case "/users": navigateState("Users", applyTasksTemplate); break;
+		
+		case "/project/add": navigateState("Add Project", applyAddProjectTemplate); break;
+		case "/project/edit": navigateState("Edit Project", applyEditProjectTemplate); break;
+		
+		case "/blog/add": navigateState("Add Blog", applyAddBlogTemplate); break;
+		case "/blog/edit": navigateState("Edit Blog", applyEditBlogTemplate); break;
+		
+		case "/tasks/add": navigateState("Add Task", applyAddTasksTemplate); break;
+		case "/tasks/edit": navigateState("Edit Task", applyEditTasksTemplate); break;
+		case "/tasks/edit-slots": navigateState("Edit Kanban Slots", applyEditKanbanSlotsTemplate); break;
+		
+		case "/users/add": navigateState("Add User", applyEditTasksTemplate); break;
+		case "/users/edit": navigateState("Edit User", applyEditTasksTemplate); break;
+
 	} 
 		
 }

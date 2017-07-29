@@ -53,69 +53,120 @@
 	</div>
 
 	<div id="templates" class="hidden">
-	  <div id="card-template" class="w3-third w3-section" ondrop="drop(event)" ondragover="allowDrop(event)">
-		<div id="{{id}}" class="w3-card-4 w3-light-grey w3-round-large" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
-		  <div class="w3-container w3-center">
-			<button type="button" class="btn btn-danger marginTop5">{{title}}</button>
-			<p>{{description}} &copy; {{year}}</p>
-			<div class="w3-section">
-			  <a class="btn btn-primary" href="{{pdfUrl}}">PDF</a>
-			  <a class="btn btn-warning" href="#" role="button" onclick="loadHtmlFragmentToRoot('{{url}}')">Documents</a>
-			  <a class="btn btn-info" role="button" href="{{codeUrl}}">Code on Gitlab</a>
-			  <a class="btn btn-info" role="button" href="{{siteUrl}}">Live Site</a>{{editButton}}
-			</div>
-		  </div>
-		</div>
-	  </div>
-		
-      <div id="cardRow-template" class="w3-row-padding w3-theme">
-	  </div>
-	  
-	  <div id="blog-template" class="row marginTop5">
-		<div class="col-sm-12">
+	
+		<div id="card-template" class="w3-third w3-section" ondrop="drop(event)" ondragover="allowDrop(event)">
 			<div id="{{id}}" class="w3-card-4 w3-light-grey w3-round-large" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
-				<div class="w3-container">
-					<div class="row">
-						<div class="col-sm-1">
-							<a class="btn btn-info marginTop5">{{date}}</a>
-						</div>
-						<div class="col-sm-11">
-							<h3>{{storyName}}</h3> 
-							<div class="blogStory">{{storyText}}</div>{{editButton}}
+			  <div class="w3-container w3-center">
+				<button type="button" class="btn btn-danger marginTop5">{{title}}</button>
+				<p>{{description}} &copy; {{year}}</p>
+				<div class="w3-section">
+				  <a class="btn btn-primary" href="{{pdfUrl}}">PDF</a>
+				  <a class="btn btn-warning" href="#" role="button" onclick="loadHtmlFragmentToRoot('{{url}}')">Documents</a>
+				  <a class="btn btn-info" role="button" href="{{codeUrl}}">Code on Gitlab</a>
+				  <a class="btn btn-info" role="button" href="{{siteUrl}}">Live Site</a>{{editButton}}
+				</div>
+			  </div>
+			</div>
+		</div>
+		
+		<div id="cardRow-template" class="w3-row-padding w3-theme">
+		</div>
+	  
+		<div id="blog-template" class="row marginTop5">
+			<div class="col-sm-12">
+				<div id="{{id}}" class="w3-card-4 w3-light-grey w3-round-large" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+					<div class="w3-container">
+						<div class="row">
+							<div class="col-sm-1">
+								<a class="btn btn-info marginTop5">{{date}}</a>
+							</div>
+							<div class="col-sm-11">
+								<h3>{{storyName}}</h3> 
+								<div class="blogStory">{{storyText}}</div>{{editButton}}
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	  </div>
 
 
 
 
         <div id="kanban-task-template" class="w3-third w3-section marginTop5" >
-		<div id="{{id}}" class="w3-card-2 w3-white w3-round-medium kanban-card" draggable="true" ondragstart="drag(event)" ondrop="false" ondragover="false">
-		  <div class="w3-container w3-center">
-			<button type="button" class="btn btn-danger marginTop5">{{storyName}}</button>{{editButton}}
-			<p>{{storyText}} </p>
+			<div id="{{id}}" class="w3-card-2 w3-white w3-round-medium kanban-card" draggable="true" ondragstart="drag(event)" ondrop="false" ondragover="false">
+			  <div class="w3-container w3-center">
+				<button type="button" class="btn btn-danger marginTop5">{{storyName}}</button>{{editButton}}
+				<p>{{storyText}} </p>
+			  </div>
+			</div>
 		  </div>
+
+
+		<div id="kanban-template" class="row">
+		  <table>
+			<tr>
+			  <td>
+				<div class="w3-card-2 col-lg-2"><center>to pick up</center></div><div class="w3-card-2 col-lg-2"><center>in progress</center></div><div class="w3-card-2 col-lg-2"><center>complete</center></div>
+			  </td>
+			</tr>
+			<tr id="kanban-slots" class="kanban-slot"></tr>
+		  </table>
 		</div>
-	  </div>
 
-
-	<div id="kanban-template" class="row">
-	  <table>
-	    <tr>
-	      <td>
-	        <div class="w3-card-2 col-lg-2"><center>to pick up</center></div><div class="w3-card-2 col-lg-2"><center>in progress</center></div><div class="w3-card-2 col-lg-2"><center>complete</center></div>
-	      </td>
-	    </tr>
-	    <tr id="kanban-slots" class="kanban-slot"></tr>
-	  </table>
-	</div>
-
-	<div id="kanban-slot-template" class="col-lg-2 w3-light-grey w3-round-medium marginTop5 kanban-slot" ondrop="drop(event)" ondragover="allowDrop(event)">
-		<td id="{{id}}">{{cards}}</td>
-	</div>
+		<div id="kanban-slot-template" class="col-lg-2 w3-light-grey w3-round-medium marginTop5 kanban-slot" ondrop="drop(event)" ondragover="allowDrop(event)">
+			<td id="{{id}}">{{cards}}</td>
+		</div>
+	
+	
+		<div id="edit-project" class="row">
+			<div id="validationResult">
+				<div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label">Project Name</label>
+				<div>
+					<input type="text" class="form-control input-lg" name="projectName" value="" id="projectName">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label">Description</label>
+				<div>
+					<input type="text" class="form-control input-lg" name="projectDescription" id="projectDescription">
+				</div>
+			</div>
+			 <div class="form-group">
+				<label class="control-label">Live Url or Download Page</label>
+				<div>
+					<input type="text" class="form-control input-lg" name="projectUrl" id="projectUrl">
+				</div>
+			</div>
+			  <div class="form-group">
+				<label class="control-label">Code Url</label>
+				<div>
+					<input type="text" class="form-control input-lg" name="projectCodeUrl" id="projectCodeUrl">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label">PDF Url</label>
+				<div>
+					<input type="text" class="form-control input-lg" name="projectPDFUrl" id="projectPDFUrl">
+				</div>
+			</div>
+			<div class="form-group">
+				<div>
+					<button type="submit" class="btn btn-success" onclick="saveChanges()">Save Changes</button>
+				</div>
+			</div>
+			<div class="form-group">
+				<div>
+					<button type="submit" class="btn btn-success" onclick="saveChanges()">Cancel</button>
+				</div>
+			</div>
+		</div>
+    
+	
 	</div> <!-- templates -->
 	
 
@@ -152,55 +203,7 @@
 		</div>
 	</div>
 
-	<!-- Add or Edit Project 
-	<div id="projectModal" class="projectModal">
 
-	  <div class="modal-content">
-		<span id="projectModalClose">&times;</span>
-	        <div>
-               <div class="form-group">
-					<div id="validationResult">
-						<div>
-						</div>
-					</div>
-                        <label class="control-label">Project Name</label>
-                        <div>
-                            <input type="text" class="form-control input-lg" name="projectName" value="" id="projectName">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Description</label>
-                        <div>
-                            <input type="text" class="form-control input-lg" name="projectDescription" id="projectDescription">
-                        </div>
-                    </div>
-                     <div class="form-group">
-                        <label class="control-label">Live Url or Download Page</label>
-                        <div>
-                            <input type="text" class="form-control input-lg" name="projectUrl" id="projectUrl">
-                        </div>
-                    </div>
-                      <div class="form-group">
-                        <label class="control-label">Code Url</label>
-                        <div>
-                            <input type="text" class="form-control input-lg" name="projectCodeUrl" id="projectCodeUrl">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">PDF Url</label>
-                        <div>
-                            <input type="text" class="form-control input-lg" name="projectPDFUrl" id="projectPDFUrl">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div>
-                            <button type="submit" class="btn btn-success" onclick="saveChanges()">Save Changes</button>
-   	        			</div>
-					</div>
-                </div>
-          </span>
-		</div>
-	</div>-->
 
 
 </body>
