@@ -312,6 +312,7 @@ function emptyJwt() {
 function logout() {
 	jwtToken = emptyJwt();
 	storeJwt();
+	refresh();
 }
 
 function login() {
