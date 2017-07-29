@@ -130,9 +130,7 @@ function updateFailed() {
 }
 
 function deleteRecord(id, callback) {
-	var lastSlashIndex = route.lastIndexOf("/");
-	var routeWithoutAdd = route.slice(route,lastSlashIndex);
-	resource = routeWithoutAdd.replace("/","")+"s";
+	var resource = route.replace("/","")+"s";
 	var url="/api/"+resource+"/"+id;
 	http_del(url,deleteFailed, callback);
 }
