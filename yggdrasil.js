@@ -18,11 +18,14 @@ function closeNav() {
 function addButton() {
 	//alert("addButton");
 	route = route+"/add";
+	refresh();
 }
 
 function editButton(id) {
 	//alert("editButton"+id);
+	var id=id;
 	route = route+"/edit";
+	refresh();
 }
 
 function deleteButton(id) {
