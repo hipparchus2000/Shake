@@ -415,7 +415,7 @@ function applyUsersTemplate () {
 			
 			var editButton="";
 			if(jwtToken.roles.includes("blog-editor")) {
-				editButton='<i class="fa fa-trash" onclick="deleteButton('+id+')" aria-hidden="true"></i><i class="fa fa-pencil" onclick="editButton('+id+')" aria-hidden="true"></i>';	
+				editButton='<i class="fa fa-trash fa-2x" onclick="deleteButton('+id+')" aria-hidden="true"></i><i class="fa fa-pencil fa-2x" onclick="editButton('+id+')" aria-hidden="true"></i>';	
 			}
 			updateField( node, "editButton", editButton);
 			root.append(node);
