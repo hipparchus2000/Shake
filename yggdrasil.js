@@ -176,7 +176,7 @@ function generateUUID(){
     return uuid;
 }
 
-function getUrlUsingRest(url, callback) {
+function http_get_json(url, callback) {
 	fetch(url).then(function(response) {
 	  	return response.json();
 	}).then(function(data) {
@@ -187,7 +187,7 @@ function getUrlUsingRest(url, callback) {
 	});
 }
 
-function getUrlAsHtmlUsingRest(url, callback) {
+function http_get_html(url, callback) {
 	fetch(url, { mode: 'no-cors' }).then(function(response) {
 		return response;
 	}).then(function(data) {
@@ -198,8 +198,26 @@ function getUrlAsHtmlUsingRest(url, callback) {
 	});
 }
 
+function http_get_json_restricted(url, callback) {
+	fetch(url,
+	{
+    	method: "get", 
+		headers: {
+        	'Accept': 'application/json, text/plain, */*',
+        	'Content-Type': 'application/json',
+			'jwt': jwtToken.token
+    	},
+        body: json = JSON.stringify(payload)
+	}).then(function(data){ 
+		rewriteUrlFromRoute();	
+		callback(data);
+	}).catch(function(err) {
+	  	console.log("Failed To Get Url "+err);
+	});
+}
+
 function loadHtmlFragmentToRoot(url) {
-	getUrlAsHtmlUsingRest(url,function(blobCallback) {
+	http_get_html(url,function(blobCallback) {
 		var root = document.getElementById("root");
 		//clear all nodes from root
 		while (root.firstChild) {
@@ -233,7 +251,7 @@ function applyProjectsTemplate() {
 	var cardrowTemplate = document.getElementById("cardRow-template");
 	var cardTemplate = document.getElementById("card-template");
 	
-	getUrlUsingRest(projectsUrl,function (response) {
+	http_get_json(projectsUrl,function (response) {
 		projects = response;
 		
 		var rowcount=0;
@@ -329,7 +347,7 @@ function applyTasksTemplate() {
 
 	//todo change blog to use tasks Url (currently using blog items for example
 	var id=0;
-	getUrlUsingRest(blogsUrl,function (response) {
+	http_get_json(blogsUrl,function (response) {
 		
 		tasks = response;
 		var currentSlot=null;
@@ -385,7 +403,7 @@ function applyBlogTemplate() {
 	var blogTemplate = document.getElementById("blog-template");
 
     var id=0;	
-	getUrlUsingRest(blogsUrl,function (response) {
+	http_get_json(blogsUrl,function (response) {
 		blogEntries = response;
 		
 		blogEntries.forEach(function (story) {
@@ -428,7 +446,7 @@ function applyUsersTemplate () {
 	var userTemplate = document.getElementById("user-template");
 
     var id=0;	
-	getUrlUsingRest(usersUrl,function (response) {
+	http_get_json_restricted(usersUrl,function (response) {
 		blogEntries = response;
 		
 		blogEntries.forEach(function (story) {
