@@ -373,7 +373,7 @@ function fetchJwt() {
 	} else {
 		var jwtToken = JSON.parse(token);
 	}
-	return null;
+	return jwtToken;
 }
 
 window.onload = function(){
