@@ -441,7 +441,7 @@ function refresh() {
 	var addButton = document.getElementById("addButton"); 
 	if (hideButtons == false) {
 		var requiredRole = route.replace("/","")+"-editor";
-		if (jwtToken.roles.includes(requiredRole)
+		if (jwtToken.roles.includes(requiredRole))
 			addButton.style.display = "block";
 	} else {
 		addButton.style.display = "none";
