@@ -1,6 +1,6 @@
 //yggdrasil.js
 
-var route="/";
+var route="/project";
 var breadcrumbs=["/"];
 
 var projectsUrl = "/api/projects";
@@ -324,10 +324,10 @@ function refresh() {
 		case "/blog/add": navigateState("Add Blog", applyAddBlogTemplate); break;
 		case "/blog/edit": navigateState("Edit Blog", applyEditBlogTemplate); break;
 		
-		case "/tasks": navigateState("Kanban", applyTasksTemplate); break;
-		case "/tasks/add": navigateState("Add Task", applyAddTasksTemplate); break;
-		case "/tasks/edit": navigateState("Edit Task", applyEditTasksTemplate); break;
-		case "/tasks/edit-slots": navigateState("Edit Kanban Slots", applyEditKanbanSlotsTemplate); break;
+		case "/task": navigateState("Kanban", applyTasksTemplate); break;
+		case "/task/add": navigateState("Add Task", applyAddTasksTemplate); break;
+		case "/task/edit": navigateState("Edit Task", applyEditTasksTemplate); break;
+		case "/task/edit-slots": navigateState("Edit Kanban Slots", applyEditKanbanSlotsTemplate); break;
 		
 		case "/users": navigateState("Users", applyUsersTemplate); break;
 		case "/users/add": navigateState("Add User", applyAddUsersTemplate); break;
