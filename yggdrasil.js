@@ -234,7 +234,7 @@ function applyProjectsTemplate() {
 
 			var editButton="";
 			if(jwtToken.roles.includes("project-editor")) {
-				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton("'+project._id+'")" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton("'+project._id+'")" aria-hidden="true"></i>';	
+				editButton = makeEditAndDeleteButtons(project._id);			
 			}
 			updateField( node, "editButton", editButton);
 			
@@ -323,7 +323,7 @@ function applyTasksTemplate() {
 			
 			var editButton="";
 			if(jwtToken.roles.includes("kanban-editor")) {
-				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton("'+task._id+'")" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton("'+task._id+'")" aria-hidden="true"></i>';	
+				editButton = makeEditAndDeleteButtons(task._id);
 			}
 			node.innerHTML = node.innerHTML.replace(/{{editButton}}/g, editButton);
 			
@@ -378,7 +378,7 @@ function applyBlogTemplate() {
 			
 			var editButton="";
 			if(jwtToken.roles.includes("blog-editor")) {
-				editButton='<i class="fa fa-trash  fa-3x pull-right" onclick="deleteButton("'+story._id+'")" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton("'+story._id+'")" aria-hidden="true"></i>';	
+				editButton = makeEditAndDeleteButtons(story._id);	
 			}
 			updateField( node, "editButton", editButton);
 			root.append(node);
@@ -404,6 +404,11 @@ function applyEditBlogTemplate () {
 	applyAddBlogTemplate();
 }
 
+function makeEditAndDeleteButtons(id,) {
+	var editButton='<i class="fa fa-trash fa-2x" onclick="deleteButton(\''+id+'\')" aria-hidden="true"></i><i class="fa fa-pencil fa-2x" onclick="editButton(\''+id+'\'")" aria-hidden="true"></i>';
+	return editButton;
+}
+
 function applyUsersTemplate () {
 	clearRootNode();
 	var userTemplate = document.getElementById("user-template");
@@ -418,7 +423,7 @@ function applyUsersTemplate () {
 			
 			var editButton="";
 			if(jwtToken.roles.includes("blog-editor")) {
-				editButton='<i class="fa fa-trash fa-2x" onclick="deleteButton("'+id+'")" aria-hidden="true"></i><i class="fa fa-pencil fa-2x" onclick="editButton("'+id+'")" aria-hidden="true"></i>';	
+				editButton = makeEditAndDeleteButtons(user._id);	
 			}
 			updateField( node, "editButton", editButton);
 			root.append(node);
