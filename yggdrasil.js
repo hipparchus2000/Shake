@@ -7,6 +7,9 @@ var projectsUrl = "/api/projects";
 var blogsUrl = "/api/blogs";
 var authUrl = "/api/auth";
 
+//initialise global variables used for edit
+var projects={};
+
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
 }
@@ -124,18 +127,24 @@ function updateField(node, name,value) {
 	node.innerHTML = node.innerHTML.replace(re, value);
 }
 
-function applyProjectsTemplate() {
-	var templates = document.getElementById("templates");
+function clearRootNode() {
 	var root = document.getElementById("root");
-	//clear all nodes from root
 	while (root.firstChild) {
 		root.removeChild(root.firstChild);
 	}
+}
 
+function appendNodeToRoot(node) {
+	var root = document.getElementById("root");
+	root.append(node);
+}
+
+function applyProjectsTemplate() {
+	clearRootNode();
 	var cardrowTemplate = document.getElementById("cardRow-template");
 	var cardTemplate = document.getElementById("card-template");
 	
-	var projects = getUrlUsingRest(projectsUrl,function (response) {
+	getUrlUsingRest(projectsUrl,function (response) {
 		projects = response;
 		
 		var rowcount=0;
@@ -186,7 +195,7 @@ function applyProjectsTemplate() {
 			
 			currentRow.append(node);
 			if ((rowcount % 3) == 0) {
-				root.append(currentRow);
+				appendNodeToRoot(currentRow);
 			}
 			rowcount++;
 		});
