@@ -409,9 +409,9 @@ function applyUsersTemplate () {
 	http_get_json_restricted(usersUrl,function (response) {
 		var users = response;
 		
-		users.forEach(function (story) {
+		users.forEach(function (user) {
 			var node = blogTemplate.cloneNode(true);
-			updateField( node, "username", story.storyName);
+			updateField( node, "username", user.username);
 			
 			var editButton="";
 			if(jwtToken.roles.includes("blog-editor")) {
