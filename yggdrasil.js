@@ -107,7 +107,7 @@ function getPayloadForResource(resource) {
 	return payload;
 }
 
-function saveChanges() {
+function saveChanges(id) {
 	//find resource
 	var lastSlashIndex = route.lastIndexOf("/");
 	var routeWithoutAdd = route.slice(route,lastSlashIndex);
@@ -192,6 +192,11 @@ function updateField(node, name,value) {
 function updateFormField(id,value) {
 	var field = document.getElementById(id);	
 	field.value=value;
+}
+
+function updateFormButtonClick(id,value) {
+	var field = document.getElementById(id);	
+	field.onclick=value;
 }
 
 
@@ -404,6 +409,7 @@ function applyEditBlogTemplate (id) {
 	updateFormField( "editBlogStoryname", storyName);
 	updateFormField( "editBlogStorytext", storyText);
 	updateFormField( "editBlogStorydate", date);
+	updateFormButtonClick( "editBlogSaveChangesButton","saveChanges('"+id+"')");
 }
 
 
