@@ -409,7 +409,7 @@ function applyEditBlogTemplate (id) {
 	updateFormField( "editBlogStoryname", storyName);
 	updateFormField( "editBlogStorytext", storyText);
 	updateFormField( "editBlogStorydate", date);
-	updateFormButtonClick( "editBlogSaveChangesButton",saveChanges(id))");
+	updateFormButtonClick( "editBlogSaveChangesButton",saveChanges(id)));
 }
 
 
