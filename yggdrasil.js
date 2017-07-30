@@ -274,6 +274,7 @@ function applyEditProjectTemplate (id) {
 	clearRootNode();
 	var blogTemplate = document.getElementById("edit-project-template");
 	var node = blogTemplate.cloneNode(true);
+	root.append(node);
 	var title = "";
 	var description = "";
 	var year="";
@@ -301,7 +302,6 @@ function applyEditProjectTemplate (id) {
 	updateFormField( "editProjectProjectCodeUrl", codeUrl);
 	updateFormField( "editProjectProjectUrl", url);
 	updateFormField( "editProjectProjectPdfUrl", pdfUrl);
-	root.append(node);
 }
 
 
@@ -351,11 +351,11 @@ function applyEditTasksTemplate (id) {
 	clearRootNode();
 	var blogTemplate = document.getElementById("edit-task-template");
 	var node = blogTemplate.cloneNode(true);
+	root.append(node);
 	var storyText = "";
 	var storyName = "";
 	updateFormField( "editTaskStorytext", storyText);
 	updateFormField( "editTaskStoryname", storyName);
-	root.append(node);
 }
 
 function applyEditKanbanSlotsTemplate () {
@@ -399,11 +399,11 @@ function applyEditBlogTemplate (id) {
 	clearRootNode();
 	var blogTemplate = document.getElementById("edit-blog-template");
 	var node = blogTemplate.cloneNode(true);
+	root.append(node);
 	updateFormField( "editBlogStoryname", id);
 	updateFormField( "editBlogStorytext", storyText);
 	updateFormField( "editBlogStorydate", storyName);
 	updateFormField( "editBlogStorydate", date);
-	root.append(node);
 }
 
 
