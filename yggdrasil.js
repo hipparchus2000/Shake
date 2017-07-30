@@ -375,7 +375,8 @@ function applyEditBlogTemplate (id) {
 				storyText = item.storyText;
 				storyName = item.storyName;
 				date = item.date;				
-			});
+			}
+		});
 	}
 	clearRootNode();
 	var blogTemplate = document.getElementById("edit-blog-template");
