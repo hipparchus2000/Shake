@@ -393,9 +393,9 @@ function applyEditBlogTemplate (id) {
 	clearRootNode();
 	var blogTemplate = document.getElementById("edit-blog-template");
 	var node = blogTemplate.cloneNode(true);
-	updateField( node, "id", id);
-	updateField( node, "storyText", storyText);
-	updateField( node, "storyName", storyName);
+	updateField( node, "editBlogStoryname", id);
+	updateField( node, "editBlogStorytext", storyText);
+	updateField( node, "editBlogStorydate", storyName);
 	updateField( node, "date", date);
 	root.append(node);
 }
