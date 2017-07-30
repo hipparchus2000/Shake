@@ -32,12 +32,12 @@ function admin() {
 
 function addButton() {
 	route = route+"/add";
-	id=null;
+	id = null;
 	refresh();
 }
 
-function editButton(id) {
-	id=id;
+function editButton(editId) {
+	id = editId;
 	route = route+"/edit";
 	refresh();
 }
@@ -299,7 +299,7 @@ function applyTasksTemplate() {
 	root.append(kanbanRoot); 
 
 	//todo change blog to use tasks Url (currently using blog items for example
-	var id=0;
+	var slotId=0;
 	http_get_json(blogsUrl,function (response) {
 		
 		tasks = response;
@@ -314,10 +314,10 @@ function applyTasksTemplate() {
 			updateField( node, "editButton", makeEditAndDeleteButtons(task._id));
 			
 			currentSlot = slotTemplate.cloneNode(true);
-			currentSlot.id = id;
+			currentSlot.id = slotId;
 			updateField( currentSlot, "kanban-slot-template",  "slot"+id );
 			updateField( currentSlot, "cards",  node.innerHTML );
-			id++;
+			slotId++;
 			var slots = document.getElementById("kanban-slots");
 			slots.appendChild(currentSlot);
 
@@ -372,7 +372,6 @@ function applyAddBlogTemplate () {
 		storyText = item.storyText,
 		storyName = item.storyName,
 		date = item.date,
-		id = id
 	}
 	clearRootNode();
 	var blogTemplate = document.getElementById("edit-blog-template");
