@@ -15,6 +15,8 @@ var projects={};
 var tasks={};
 var users={};
 var blogEntries={};
+var id = null;
+var jwtToken = null;
 
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
@@ -667,8 +669,7 @@ function fetchJwt() {
 }
 
 window.onload = function(){
-	var id=null;
-	var jwtToken=emptyJwt();
+	jwtToken=emptyJwt();
 	
 	var loginModal = document.getElementById('loginModal');
 
