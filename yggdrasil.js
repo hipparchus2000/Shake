@@ -474,16 +474,22 @@ function refresh(id) {
 	var addButton = document.getElementById("addButton"); 
 	if (hideButtons == false) {
 		var requiredRole = route.replace("/","")+"-editor";
-		if (jwtToken.roles.includes(requiredRole))
+		if (jwtToken.roles.includes(requiredRole)) {
 			addButton.style.display = "block";
+		} else {
+			addButton.style.display = "none";
+		}
 	} else {
 		addButton.style.display = "none";
 	}
 	
 	var adminButton = document.getElementById("adminButton"); 
 	if (hideButtons == false) {
-		if (jwtToken.admin == true)
+		if (jwtToken.admin == true) {
 			adminButton.style.display = "block";
+		} else {
+			adminButton.style.display = "none";
+		}
 	} else {
 		adminButton.style.display = "none";
 	}
