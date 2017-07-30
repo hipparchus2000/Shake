@@ -400,9 +400,9 @@ function applyEditBlogTemplate (id) {
 	var blogTemplate = document.getElementById("edit-blog-template");
 	var node = blogTemplate.cloneNode(true);
 	root.append(node);
-	updateFormField( "editBlogStoryname", id);
+	updateFormField( "editBlogId", id);
+	updateFormField( "editBlogStoryname", storyName);
 	updateFormField( "editBlogStorytext", storyText);
-	updateFormField( "editBlogStorydate", storyName);
 	updateFormField( "editBlogStorydate", date);
 }
 
