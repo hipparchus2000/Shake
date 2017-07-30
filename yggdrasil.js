@@ -122,7 +122,7 @@ function saveChanges() {
 	if(id==null) { //then save with post
 		http_post(url,payload,navigateBack,updateFailed);
 	} else { //then update with put
-		http_put(url,payload,navigateBack,updateFailed);
+		http_put(url+"/"+id,payload,navigateBack,updateFailed);
 	}
 	
 }
