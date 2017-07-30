@@ -73,7 +73,6 @@ function getPayloadForResource(resource) {
 		case "projects": 
 			payload = {
 				"title":       document.getElementById("editProjectProjectName").value,
-				"id":          document.getElementById("editProjectProjectId").value,
 				"description": document.getElementById("editProjectProjectDescription").value,
 				"year":        document.getElementById("editProjectProjectYear").value,
 				"codeUrl":     document.getElementById("editProjectProjectCodeUrl").value,
@@ -295,7 +294,6 @@ function applyEditProjectTemplate (id) {
 			if (item._id == id) {
 				title = item.title;
 				description = item.description;
-				id = item.id;
 				year = item.year;
 				codeUrl = item.codeUrl;
 				url = item.url;
@@ -306,7 +304,6 @@ function applyEditProjectTemplate (id) {
 	updateFormField( "projectEditId", id);
 	updateFormField( "editProjectProjectName", title);
 	updateFormField( "editProjectProjectDescription", description);
-	updateFormField( "editProjectProjectId", id);
 	updateFormField( "editProjectProjectYear", year);
 	updateFormField( "editProjectProjectCodeUrl", codeUrl);
 	updateFormField( "editProjectProjectUrl", url);
