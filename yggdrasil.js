@@ -402,7 +402,7 @@ function applyEditBlogTemplate (id) {
 	updateFormField( "editBlogStoryname", id);
 	updateFormField( "editBlogStorytext", storyText);
 	updateFormField( "editBlogStorydate", storyName);
-	updateFormField(  "date", date);
+	updateFormField( "editBlogStorydate", date);
 	root.append(node);
 }
 
