@@ -371,9 +371,9 @@ function applyEditBlogTemplate (id) {
 	var date= "";	
 	if(id!=null) {
 		var item = blogEntries.filter(function (entry) { return entry._id === id; })[0];
-		storyText = item.storyText,
-		storyName = item.storyName,
-		date = item.date,
+		storyText = item.storyText;
+		storyName = item.storyName;
+		date = item.date;
 	}
 	clearRootNode();
 	var blogTemplate = document.getElementById("edit-blog-template");
