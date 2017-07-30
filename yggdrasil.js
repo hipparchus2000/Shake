@@ -370,10 +370,12 @@ function applyEditBlogTemplate (id) {
 	var storyName = "";
 	var date= "";	
 	if(id!=null) {
-		var item = blogEntries.filter(function (entry) { return entry._id === id; })[0];
-		storyText = item.storyText;
-		storyName = item.storyName;
-		date = item.date;
+		blogEntries.forEach(function (item) {
+			if (item._id == id) {
+				storyText = item.storyText;
+				storyName = item.storyName;
+				date = item.date;				
+			});
 	}
 	clearRootNode();
 	var blogTemplate = document.getElementById("edit-blog-template");
