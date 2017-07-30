@@ -107,13 +107,16 @@ function getPayloadForResource(resource) {
 	return payload;
 }
 
-function saveChanges(id) {
+function saveChanges() {
 	//find resource
 	var lastSlashIndex = route.lastIndexOf("/");
 	var routeWithoutAdd = route.slice(route,lastSlashIndex);
 	resource = routeWithoutAdd.replace("/","")+"s";
 	var url="/api/"+resource;
 	var payload = getPayloadForResource(resource);
+	
+	var idField=document.getElementById(resource+"EditId");
+	var id = idField.value;
 	
 	if(id==null) { //then save with post
 		http_post(url,payload,navigateBack,updateFailed);
@@ -300,6 +303,7 @@ function applyEditProjectTemplate (id) {
 			}
 		});
 	}
+	updateFormField( "projectEditId", id);
 	updateFormField( "editProjectProjectName", title);
 	updateFormField( "editProjectProjectDescription", description);
 	updateFormField( "editProjectProjectId", id);
@@ -359,6 +363,7 @@ function applyEditTasksTemplate (id) {
 	root.append(node);
 	var storyText = "";
 	var storyName = "";
+	updateFormField( "taskEditId", id);
 	updateFormField( "editTaskStorytext", storyText);
 	updateFormField( "editTaskStoryname", storyName);
 }
@@ -405,11 +410,10 @@ function applyEditBlogTemplate (id) {
 	var blogTemplate = document.getElementById("edit-blog-template");
 	var node = blogTemplate.cloneNode(true);
 	root.append(node);
-	updateFormField( "editBlogId", id);
+	updateFormField( "blogEditId", id);
 	updateFormField( "editBlogStoryname", storyName);
 	updateFormField( "editBlogStorytext", storyText);
 	updateFormField( "editBlogStorydate", date);
-	updateFormButtonClick( "editBlogSaveChangesButton",function(){ saveChanges(id) });
 }
 
 
