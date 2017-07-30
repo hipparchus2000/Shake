@@ -275,7 +275,19 @@ function applyEditProjectTemplate (id) {
 	var id="";
 	var url="";
 	var pdfUrl="";
-
+	if(id!=null) {
+		projects.forEach(function (item) {
+			if (item._id == id) {
+				title = item.title;
+				description = item.description;
+				id = item.id;
+				year = item.year;
+				codeUrl = item.codeUrl;
+				url = item.url;
+				pdfUrl = item.pdfUrl;
+			}
+		});
+	}
 	updateField( node, "editProjectProjectName", title);
 	updateField( node, "editProjectProjectDescription", description);
 	updateField( node, "editProjectProjectId", id);
@@ -382,8 +394,8 @@ function applyEditBlogTemplate (id) {
 	var blogTemplate = document.getElementById("edit-blog-template");
 	var node = blogTemplate.cloneNode(true);
 	updateField( node, "id", id);
-	updateField( node, "editBlogStorytext", storyText);
-	updateField( node, "editBlogStoryname", storyName);
+	updateField( node, "storyText", storyText);
+	updateField( node, "storyName", storyName);
 	updateField( node, "date", date);
 	root.append(node);
 }
