@@ -372,7 +372,7 @@ function applyAddBlogTemplate () {
 		storyText = item.storyText,
 		storyName = item.storyName,
 		date = item.date,
-		id = item.id
+		id = id
 	}
 	clearRootNode();
 	var blogTemplate = document.getElementById("edit-blog-template");
