@@ -111,11 +111,12 @@ function saveChanges() {
 	//find resource
 	var lastSlashIndex = route.lastIndexOf("/");
 	var routeWithoutAdd = route.slice(route,lastSlashIndex);
-	resource = routeWithoutAdd.replace("/","")+"s";
+	var fieldprefix = routeWithoutAdd.replace("/","");
+	resource = fieldprefix+"s";
 	var url="/api/"+resource;
 	var payload = getPayloadForResource(resource);
 	
-	var idField=document.getElementById(resource+"EditId");
+	var idField=document.getElementById(fieldprefix+"EditId");
 	var id = idField.value;
 	
 	if(id==null) { //then save with post
