@@ -32,14 +32,12 @@ function admin() {
 
 function addButton() {
 	route = route+"/add";
-	id = null;
 	refresh();
 }
 
 function editButton(editId) {
-	id = editId;
 	route = route+"/edit";
-	refresh();
+	refresh(editId);
 }
 
 function deleteButton(id) {
@@ -263,6 +261,10 @@ function applyProjectsTemplate() {
 }
 
 function applyAddProjectTemplate () {
+	applyEditProjectTemplate(null);
+}
+
+function applyEditProjectTemplate (id) {
 	clearRootNode();
 	var blogTemplate = document.getElementById("edit-project-template");
 	var node = blogTemplate.cloneNode(true);
@@ -282,10 +284,6 @@ function applyAddProjectTemplate () {
 	updateField( node, "editProjectProjectUrl", url);
 	updateField( node, "editProjectProjectPdfUrl", pdfUrl);
 	root.append(node);
-}
-
-function applyEditProjectTemplate () {
-	applyAddProjectTemplate();
 }
 
 
@@ -328,6 +326,10 @@ function applyTasksTemplate() {
 }
 
 function applyAddTasksTemplate () {
+	applyEditTasksTemplate(null);
+}
+
+function applyEditTasksTemplate (id) {
 	clearRootNode();
 	var blogTemplate = document.getElementById("edit-task-template");
 	var node = blogTemplate.cloneNode(true);
@@ -336,10 +338,6 @@ function applyAddTasksTemplate () {
 	updateField( node, "editTaskStorytext", storyText);
 	updateField( node, "editTaskStoryname", storyName);
 	root.append(node);
-}
-
-function applyEditTasksTemplate () {
-	applyAddTasksTemplate();
 }
 
 function applyEditKanbanSlotsTemplate () {
@@ -364,6 +362,10 @@ function applyBlogTemplate() {
 }
 
 function applyAddBlogTemplate () {
+	applyEditBlogTemplate(null);
+}
+
+function applyEditBlogTemplate (id) {
 	var storyText = "";
 	var storyName = "";
 	var date= "";	
@@ -383,17 +385,6 @@ function applyAddBlogTemplate () {
 	root.append(node);
 }
 
-function applyEditBlogTemplate () {
-	applyAddBlogTemplate();
-}
-
-function makeEditAndDeleteButtons(id,) {
-	var requiredRole = route.replace("/","")+"-editor";
-	var editButton="";
-	if (jwtToken.roles.includes(requiredRole))
-		editButton='<i class="fa fa-trash fa-3x pull-right" onclick="deleteButton(\''+id+'\')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton(\''+id+'\')" aria-hidden="true"></i>';
-	return editButton;
-}
 
 function applyUsersTemplate () {
 	clearRootNode();
@@ -417,14 +408,22 @@ function applyAddUsersTemplate () {
 	
 }
 
-function applyEditUsersTemplate () {
+function applyEditUsersTemplate (id) {
 	
 }
 
-function navigateState(stateTitle,templateFunction) {
+function navigateState(stateTitle,templateFunction, id) {
 	var title=document.getElementById("pageTitle");
 	title.innerHTML=stateTitle;
-	templateFunction();
+	templateFunction(id);
+}
+
+function makeEditAndDeleteButtons(id,) {
+	var requiredRole = route.replace("/","")+"-editor";
+	var editButton="";
+	if (jwtToken.roles.includes(requiredRole))
+		editButton='<i class="fa fa-trash fa-3x pull-right" onclick="deleteButton(\''+id+'\')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton(\''+id+'\')" aria-hidden="true"></i>';
+	return editButton;
 }
 
 function rewriteUrlFromRoute() {
@@ -433,7 +432,7 @@ function rewriteUrlFromRoute() {
 	window.location.replace(parts[0] + "#" + route);
 }
 
-function refresh() {
+function refresh(id) {
 
 	rewriteUrlFromRoute();	
 	
@@ -464,21 +463,21 @@ function refresh() {
 	switch(route) {
 		
 		case "/project":     navigateState("Yggsrasil Projects", applyProjectsTemplate ); break;
-		case "/project/add": navigateState("Add Project", applyAddProjectTemplate); break;
-		case "/project/edit": navigateState("Edit Project", applyEditProjectTemplate); break;
+		case "/project/add": navigateState("Add Project", applyAddProjectTemplate ); break;
+		case "/project/edit": navigateState("Edit Project", applyEditProjectTemplate, id ); break;
 		
 		case "/blog": navigateState("Jeff Davies' Blog", applyBlogTemplate ); break;
-		case "/blog/add": navigateState("Add Blog", applyAddBlogTemplate); break;
-		case "/blog/edit": navigateState("Edit Blog", applyEditBlogTemplate); break;
+		case "/blog/add": navigateState("Add Blog", applyAddBlogTemplate ); break;
+		case "/blog/edit": navigateState("Edit Blog", applyEditBlogTemplate, id ); break;
 		
-		case "/task": navigateState("Kanban", applyTasksTemplate); break;
-		case "/task/add": navigateState("Add Task", applyAddTasksTemplate); break;
-		case "/task/edit": navigateState("Edit Task", applyEditTasksTemplate); break;
-		case "/task/edit-slots": navigateState("Edit Kanban Slots", applyEditKanbanSlotsTemplate); break;
+		case "/task": navigateState("Kanban", applyTasksTemplate ); break;
+		case "/task/add": navigateState("Add Task", applyAddTasksTemplate ); break;
+		case "/task/edit": navigateState("Edit Task", applyEditTasksTemplate, id ); break;
+		case "/task/edit-slots": navigateState("Edit Kanban Slots", applyEditKanbanSlotsTemplate ); break;
 		
-		case "/user": navigateState("Users", applyUsersTemplate); break;
-		case "/user/add": navigateState("Add User", applyAddUsersTemplate); break;
-		case "/user/edit": navigateState("Edit User", applyEditUsersTemplate); break;
+		case "/user": navigateState("Users", applyUsersTemplate ); break;
+		case "/user/add": navigateState("Add User", applyAddUsersTemplate ); break;
+		case "/user/edit": navigateState("Edit User", applyEditUsersTemplate, id ); break;
 
 	} 
 		
