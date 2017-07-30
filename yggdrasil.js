@@ -288,7 +288,6 @@ function applyEditProjectTemplate (id) {
 	var description = "";
 	var year="";
 	var codeUrl="";
-	var id="";
 	var url="";
 	var pdfUrl="";
 	if(id!=null) {
