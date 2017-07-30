@@ -189,6 +189,12 @@ function updateField(node, name,value) {
 	node.innerHTML = node.innerHTML.replace(re, value);
 }
 
+function updateFormField(id,value) {
+	var field = document.getElementById(id);	
+	field.value=value;
+}
+
+
 function clearRootNode() {
 	var root = document.getElementById("root");
 	while (root.firstChild) {
@@ -288,13 +294,13 @@ function applyEditProjectTemplate (id) {
 			}
 		});
 	}
-	updateField( node, "editProjectProjectName", title);
-	updateField( node, "editProjectProjectDescription", description);
-	updateField( node, "editProjectProjectId", id);
-	updateField( node, "editProjectProjectYear", year);
-	updateField( node, "editProjectProjectCodeUrl", codeUrl);
-	updateField( node, "editProjectProjectUrl", url);
-	updateField( node, "editProjectProjectPdfUrl", pdfUrl);
+	updateFormField( "editProjectProjectName", title);
+	updateFormField( "editProjectProjectDescription", description);
+	updateFormField( "editProjectProjectId", id);
+	updateFormField( "editProjectProjectYear", year);
+	updateFormField( "editProjectProjectCodeUrl", codeUrl);
+	updateFormField( "editProjectProjectUrl", url);
+	updateFormField( "editProjectProjectPdfUrl", pdfUrl);
 	root.append(node);
 }
 
@@ -347,8 +353,8 @@ function applyEditTasksTemplate (id) {
 	var node = blogTemplate.cloneNode(true);
 	var storyText = "";
 	var storyName = "";
-	updateField( node, "editTaskStorytext", storyText);
-	updateField( node, "editTaskStoryname", storyName);
+	updateFormField( "editTaskStorytext", storyText);
+	updateFormField( "editTaskStoryname", storyName);
 	root.append(node);
 }
 
@@ -393,10 +399,10 @@ function applyEditBlogTemplate (id) {
 	clearRootNode();
 	var blogTemplate = document.getElementById("edit-blog-template");
 	var node = blogTemplate.cloneNode(true);
-	updateField( node, "editBlogStoryname", id);
-	updateField( node, "editBlogStorytext", storyText);
-	updateField( node, "editBlogStorydate", storyName);
-	updateField( node, "date", date);
+	updateFormField( "editBlogStoryname", id);
+	updateFormField( "editBlogStorytext", storyText);
+	updateFormField( "editBlogStorydate", storyName);
+	updateFormField(  "date", date);
 	root.append(node);
 }
 
