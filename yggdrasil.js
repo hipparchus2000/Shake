@@ -119,7 +119,7 @@ function saveChanges() {
 	var idField=document.getElementById(fieldprefix+"EditId");
 	var id = idField.value;
 	
-	if(id==null) { //then save with post
+	if(id==null || id="") { //then save with post
 		http_post(url,payload,navigateBack,updateFailed);
 	} else { //then update with put
 		http_put(url+"/"+id,payload,navigateBack,updateFailed);
