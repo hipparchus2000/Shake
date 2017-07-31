@@ -550,6 +550,16 @@ function http_get_html(url, callback) {
 }
 
 function http_get_json_restricted(url, callback) {
+	if(jwtToken.token==null) {
+		alert("you must login to use this resource");
+		logout();
+		return;
+	}
+	if(jwtToken.token.expiry < Date.now() ) {
+		alert("Token has expired you must login to use this resource");
+		logout();
+		return;
+	}
 	fetch(url,
 	{
     	method: "get", 
@@ -569,6 +579,16 @@ function http_get_json_restricted(url, callback) {
 }
 
 function http_post(url,payload,callback,errorCallback) {
+	if(jwtToken.token==null) {
+		alert("you must login to use this resource");
+		logout();
+		return;
+	}
+	if(jwtToken.token.expiry < Date.now() ) {
+		alert("Token has expired you must login to use this resource");
+		logout();
+		return;
+	}
 	var json = {
     	json: JSON.stringify(payload),
     	delay: 3
@@ -590,6 +610,16 @@ function http_post(url,payload,callback,errorCallback) {
 }
 
 function http_put(url,payload,callback,errorCallback) {
+	if(jwtToken.token==null) {
+		alert("you must login to use this resource");
+		logout();
+		return;
+	}
+	if(jwtToken.token.expiry < Date.now() ) {
+		alert("Token has expired you must login to use this resource");
+		logout();
+		return;
+	}
 	var json = {
     	json: JSON.stringify(payload),
     	delay: 3
@@ -611,6 +641,16 @@ function http_put(url,payload,callback,errorCallback) {
 }
 
 function http_del(url,errorCallback, callback) {
+	if(jwtToken.token==null) {
+		alert("you must login to use this resource");
+		logout();
+		return;
+	}
+	if(jwtToken.token.expiry < Date.now() ) {
+		alert("Token has expired you must login to use this resource");
+		logout();
+		return;
+	}
 	fetch(url,
 	{
     	method: "delete", 
