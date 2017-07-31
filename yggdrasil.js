@@ -807,8 +807,8 @@ function fetchJwt() {
 
 
 window.onload = function(){
-	var builddate = document.getElementById('builddate');
-	updateField(builddate, builddate,builddate());
+	var builddateNode = document.getElementById('builddate');
+	updateField(builddateNode, "builddate",builddate());
 	
 	jwtToken=emptyJwt();
 	
