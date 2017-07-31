@@ -102,6 +102,12 @@ function getPayloadForResource(resource) {
 				"storyText": document.getElementById("editTaskStorytext").value
 			};
 			break;
+		case "kanbanslots":
+			payload = {
+				"slotOrder": document.getElementById("editSlotOrder").value,
+				"slotName": document.getElementById("editSlotName").value
+			};
+			break;
 	}
 	return payload;
 }
@@ -232,7 +238,6 @@ function applyProjectsTemplate() {
 			}
 			var node = cardTemplate.cloneNode(true);
 			updateField( node, "title", project.title);
-			//updateField( node, "id", rowcount);
 			updateField( node, "id", project._id);
 			updateField( node, "description", project.description);
 			updateField( node, "year", project.year);
@@ -251,7 +256,7 @@ function applyProjectsTemplate() {
 				
 				var hrefNotFound = href.includes("undefined");
 				var onclickNotFound = onclick==null;
-				if (href == "#")
+				if (href == "#"||href="")
 					hrefNotFound = true;
 				if(onclick!=null) {
 					if (onclick.includes("undefined")) {
