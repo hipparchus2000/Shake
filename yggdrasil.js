@@ -501,7 +501,7 @@ function applyEditUsersTemplate (id) {
 		});
 	}
 	clearRootNode();
-	var taskTemplate = document.getElementById("edit-task-template");
+	var taskTemplate = document.getElementById("edit-user-template");
 	var node = taskTemplate.cloneNode(true);
 	root.append(node);
 	updateFormField( "userEditId", id);
