@@ -479,7 +479,7 @@ function applyEditUsersTemplate (id) {
 	var userEditRoles = "";
 	
 	if(id!=null) {
-		tasks.forEach(function (item) {
+		users.forEach(function (item) {
 			if (item._id == id) {
 				userEditUsername = item.username;
 				userEditPassword = item.password;
