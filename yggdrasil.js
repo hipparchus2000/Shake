@@ -221,6 +221,7 @@ function appendNodeToRoot(node) {
 	root.append(node);
 }
 
+
 function applyProjectsTemplate() {
 	clearRootNode();
 	var cardrowTemplate = document.getElementById("cardRow-template");
@@ -359,20 +360,45 @@ function applyAddTasksTemplate () {
 }
 
 function applyEditTasksTemplate (id) {
-	clearRootNode();
-	var blogTemplate = document.getElementById("edit-task-template");
-	var node = blogTemplate.cloneNode(true);
-	root.append(node);
 	var storyText = "";
 	var storyName = "";
+	if(id!=null) {
+		taskEntries.forEach(function (item) {
+			if (item._id == id) {
+				storyText = item.storyText;
+				storyName = item.storyName;
+			}
+		});
+	}
+	clearRootNode();
+	var taskTemplate = document.getElementById("edit-task-template");
+	var node = taskTemplate.cloneNode(true);
+	root.append(node);
 	updateFormField( "taskEditId", id);
-	updateFormField( "editTaskStorytext", storyText);
 	updateFormField( "editTaskStoryname", storyName);
+	updateFormField( "editTaskStorytext", storyText);
 }
 
 function applyEditKanbanSlotsTemplate () {
-	
+	var slotOrder = "";
+	var slotName = "";	
+	if(id!=null) {
+		slotEntries.forEach(function (item) {
+			if (item._id == id) {
+				slotOrder = item.slotOrder;
+				slotName = item.slotName;
+			}
+		});
+	}
+	clearRootNode();
+	var slotTemplate = document.getElementById("edit-slot-template");
+	var node = slotTemplate.cloneNode(true);
+	root.append(node);
+	updateFormField( "slotEditId", id);
+	updateFormField( "editSlotslotOrder", slotOrder);
+	updateFormField( "editSlotStorytext", slotName);
 }
+
 
 function applyBlogTemplate() {
 	clearRootNode();
@@ -444,6 +470,7 @@ function applyAddUsersTemplate () {
 function applyEditUsersTemplate (id) {
 	
 }
+
 
 function navigateState(stateTitle,templateFunction, id) {
 	var title=document.getElementById("pageTitle");
