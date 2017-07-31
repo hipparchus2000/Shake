@@ -18,6 +18,7 @@ var blogs={};
 var id = null;
 var jwtToken = null;
 
+// user action functions
 function openNav() {
     document.getElementById("mySidenav").style.width = "250px";
 }
@@ -152,6 +153,21 @@ function drop(ev) {
     ev.target.appendChild(document.getElementById(data));
 }
 
+function loadHtmlFragmentToRoot(url) {
+	http_get_html(url,function(blobCallback) {
+		var root = document.getElementById("root");
+		//clear all nodes from root
+		while (root.firstChild) {
+			root.removeChild(root.firstChild);
+		};
+		blobCallback.then(function(blob) {
+			root.innerHTML = blob;
+		});
+	});
+}
+
+
+//generic functions
 function registerServiceWorker () {
 	//register the service worker
 	if ('serviceWorker' in navigator) {
@@ -180,19 +196,8 @@ function generateUUID(){
     return uuid;
 }
 
-function loadHtmlFragmentToRoot(url) {
-	http_get_html(url,function(blobCallback) {
-		var root = document.getElementById("root");
-		//clear all nodes from root
-		while (root.firstChild) {
-			root.removeChild(root.firstChild);
-		};
-		blobCallback.then(function(blob) {
-			root.innerHTML = blob;
-		});
-	});
-}
 
+//rendering helpers
 function updateField(node, name,value) {
 	var re = new RegExp("{{"+name+"}}","g");
 	node.innerHTML = node.innerHTML.replace(re, value);
@@ -208,6 +213,14 @@ function updateFormButtonClick(id,value) {
 	field.onclick=value;
 }
 
+function makeEditAndDeleteButtons(id,) {
+	var requiredRole = route.replace("/","")+"-editor";
+	var editButton="";
+	if (jwtToken.roles.includes(requiredRole))
+		editButton='<i class="fa fa-trash fa-3x pull-right" onclick="deleteButton(\''+id+'\')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton(\''+id+'\')" aria-hidden="true"></i>';
+	return editButton;
+}
+
 
 function clearRootNode() {
 	var root = document.getElementById("root");
@@ -221,7 +234,7 @@ function appendNodeToRoot(node) {
 	root.append(node);
 }
 
-
+//project Template rendering
 function applyProjectsTemplate() {
 	clearRootNode();
 	var cardrowTemplate = document.getElementById("cardRow-template");
@@ -322,7 +335,7 @@ function applyEditProjectTemplate (id) {
 	updateFormField( "editProjectProjectPdfUrl", pdfUrl);
 }
 
-
+//task Template rendering
 function applyTasksTemplate() {
 	clearRootNode();
 	var kanbanTemplate = document.getElementById("kanban-template");
@@ -405,7 +418,7 @@ function applyEditKanbanSlotsTemplate () {
 	updateFormField( "editSlotStorytext", slotName);
 }
 
-
+//Blog Template Rendering
 function applyBlogTemplate() {
 	clearRootNode();
 	var blogTemplate = document.getElementById("blog-template");
@@ -450,7 +463,7 @@ function applyEditBlogTemplate (id) {
 	updateFormField( "editBlogStorydate", date);
 }
 
-
+//User Template Rendering
 function applyUsersTemplate () {
 	clearRootNode();
 	var userTemplate = document.getElementById("user-template");
@@ -505,14 +518,7 @@ function navigateState(stateTitle,templateFunction, id) {
 	templateFunction(id);
 }
 
-function makeEditAndDeleteButtons(id,) {
-	var requiredRole = route.replace("/","")+"-editor";
-	var editButton="";
-	if (jwtToken.roles.includes(requiredRole))
-		editButton='<i class="fa fa-trash fa-3x pull-right" onclick="deleteButton(\''+id+'\')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton(\''+id+'\')" aria-hidden="true"></i>';
-	return editButton;
-}
-
+//state and route functions
 function rewriteUrlFromRoute() {
 	var url = window.location.href;
 	var parts = url.split("#");
@@ -576,16 +582,13 @@ function refresh(id) {
 		
 }
 
-function makeBreadCrumbs () {
-	//todo
-}
-
 function navigate(newroute) {
 	route=newroute;
 	refresh();
 }
 
 
+//http methods
 function http_get_json(url, callback) {
 	fetch(url).then(function(response) {
 	  	return response.json();
@@ -725,6 +728,7 @@ function http_del(url,errorCallback, callback) {
 	.then(callback).catch(errorCallback);
 }
 
+//auth methods
 function emptyJwt() {
 	return {
 		"admin" : false,
@@ -772,6 +776,7 @@ function login() {
 		if (jwtToken.loginSuccess==true) {
 			var modal = document.getElementById('myModal');
 			loginModal.style.display = "none";
+			closeNav();
 			refresh();
 		} else {
 			var modal = document.getElementById('loginStatus');
@@ -798,6 +803,7 @@ function fetchJwt() {
 	}
 	return jwtToken;
 }
+
 
 window.onload = function(){
 	jwtToken=emptyJwt();
