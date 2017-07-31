@@ -1,2 +1,3 @@
-echo function builddate() { return '`date`'\; } > builddate.js
+echo "export function builddate() { return '`date`'; }" > builddate.js
+
 

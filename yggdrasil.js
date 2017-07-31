@@ -2,6 +2,7 @@
 
 var route="/project";
 var breadcrumbs=["/"];
+import {builddate} from 'builddate'; 
 
 var projectsUrl = "/api/projects";
 var blogsUrl = "/api/blogs";
@@ -806,6 +807,9 @@ function fetchJwt() {
 
 
 window.onload = function(){
+	var builddate = document.getElementById('builddate');
+	updateField(builddate, builddate,builddate());
+	
 	jwtToken=emptyJwt();
 	
 	var loginModal = document.getElementById('loginModal');
