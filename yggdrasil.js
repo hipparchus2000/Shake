@@ -370,6 +370,14 @@ function applyTasksTemplate() {
 		theseSlots.forEach(function(thisSlot) {
 
 			var tasksInThisSlot="";
+			//make the title task
+			var taskNode = cardTemplate.cloneNode(true);
+			updateField( taskNode, "storyName", thisSlot.slotName );
+			updateField( taskNode, "storyText", "");
+			updateField( taskNode, "id", "");
+			updateField( taskNode, "editButton", "");
+			tasksInThisSlot+= taskNode.innerHTML;
+			
 			tasks.forEach(function (task) {
 				if (task.slot=="" || task.slot==null)
 					task.slot = theseSlots[0].slotName;
