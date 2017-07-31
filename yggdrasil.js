@@ -109,7 +109,7 @@ function deleteFailed() {
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-	alert(ev.currentTarget.childNodes.innerText);
+	alert(ev.currentTarget.childNodes[1].innerText);
     ev.target.appendChild(document.getElementById(data));
 }
 
