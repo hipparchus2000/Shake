@@ -425,7 +425,7 @@ function applyAddKanbanslotsTemplate() {
 	applyEditKanbanSlotsTemplate(null);
 }
 
-function applyEditKanbanSlotsTemplate () {
+function applyEditKanbanslotsTemplate () {
 	var slotOrder = "";
 	var slotName = "";	
 	if(id!=null) {
