@@ -1,2 +1,2 @@
-echo var builddate='`date`'\; > builddate.js
+echo function builddate() { return '`date`'\; } > builddate.js
 
