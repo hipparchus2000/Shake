@@ -350,29 +350,40 @@ function applyTasksTemplate() {
 	kanbanRoot.innerHTML = kanbanRoot.innerHTML.replace(/kanban-template/g,"kanbanroot");
 	root.append(kanbanRoot); 
 
-	//todo change blog to use tasks Url (currently using blog items for example
 	var slotId=0;
+	
 	http_get_json(tasksUrl,function (response) {
 		
-		tasks = response;
-		var currentSlot=null;
+		var theseSlots = ["Story Preparation","Ready To Pick Up", "In Progress", "Complete", "In Test", "Ready For Release", "Released"];
 		
-		tasks.forEach(function (task) {
-			//todo need to assign tasks to correct slot
-			var node = cardTemplate.cloneNode(true);
-			updateField( node, "storyText", task.storyText);
-			updateField( node, "storyName", task.storyName);
-			updateField( node, "id", task._id);
-			updateField( node, "editButton", makeEditAndDeleteButtons(task._id));
+		tasks = response.tasks;
+		var currentSlotNode=null;
+		
+		//table one row, one TD per slot, multiple cards in one TD
+		theseSlots.forEach(function(thisSlot) {
+
+			var tasksInThisSlot="";
+			tasks.forEach(function (task) {
+				if (task.slot=="" || task.slot=null)
+					task.slot = theseSlots[0];
+				if(task.slot = thisSlot) {
+					var taskNode = cardTemplate.cloneNode(true);
+					updateField( taskNode, "storyText", task.storyText);
+					updateField( taskNode, "storyName", task.storyName);
+					updateField( taskNode, "id", task._id);
+					updateField( taskNode, "editButton", makeEditAndDeleteButtons(task._id));
+					tasksInThisSlot+= taskNode.innerHTML;
+				}
+			});
 			
-			currentSlot = slotTemplate.cloneNode(true);
-			currentSlot.id = slotId;
-			updateField( currentSlot, "kanban-slot-template",  "slot"+id );
-			updateField( currentSlot, "cards",  node.innerHTML );
+			currentSlotNode = slotTemplate.cloneNode(true);
+			currentSlotNode.id = slotId;
+			updateField( currentSlotNode, "kanban-slot-template",  "slot"+id );
+			updateField( currentSlotNode, "cards",  tasksInThisSlot );
 			slotId++;
 			var slots = document.getElementById("kanban-slots");
-			slots.appendChild(currentSlot);
-
+			slots.appendChild(currentSlotNode);
+				
 		});
 		
 	});
