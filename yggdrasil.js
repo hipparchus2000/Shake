@@ -266,7 +266,7 @@ function applyProjectsTemplate() {
 				if (href == "#"||href=="")
 					hrefNotFound = true;
 				if(onclick!=null) {
-					if (onclick.includes("undefined")||onclick.includes("loadHtmlFragmentToRoot('')") {
+					if (onclick.includes("undefined")||onclick.includes("loadHtmlFragmentToRoot('')")) {
 						onclickNotFound=true;
 					}
 				}
