@@ -585,6 +585,19 @@ function refresh(id) {
 	} else {
 		adminButton.style.display = "none";
 	}
+	
+	var slotButton = document.getElementById("slotButton"); 
+	if (hideButtons == false) {
+		var requiredRole = "slot-editor";
+		if (jwtToken.roles.includes(requiredRole)) {
+			addButton.style.display = "block";
+		} else {
+			addButton.style.display = "none";
+		}
+	} else {
+		addButton.style.display = "none";
+	}
+	
 
 	switch(route) {
 		
