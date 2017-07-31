@@ -213,7 +213,8 @@ function getPayloadForResource(resource) {
 		case "tasks":
 			payload = {
 				"storyName": document.getElementById("editTaskStoryname").value,
-				"storyText": document.getElementById("editTaskStorytext").value
+				"storyText": document.getElementById("editTaskStorytext").value,
+				"storySlot": document.getElementById("editTaskSlot").value,
 			};
 			break;
 		case "kanbanslots":
@@ -403,11 +404,13 @@ function applyAddTasksTemplate () {
 function applyEditTasksTemplate (id) {
 	var storyText = "";
 	var storyName = "";
+	var storySlot = "";
 	if(id!=null) {
 		tasks.forEach(function (item) {
 			if (item._id == id) {
 				storyText = item.storyText;
 				storyName = item.storyName;
+				storySlot = item.storySlot;
 			}
 		});
 	}
@@ -418,6 +421,7 @@ function applyEditTasksTemplate (id) {
 	updateFormField( "taskEditId", id);
 	updateFormField( "editTaskStoryname", storyName);
 	updateFormField( "editTaskStorytext", storyText);
+	updateFormField( "editTaskSlot", storySlot);
 }
 
 //kanbanslot Template rendering
