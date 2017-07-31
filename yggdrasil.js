@@ -380,7 +380,7 @@ function applyTasksTemplate() {
 			
 			tasks.forEach(function (task) {
 				if (task.storySlot=="" || task.storySlot==null)
-					task.StorySlot = theseSlots[0].slotName;
+					task.storySlot = theseSlots[0].slotName;
 				if(task.storySlot == thisSlot.slotName) {
 					var taskNode = cardTemplate.cloneNode(true);
 					updateField( taskNode, "storyText", task.storyText);
