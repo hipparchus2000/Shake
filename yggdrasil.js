@@ -354,7 +354,14 @@ function applyTasksTemplate() {
 	
 	http_get_json(tasksUrl,function (response) {
 		
-		var theseSlots = ["Story Preparation","Ready To Pick Up", "In Progress", "Complete", "In Test", "Ready For Release", "Released"];
+		var theseSlots = [
+			{ slotName:"Story Preparation" },
+			{ slotName:"Ready To Pick Up"}, 
+			{ slotName:"In Progress" }, 
+			{ slotName:"Complete" }, 
+			{ slotName:"In Test" },
+			{ slotName:"Ready For Release" },
+			{ slotName:"Released"} ];
 		
 		tasks = response.tasks;
 		var currentSlotNode=null;
