@@ -14,7 +14,7 @@ var authUrl = "/api/auth";
 var projects={};
 var tasks={};
 var users={};
-var blogEntries={};
+var blogs={};
 var id = null;
 var jwtToken = null;
 
@@ -363,7 +363,7 @@ function applyEditTasksTemplate (id) {
 	var storyText = "";
 	var storyName = "";
 	if(id!=null) {
-		taskEntries.forEach(function (item) {
+		tasks.forEach(function (item) {
 			if (item._id == id) {
 				storyText = item.storyText;
 				storyName = item.storyName;
@@ -404,8 +404,8 @@ function applyBlogTemplate() {
 	clearRootNode();
 	var blogTemplate = document.getElementById("blog-template");
 	http_get_json(blogsUrl,function (response) {
-		blogEntries = response;
-		blogEntries.forEach(function (story) {
+		blogs = response;
+		blogs.forEach(function (story) {
 			var node = blogTemplate.cloneNode(true);
 			updateField( node, "storyText", story.storyText);
 			updateField( node, "storyName", story.storyName);
@@ -426,7 +426,7 @@ function applyEditBlogTemplate (id) {
 	var storyName = "";
 	var date= "";	
 	if(id!=null) {
-		blogEntries.forEach(function (item) {
+		blogs.forEach(function (item) {
 			if (item._id == id) {
 				storyText = item.storyText;
 				storyName = item.storyName;
