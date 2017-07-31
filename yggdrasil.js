@@ -71,51 +71,6 @@ function cancelChanges() {
 	navigateBack();
 }
 
-function getPayloadForResource(resource) {
-	var payload = {};
-	switch (resource) {
-		
-		case "projects": 
-			payload = {
-				"title":       document.getElementById("editProjectProjectName").value,
-				"description": document.getElementById("editProjectProjectDescription").value,
-				"year":        document.getElementById("editProjectProjectYear").value,
-				"codeUrl":     document.getElementById("editProjectProjectCodeUrl").value,
-				"url":         document.getElementById("editProjectProjectUrl").value,
-				"pdfUrl":      document.getElementById("editProjectProjectPdfUrl").value
-			};
-			break;
-			
-		case "blogs":
-			payload = {
-				"storyName": document.getElementById("editBlogStoryname").value,
-				"storyText": document.getElementById("editBlogStorytext").value,
-				"date":      document.getElementById("editBlogStorydate").value
-			};
-			break;
-		case "users":
-			payload = {
-				"username": document.getElementById("userEditUsername").value,
-				"password": document.getElementById("userEditPassword").value,
-				"roles":      document.getElementById("userEditRoles").value,
-				"admin":      false
-			};
-			break;
-		case "tasks":
-			payload = {
-				"storyName": document.getElementById("editTaskStoryname").value,
-				"storyText": document.getElementById("editTaskStorytext").value
-			};
-			break;
-		case "kanbanslots":
-			payload = {
-				"slotOrder": document.getElementById("editSlotslotOrder").value,
-				"slotName": document.getElementById("editSlotslotName").value
-			};
-			break;
-	}
-	return payload;
-}
 
 function saveChanges() {
 	//find resource
@@ -223,6 +178,52 @@ function makeEditAndDeleteButtons(id,) {
 	if (jwtToken.roles.includes(requiredRole))
 		editButton='<i class="fa fa-trash fa-3x pull-right" onclick="deleteButton(\''+id+'\')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton(\''+id+'\')" aria-hidden="true"></i>';
 	return editButton;
+}
+
+function getPayloadForResource(resource) {
+	var payload = {};
+	switch (resource) {
+		
+		case "projects": 
+			payload = {
+				"title":       document.getElementById("editProjectProjectName").value,
+				"description": document.getElementById("editProjectProjectDescription").value,
+				"year":        document.getElementById("editProjectProjectYear").value,
+				"codeUrl":     document.getElementById("editProjectProjectCodeUrl").value,
+				"url":         document.getElementById("editProjectProjectUrl").value,
+				"pdfUrl":      document.getElementById("editProjectProjectPdfUrl").value
+			};
+			break;
+			
+		case "blogs":
+			payload = {
+				"storyName": document.getElementById("editBlogStoryname").value,
+				"storyText": document.getElementById("editBlogStorytext").value,
+				"date":      document.getElementById("editBlogStorydate").value
+			};
+			break;
+		case "users":
+			payload = {
+				"username": document.getElementById("userEditUsername").value,
+				"password": document.getElementById("userEditPassword").value,
+				"roles":      document.getElementById("userEditRoles").value,
+				"admin":      false
+			};
+			break;
+		case "tasks":
+			payload = {
+				"storyName": document.getElementById("editTaskStoryname").value,
+				"storyText": document.getElementById("editTaskStorytext").value
+			};
+			break;
+		case "kanbanslots":
+			payload = {
+				"slotOrder": document.getElementById("editSlotslotOrder").value,
+				"slotName": document.getElementById("editSlotslotName").value
+			};
+			break;
+	}
+	return payload;
 }
 
 
