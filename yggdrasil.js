@@ -575,6 +575,11 @@ function refresh(id) {
 		case "/task/edit": navigateState("Edit Task", applyEditTasksTemplate, id ); break;
 		case "/task/edit-slots": navigateState("Edit Kanban Slots", applyEditKanbanSlotsTemplate ); break;
 		
+		case "/kanbanslot": navigateState("Kanban", applyKanbanslotsTemplate ); break;
+		case "/kanbanslot/add": navigateState("Add Kanbanslot", applyAddKanbanslotsTemplate ); break;
+		case "/kanbanslot/edit": navigateState("Edit Kanbanslot", applyEditKanbanslotsTemplate, id ); break;
+		case "/kanbanslot/edit-slots": navigateState("Edit Kanban Slots", applyEditKanbanSlotsTemplate ); break;
+		
 		case "/user": navigateState("Users", applyUsersTemplate ); break;
 		case "/user/add": navigateState("Add User", applyAddUsersTemplate ); break;
 		case "/user/edit": navigateState("Edit User", applyEditUsersTemplate, id ); break;
