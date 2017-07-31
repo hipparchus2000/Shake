@@ -2,7 +2,7 @@
 
 var route="/project";
 var breadcrumbs=["/"];
-import {builddate} from 'builddate'; 
+//import {builddate} from 'builddate';  only in experimental in browser
 
 var projectsUrl = "/api/projects";
 var blogsUrl = "/api/blogs";

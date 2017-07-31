@@ -1,3 +1,3 @@
-echo "export function builddate() { return '`date`'; }" > builddate.js
+echo "function builddate() { return '`date`'; }" > builddate.js
 
 
