@@ -14,6 +14,7 @@ var authUrl = "/api/auth";
 //initialise global variables used for edit
 var projects={};
 var tasks={};
+var kanbanslots={};
 var users={};
 var blogs={};
 var id = null;
@@ -399,11 +400,34 @@ function applyEditTasksTemplate (id) {
 	updateFormField( "editTaskStorytext", storyText);
 }
 
+//kanbanslot Template rendering
+function applyKanbanslotsTemplate() {
+	clearRootNode();
+	var kanbanslotTemplate = document.getElementById("kanbanslot-template");
+
+    var id=0;	
+	http_get_json_restricted(kanbanslotsUrl,function (response) {
+		kanbanslots = response;
+		
+		kanbanslots.forEach(function (kanbanslot) {
+			var node = kanbanslotTemplate.cloneNode(true);
+			updateField( node, "kanbanslotname", kanbanslot.kanbanslotname);
+			updateField( node, "editButton", makeEditAndDeleteButtons(kanbanslot._id));
+			root.append(node);
+			id++;
+		});
+	});
+}
+
+function applyAddKanbanslotsTemplate() {
+	applyEditKanbanSlotsTemplate(null);
+}
+
 function applyEditKanbanSlotsTemplate () {
 	var slotOrder = "";
 	var slotName = "";	
 	if(id!=null) {
-		slotEntries.forEach(function (item) {
+		kanbanslots.forEach(function (item) {
 			if (item._id == id) {
 				slotOrder = item.slotOrder;
 				slotName = item.slotName;
