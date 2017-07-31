@@ -440,7 +440,7 @@ function applyEditKanbanSlotsTemplate () {
 	var slotTemplate = document.getElementById("edit-slot-template");
 	var node = slotTemplate.cloneNode(true);
 	root.append(node);
-	updateFormField( "slotEditId", id);
+	updateFormField( "kanbanslotEditId", id);
 	updateFormField( "editSlotslotOrder", slotOrder);
 	updateFormField( "editSlotslotName", slotName);
 }
