@@ -322,7 +322,7 @@ function applyTasksTemplate() {
 
 	//todo change blog to use tasks Url (currently using blog items for example
 	var slotId=0;
-	http_get_json(blogsUrl,function (response) {
+	http_get_json(tasksUrl,function (response) {
 		
 		tasks = response;
 		var currentSlot=null;
