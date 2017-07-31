@@ -414,7 +414,7 @@ function applyKanbanslotsTemplate() {
 		
 		kanbanslots.forEach(function (kanbanslot) {
 			var node = kanbanslotTemplate.cloneNode(true);
-			updateField( node, "slotname", kanbanslot.kanbanslotname);
+			updateField( node, "slotName", kanbanslot.kanbanslotname);
 			updateField( node, "editButton", makeEditAndDeleteButtons(kanbanslot._id));
 			root.append(node);
 			id++;
