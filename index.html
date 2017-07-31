@@ -101,14 +101,25 @@
 
 				<div id="kanban-task-template" class="w3-third w3-section marginTop5" >
 					<div id="{{id}}" class="w3-card-2 w3-white w3-round-medium kanban-card" draggable="true" ondragstart="drag(event)" ondrop="false" ondragover="false">
-					  <div class="w3-container w3-center">
-  						<input type="hidden" name="id" value="{{id}}" id="taskId">
-						<h3>{{storyName}}</h3> {{editButton}}
-						<p>{{storyText}} </p>
-					  </div>
+						<div class="w3-container w3-center">
+							<input type="hidden" name="id" value="{{id}}" id="taskId">
+							<button type="button" class="btn btn-danger marginTop5">{{storyName}}</button> {{editButton}}
+							<p>{{storyText}} </p>
+						</div>
 					</div>
-				  </div>
+				</div>
 
+				<div id="kanban-heading-template" class="w3-third w3-section marginTop5" >
+					<div id="{{id}}" class="w3-card-2 w3-white w3-round-medium kanban-card" draggable="true" ondragstart="drag(event)" ondrop="false" ondragover="false">
+						<div class="w3-container w3-center">
+							<input type="hidden" name="id" value="{{id}}" id="taskId">
+							<h3>{{storyName}}</h3> {{editButton}}
+							<p>{{storyText}} </p>
+						</div>
+					</div>
+				</div>
+
+				
 				<div id="kanban-template" class="row">
 					<table>
 						<tr id="kanban-slots" class="kanban-slot">

@@ -347,6 +347,7 @@ function applyTasksTemplate() {
 	var kanbanTemplate = document.getElementById("kanban-template");
 	var slotTemplate = document.getElementById("kanban-slot-template");
 	var cardTemplate = document.getElementById("kanban-task-template");
+	var headingTemplate = document.getElementById("kanban-heading-template");
 	var kanbanRoot = kanbanTemplate.cloneNode(true);
 	kanbanRoot.innerHTML = kanbanRoot.innerHTML.replace(/kanban-template/g,"kanbanroot");
 	root.append(kanbanRoot); 
@@ -371,7 +372,7 @@ function applyTasksTemplate() {
 
 			var tasksInThisSlot="";
 			//make the title task
-			var taskNode = cardTemplate.cloneNode(true);
+			var taskNode = headingTemplate.cloneNode(true);
 			updateField( taskNode, "storyName", thisSlot.slotName );
 			updateField( taskNode, "storyText", "");
 			updateField( taskNode, "id", "");
