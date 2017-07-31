@@ -379,9 +379,9 @@ function applyTasksTemplate() {
 			tasksInThisSlot+= taskNode.innerHTML;
 			
 			tasks.forEach(function (task) {
-				if (task.slot=="" || task.slot==null)
-					task.slot = theseSlots[0].slotName;
-				if(task.slot == thisSlot.slotName) {
+				if (task.storySlot=="" || task.slot==null)
+					task.StorySlot = theseSlots[0].slotName;
+				if(task.storySlot == thisSlot.slotName) {
 					var taskNode = cardTemplate.cloneNode(true);
 					updateField( taskNode, "storyText", task.storyText);
 					updateField( taskNode, "storyName", task.storyName);
