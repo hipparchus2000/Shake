@@ -470,10 +470,31 @@ function applyUsersTemplate () {
 }
 
 function applyAddUsersTemplate () {
-	
+	applyEditUsersTemplate(null);
 }
 
 function applyEditUsersTemplate (id) {
+	var userEditUsername = "";
+	var userEditPassword = "";
+	var userEditRoles = "";
+	
+	if(id!=null) {
+		tasks.forEach(function (item) {
+			if (item._id == id) {
+				userEditUsername = item.username;
+				userEditPassword = item.password;
+				userEditRoles = item.roles;
+			}
+		});
+	}
+	clearRootNode();
+	var taskTemplate = document.getElementById("edit-task-template");
+	var node = taskTemplate.cloneNode(true);
+	root.append(node);
+	updateFormField( "userEditId", id);
+	updateFormField( "userEditUsername", userEditUsername);
+	updateFormField( "userEditPassword", userEditPassword);
+	updateFormField( "userEditRoles", userEditRoles);
 	
 }
 
