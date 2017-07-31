@@ -255,7 +255,11 @@ function applyProjectsTemplate() {
 				var href =allButtons[i].getAttribute("href");
 				var onclick = allButtons[i].getAttribute("onclick");
 				
-				var hrefNotFound = href.includes("undefined");
+				var hrefNotFound = false;
+				if(href==null)
+					hrefNotFound=true;
+				hrefNotFound = href.includes("undefined");
+				
 				var onclickNotFound = onclick==null;
 				if (href == "#"||href=="")
 					hrefNotFound = true;
