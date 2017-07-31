@@ -8,6 +8,8 @@ var projectsUrl = "/api/projects";
 var blogsUrl = "/api/blogs";
 var usersUrl = "/api/users";
 var tasksUrl = "/api/tasks";
+var kanbanslotsUrl = "/api/kanbanslots";
+
 
 var authUrl = "/api/auth";
 
