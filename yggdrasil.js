@@ -658,7 +658,7 @@ function http_get_html(url, callback) {
 
 function http_get_json_restricted(url, callback) {
 	if(jwtToken.token==null) {
-		alert("you must login to use this resource");
+		//alert("you must login to use this resource");
 		logout();
 		return;
 	}
@@ -687,7 +687,7 @@ function http_get_json_restricted(url, callback) {
 
 function http_post(url,payload,callback,errorCallback) {
 	if(jwtToken.token==null) {
-		alert("you must login to use this resource");
+		//alert("you must login to use this resource");
 		logout();
 		return;
 	}
@@ -718,7 +718,7 @@ function http_post(url,payload,callback,errorCallback) {
 
 function http_put(url,payload,callback,errorCallback) {
 	if(jwtToken.token==null) {
-		alert("you must login to use this resource");
+		//alert("you must login to use this resource");
 		logout();
 		return;
 	}
@@ -749,7 +749,7 @@ function http_put(url,payload,callback,errorCallback) {
 
 function http_del(url,errorCallback, callback) {
 	if(jwtToken.token==null) {
-		alert("you must login to use this resource");
+		//alert("you must login to use this resource");
 		logout();
 		return;
 	}
