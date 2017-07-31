@@ -109,8 +109,8 @@ function getPayloadForResource(resource) {
 			break;
 		case "kanbanslots":
 			payload = {
-				"slotOrder": document.getElementById("editSlotOrder").value,
-				"slotName": document.getElementById("editSlotName").value
+				"slotOrder": document.getElementById("editSlotslotOrder").value,
+				"slotName": document.getElementById("editSlotslotName").value
 			};
 			break;
 	}
@@ -413,7 +413,7 @@ function applyKanbanslotsTemplate() {
 		
 		kanbanslots.forEach(function (kanbanslot) {
 			var node = kanbanslotTemplate.cloneNode(true);
-			updateField( node, "kanbanslotname", kanbanslot.kanbanslotname);
+			updateField( node, "slotname", kanbanslot.kanbanslotname);
 			updateField( node, "editButton", makeEditAndDeleteButtons(kanbanslot._id));
 			root.append(node);
 			id++;
@@ -442,7 +442,7 @@ function applyEditKanbanSlotsTemplate () {
 	root.append(node);
 	updateFormField( "slotEditId", id);
 	updateFormField( "editSlotslotOrder", slotOrder);
-	updateFormField( "editSlotStorytext", slotName);
+	updateFormField( "editSlotslotName", slotName);
 }
 
 //Blog Template Rendering

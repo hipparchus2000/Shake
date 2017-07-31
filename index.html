@@ -137,6 +137,17 @@
 					</div>
 				</div>
 			
+				<div id="kanbanslot-template" class="row marginTop5">
+					<div class="col-sm-12">
+						<div class="row">
+							<input type="hidden" name="id" value="{{id}}" id="slotId">
+							<div class="col-sm-6">
+								{{editButton}} {{slotname}}
+							</div>
+						</div>
+					</div>
+				</div>
+			
 				<div id="edit-project-template" class="row">
 					<div class="col-md-6">
 						<div id="validationResult">
@@ -293,6 +304,39 @@
 							<label class="control-label">Roles</label>
 							<div>
 								<input type="text" class="form-control input-lg" name="userEditRoles" id="userEditRoles">
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div>
+								<button type="submit" class="btn btn-success" onclick="saveChanges()">Save Changes</button>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<button type="submit" class="btn btn-success" onclick="cancelChanges()">Cancel</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div id="edit-slot-template" class="row">
+					<div class="col-md-6">
+						<div id="validationResult">
+							<div>
+							</div>
+						</div>
+						<input type="hidden" name="id" value="{{id}}" id="slotEditId">
+						<div class="form-group">
+							<label class="control-label">Order</label>
+							<div>
+								<input type="text" class="form-control input-lg" name="editSlotslotOrder" value="" id="editSlotslotOrder">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Name</label>
+							<div>
+								<input type="text" class="form-control input-lg" name="editSlotslotName" id="editSlotslotName">
 							</div>
 						</div>
 
