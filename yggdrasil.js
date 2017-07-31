@@ -457,7 +457,7 @@ function applyUsersTemplate () {
 
     var id=0;	
 	http_get_json_restricted(usersUrl,function (response) {
-		var users = response;
+		users = response;
 		
 		users.forEach(function (user) {
 			var node = userTemplate.cloneNode(true);
