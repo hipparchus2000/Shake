@@ -355,7 +355,6 @@ function applyTasksTemplate() {
 	http_get_json(tasksUrl,function (response) {
 		
 		var theseSlots = [
-			{ slotName:"Story Preparation" },
 			{ slotName:"Ready To Pick Up"}, 
 			{ slotName:"In Progress" }, 
 			{ slotName:"Complete" }, 
@@ -373,7 +372,7 @@ function applyTasksTemplate() {
 			tasks.forEach(function (task) {
 				if (task.slot=="" || task.slot==null)
 					task.slot = theseSlots[0];
-				if(task.slot = thisSlot) {
+				if(task.slot == thisSlot.slotName) {
 					var taskNode = cardTemplate.cloneNode(true);
 					updateField( taskNode, "storyText", task.storyText);
 					updateField( taskNode, "storyName", task.storyName);
