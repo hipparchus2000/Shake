@@ -363,7 +363,7 @@ function applyTasksTemplate() {
 			{ slotName:"Ready For Release" },
 			{ slotName:"Released"} ];
 		
-		tasks = response.tasks;
+		tasks = response;
 		var currentSlotNode=null;
 		
 		//table one row, one TD per slot, multiple cards in one TD
