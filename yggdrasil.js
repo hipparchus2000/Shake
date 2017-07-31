@@ -256,7 +256,7 @@ function applyProjectsTemplate() {
 				
 				var hrefNotFound = href.includes("undefined");
 				var onclickNotFound = onclick==null;
-				if (href == "#"||href="")
+				if (href == "#"||href=="")
 					hrefNotFound = true;
 				if(onclick!=null) {
 					if (onclick.includes("undefined")) {
