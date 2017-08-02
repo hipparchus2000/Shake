@@ -111,7 +111,7 @@ function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
 	if(route.includes("task")) {
-		var newState = ev.currentTarget.childNodes[1].innerText;
+		var newState = ev.currentTarget.childNodes[1].innerText.replace("/n/n","");
 		var id = ev.srcElement.id;
 		var task = null;
 		tasks.forEach(function(task) {
