@@ -1,2 +1,2 @@
-./makebuilddateclass.sh; git add . ; git commit -m 'adding slots' ; git push origin HEAD
+./makebuilddateclass.sh; git add . ; git commit -m 'adding slots' ; git push origin HEAD ; date
 

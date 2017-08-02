@@ -116,7 +116,7 @@ function drop(ev) {
 		var task = null;
 		tasks.forEach(function(task) {
 			if (task._id == data) {
-				task.slot = newState;
+				task.storySlot = newState;
 				ev.target.appendChild(document.getElementById(data));
 				var url="/api/tasks"
 				http_put(url+"/"+task._id,task,nullOperation,updateFailed);
