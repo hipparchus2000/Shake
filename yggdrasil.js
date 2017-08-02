@@ -109,9 +109,18 @@ function deleteFailed() {
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-	alert(ev.currentTarget.childNodes[1].innerText);
-	alert(JSON.stringify(ev.srcElement.children[0].children[0].childNodes[1]));
-    ev.target.appendChild(document.getElementById(data));
+	if(route.includes("task") {
+		var newState = ev.currentTarget.childNodes[1].innerText;
+		var id = srcElement.id;
+		var task = null;
+		tasks.forEach(function(task) {
+			if (task.id == id) {
+				task.slot = newState;
+				
+			}
+		});
+		ev.target.appendChild(document.getElementById(data));
+	}
 }
 
 function loadHtmlFragmentToRoot(url) {
