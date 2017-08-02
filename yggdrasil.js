@@ -926,10 +926,14 @@ window.onload = function(){
 
 	}
 	
+	var currentUrl = window.location.href ;
+	var parts = currentUrl.split("#");
+	route = parts[1];	
+	
 	refresh();
 	registerServiceWorker();
 	
-	var currentUrl = window.location.href ;
+
 }
 
 
