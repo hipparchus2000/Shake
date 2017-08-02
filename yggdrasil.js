@@ -71,6 +71,7 @@ function cancelChanges() {
 	navigateBack();
 }
 
+function nullOperation() {}
 
 function saveChanges() {
 	//find resource
@@ -120,6 +121,7 @@ function drop(ev) {
 			}
 		});
 		ev.target.appendChild(document.getElementById(data));
+		http_put(url+"/"+task._id,task,nullOperation,updateFailed);
 	}
 }
 
