@@ -118,11 +118,7 @@ function drop(ev) {
 			if (task._id == data) {
 				task.slot = newState;
 				ev.target.appendChild(document.getElementById(data));
-				var lastSlashIndex = route.lastIndexOf("/");
-				var routeWithoutAdd = route.slice(route,lastSlashIndex);
-				var fieldprefix = routeWithoutAdd.replace("/","");
-				resource = fieldprefix+"s";
-				var url="/api/"+resource;
+				var url="/api/tasks"
 				http_put(url+"/"+task._id,task,nullOperation,updateFailed);
 			}
 		});
