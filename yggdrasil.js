@@ -111,7 +111,7 @@ function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
 	if(route.includes("task")) {
-		var newState = ev.currentTarget.childNodes[1].innerText.replace("/n/n","").trim();
+		var newState = ev.currentTarget.childNodes[1].innerText.replace("/n/n","").replace("/r","").trim();
 		var id = ev.srcElement.id;
 		var task = null;
 		tasks.forEach(function(task) {
@@ -394,7 +394,7 @@ function applyTasksTemplate() {
 			tasksInThisSlot+= taskNode.innerHTML;
 			
 			tasks.forEach(function (task) {
-				task.storySlot = task.storySlot.replace("/n/n","").trim();
+				task.storySlot = task.storySlot.replace("/n/n","").replace("/r","").trim();
 				if (task.storySlot=="" || task.storySlot==null)
 					task.storySlot = theseSlots[0].slotName;
 				if(task.storySlot == thisSlot.slotName) {
