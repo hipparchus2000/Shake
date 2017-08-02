@@ -110,7 +110,7 @@ function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
 	alert(ev.currentTarget.childNodes[1].innerText);
-	alert(ev.srcElement.childNodes[1].id);
+	alert(ev.srcElement.childNodes[5].children[0].children[0].value);
     ev.target.appendChild(document.getElementById(data));
 }
 
