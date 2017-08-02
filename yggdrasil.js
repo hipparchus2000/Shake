@@ -111,7 +111,7 @@ function drop(ev) {
     var data = ev.dataTransfer.getData("text");
 	if(route.includes("task")) {
 		var newState = ev.currentTarget.childNodes[1].innerText;
-		var id = srcElement.id;
+		var id = ev.srcElement.id;
 		var task = null;
 		tasks.forEach(function(task) {
 			if (task.id == id) {
