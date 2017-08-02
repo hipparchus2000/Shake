@@ -109,7 +109,7 @@ function deleteFailed() {
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-	if(route.includes("task") {
+	if(route.includes("task")) {
 		var newState = ev.currentTarget.childNodes[1].innerText;
 		var id = srcElement.id;
 		var task = null;
