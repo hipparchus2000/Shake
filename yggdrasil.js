@@ -928,6 +928,8 @@ window.onload = function(){
 	
 	refresh();
 	registerServiceWorker();
+	
+	var currentUrl = window.location.href ;
 }
 
 
