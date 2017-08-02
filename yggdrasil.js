@@ -114,7 +114,7 @@ function drop(ev) {
 		var id = ev.srcElement.id;
 		var task = null;
 		tasks.forEach(function(task) {
-			if (task.id == id) {
+			if (task.id == data) {
 				task.slot = newState;
 				
 			}
