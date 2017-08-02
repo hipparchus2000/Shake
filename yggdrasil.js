@@ -121,6 +121,11 @@ function drop(ev) {
 			}
 		});
 		ev.target.appendChild(document.getElementById(data));
+		var lastSlashIndex = route.lastIndexOf("/");
+		var routeWithoutAdd = route.slice(route,lastSlashIndex);
+		var fieldprefix = routeWithoutAdd.replace("/","");
+		resource = fieldprefix+"s";
+		var url="/api/"+resource;
 		http_put(url+"/"+task._id,task,nullOperation,updateFailed);
 	}
 }
