@@ -394,6 +394,7 @@ function applyTasksTemplate() {
 			tasksInThisSlot+= taskNode.innerHTML;
 			
 			tasks.forEach(function (task) {
+				task.storySlot = task.storySlot.replace("/n/n"),"");
 				if (task.storySlot=="" || task.storySlot==null)
 					task.storySlot = theseSlots[0].slotName;
 				if(task.storySlot == thisSlot.slotName) {
