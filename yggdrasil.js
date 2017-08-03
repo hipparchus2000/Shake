@@ -928,7 +928,11 @@ window.onload = function(){
 	
 	var currentUrl = window.location.href ;
 	var parts = currentUrl.split("#");
-	route = parts[1];	
+	if (parts.length<2) {
+		route="/";
+	} else {
+		route = parts[1];	
+	}
 	
 	refresh();
 	registerServiceWorker();
