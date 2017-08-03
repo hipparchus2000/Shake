@@ -588,6 +588,7 @@ function applyEditUsersTemplate (id) {
 function navigateState(stateTitle,templateFunction, id) {
 	var title=document.getElementById("pageTitle");
 	title.innerHTML=stateTitle;
+	document.title = title;
 	templateFunction(id);
 }
 
