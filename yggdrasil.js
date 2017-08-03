@@ -143,8 +143,8 @@ function loadHtmlFragmentToRoot(url) {
 //generic functions
 function registerServiceWorker () {
 	//register the service worker
-	if ('serviceWorker' in navigator) {
-	  window.addEventListener('load', function() {
+	//if ('serviceWorker' in navigator) {
+	  //window.addEventListener('load', function() {
 		navigator.serviceWorker.register('sw.js').then(function(registration) {
 		  // Registration was successful
 		  console.log('ServiceWorker registration successful with scope: ', registration.scope);
@@ -152,8 +152,8 @@ function registerServiceWorker () {
 		  // registration failed :(
 		  console.log('ServiceWorker registration failed: ', err);
 		});
-	  });
-	}
+	  //});
+	//}
 }
 
 function generateUUID(){
