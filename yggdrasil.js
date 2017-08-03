@@ -929,7 +929,7 @@ window.onload = function(){
 	var currentUrl = window.location.href ;
 	var parts = currentUrl.split("#");
 	if (parts.length<2) {
-		route="/";
+		route="/project";
 	} else {
 		route = parts[1];	
 	}
