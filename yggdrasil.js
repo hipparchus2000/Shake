@@ -4,14 +4,15 @@ var route="/project";
 var breadcrumbs=["/"];
 //import {builddate} from 'builddate';  only in experimental in browser
 
-var projectsUrl = "/api/projects";
-var blogsUrl = "/api/blogs";
-var usersUrl = "/api/users";
-var tasksUrl = "/api/tasks";
-var kanbanslotsUrl = "/api/kanbanslots";
+var projectsResource = "projects";
+var blogsResource = "blogs";
+var usersResource = "users";
+var tasksResource = "tasks";
+var kanbansResource = "kanbanslots";
+var apiPath = "/api/";
+var dev=0;
 
-
-var authUrl = "/api/auth";
+var authResource = "auth";
 
 //initialise global variables used for edit
 var projects={};
@@ -79,16 +80,15 @@ function saveChanges() {
 	var routeWithoutAdd = route.slice(route,lastSlashIndex);
 	var fieldprefix = routeWithoutAdd.replace("/","");
 	resource = fieldprefix+"s";
-	var url="/api/"+resource;
 	var payload = getPayloadForResource(resource);
 	
 	var idField=document.getElementById(fieldprefix+"EditId");
 	var id = idField.value;
 	
 	if(id==null || id=="") { //then save with post
-		http_post(url,payload,navigateBack,updateFailed);
+		http_post(resource,payload,navigateBack,updateFailed);
 	} else { //then update with put
-		http_put(url+"/"+id,payload,navigateBack,updateFailed);
+		http_put(resource+"/"+id,payload,navigateBack,updateFailed);
 	}
 	
 }
@@ -99,8 +99,7 @@ function updateFailed() {
 
 function deleteRecord(id, callback) {
 	var resource = route.replace("/","")+"s";
-	var url="/api/"+resource+"/"+id;
-	http_del(url,deleteFailed, callback);
+	http_del(resource+"/"+id,deleteFailed, callback);
 }
 
 function deleteFailed() {
@@ -260,7 +259,7 @@ function applyProjectsTemplate() {
 	var cardrowTemplate = document.getElementById("cardRow-template");
 	var cardTemplate = document.getElementById("card-template");
 	
-	http_get_json(projectsUrl,function (response) {
+	http_get_json(projectsResource,function (response) {
 		projects = response;
 		
 		var rowcount=0;
@@ -368,7 +367,7 @@ function applyTasksTemplate() {
 
 	var slotId=0;
 	
-	http_get_json(tasksUrl,function (response) {
+	http_get_json(tasksResource,function (response) {
 		
 		var theseSlots = [
 			{ slotName:"Ready To Pick Up"}, 
@@ -454,7 +453,7 @@ function applyKanbanslotsTemplate() {
 	var kanbanslotTemplate = document.getElementById("kanbanslot-template");
 
     var id=0;	
-	http_get_json_restricted(kanbanslotsUrl,function (response) {
+	http_get_json_restricted(kanbanslotsResource,function (response) {
 		kanbanslots = response;
 		
 		kanbanslots.forEach(function (kanbanslot) {
@@ -495,7 +494,7 @@ function applyEditKanbanslotsTemplate () {
 function applyBlogTemplate() {
 	clearRootNode();
 	var blogTemplate = document.getElementById("blog-template");
-	http_get_json(blogsUrl,function (response) {
+	http_get_json(blogsResource,function (response) {
 		blogs = response;
 		blogs.forEach(function (story) {
 			var node = blogTemplate.cloneNode(true);
@@ -542,7 +541,7 @@ function applyUsersTemplate () {
 	var userTemplate = document.getElementById("user-template");
 
     var id=0;	
-	http_get_json_restricted(usersUrl,function (response) {
+	http_get_json_restricted(usersResource,function (response) {
 		users = response;
 		
 		users.forEach(function (user) {
@@ -599,10 +598,19 @@ function rewriteUrlFromRoute() {
 	window.location.replace(parts[0] + "#" + route);
 }
 
+function setApiPath() {
+	var url=window.location.href;
+	if (url.includes("dev.")) {
+		dev=1;
+		apiPath="/devapi/";
+	}
+}
+
 function refresh(id) {
 
 	rewriteUrlFromRoute();	
-	
+	setApiPath();	
+
 	jwtToken = fetchJwt();
 	if (jwtToken==null) {
 		jwtToken={ admin: false, username: "Guest", roles: ""};
@@ -682,7 +690,7 @@ function navigate(newroute) {
 
 //http methods
 function http_get_json(url, callback) {
-	fetch(url).then(function(response) {
+	fetch(apiPath + url).then(function(response) {
 	  	return response.json();
 	}).then(function(data) {
 		rewriteUrlFromRoute();	
@@ -714,7 +722,7 @@ function http_get_json_restricted(url, callback) {
 		logout();
 		return;
 	}
-	fetch(url,
+	fetch(apiPath + url,
 	{
     	method: "get", 
 		headers: {
@@ -747,7 +755,7 @@ function http_post(url,payload,callback,errorCallback) {
     	json: JSON.stringify(payload),
     	delay: 3
 	};
-	fetch(url,
+	fetch(apiPath + url,
 	{
     	method: "post", 
 		headers: {
@@ -778,7 +786,7 @@ function http_put(url,payload,callback,errorCallback) {
     	json: JSON.stringify(payload),
     	delay: 3
 	};
-	fetch(url,
+	fetch(apiPath + url,
 	{
     	method: "put", 
 		headers: {
@@ -805,7 +813,7 @@ function http_del(url,errorCallback, callback) {
 		logout();
 		return;
 	}
-	fetch(url,
+	fetch(apiPath + url,
 	{
     	method: "delete", 
 		headers: {
@@ -840,7 +848,6 @@ function login() {
 	loginStatus.innerHTML = "";
 	var username = document.getElementById("username").value;
 	var password = document.getElementById("password").value;
-	var url = authUrl;
 	var payload = {
     	"username": username,
 	    "password": password
@@ -850,7 +857,7 @@ function login() {
     	json: JSON.stringify(payload),
     	delay: 3
 	};
-	fetch(url,
+	fetch(apiPath + authResource,
 	{
     	method: "post", 
 		headers: {
