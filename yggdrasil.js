@@ -117,7 +117,7 @@ function drop(ev) {
 			if (task._id == data) {
 				task.storySlot = newState;
 				ev.target.appendChild(document.getElementById(data));
-				var url="/api/tasks"
+				var url="tasks"
 				http_put(url+"/"+task._id,task,nullOperation,updateFailed);
 			}
 		});
