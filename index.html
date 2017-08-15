@@ -103,6 +103,37 @@
 				<div id="cardRow-template" class="w3-row-padding w3-theme">
 				</div>
 			  
+			  <div id="trash-template" class="w3-third w3-section" ondrop="drop(event)" ondragover="allowDrop(event)">
+					<div id="{{id}}" class="w3-card-4 w3-light-grey w3-round-large" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">
+					  <div class="w3-container w3-center">
+  						<input type="hidden" name="id" value="{{id}}" id="projectId">
+						<button type="button" class="btn btn-danger marginTop5">{{title}}</button>
+						<p>{{description}} &copy; {{year}}</p>
+						<div class="w3-section">
+						  <a class="btn btn-primary" href="{{pdfUrl}}">PDF</a>
+						  <a class="btn btn-warning" role="button" onclick="loadHtmlFragmentToRoot('{{url}}')">Documents</a>
+						  <a class="btn btn-info" role="button" href="{{codeUrl}}">Code on Gitlab</a>
+						  <a class="btn btn-info" role="button" href="{{siteUrl}}">Live Site</a>{{editButton}}
+						  
+							<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+							<input type="hidden" name="cmd" value="_s-xclick">
+							<input type="hidden" name="hosted_button_id" value="6QFTG33VZN9S8">
+							<table>
+							<tr><td><input type="hidden" name="on0" value="Pay It Forward Awesome Badge">Pay It Forward Awesome Badge</td></tr><tr><td><select name="os0">
+								<option value="Single">Single £1.00 GBP
+								<option value="Pack of 10">Pack of 10 £9.00 GBP
+								<option value="Pack of 100">Pack of 100 £80.00 GBP
+							</select> </td></tr>
+							</table>
+							<input type="hidden" name="currency_code" value="GBP">
+							<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
+							<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+							</form>
+						</div>
+					  </div>
+					</div>
+				</div>
+			  
 				<div id="blog-template" class="row marginTop5">
 					<div class="col-sm-12">
 						<div id="{{id}}" class="w3-card-4 w3-light-grey w3-round-large" draggable="true" ondragstart="drag(event)" ondrop="drop(event)" ondragover="allowDrop(event)">

@@ -262,7 +262,7 @@ function appendNodeToRoot(node) {
 function applyTrashTemplate() {
 	clearRootNode();
 	var cardrowTemplate = document.getElementById("cardRow-template");
-	var cardTemplate = document.getElementById("card-template");
+	var cardTemplate = document.getElementById("trash-template");
 	
 	http_get_json(trashsResource,function (response) {
 		trashs = response;
