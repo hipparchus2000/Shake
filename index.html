@@ -386,7 +386,68 @@
 						</div>
 					</div>
 				</div>
-			
+
+				<div id="edit-trash-template" class="row">
+					<div class="col-md-6">
+						<div id="validationResult">
+							<div>
+							</div>
+						</div>
+						<input type="hidden" name="id" value="{{id}}" id="projectEditId">
+						<div class="form-group">
+							<label class="control-label">Project Name</label>
+							<div>
+								<input type="text" class="form-control input-lg" name="editProjectProjectName" value="" id="editProjectProjectName">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Description</label>
+							<div>
+								<input type="text" class="form-control input-lg" name="editProjectProjectDescription" id="editProjectProjectDescription">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Year</label>
+							<div>
+								<input type="text" class="form-control input-lg" name="editProjectProjectDescription" id="editProjectProjectYear">
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<label class="control-label">Live Url or Download Page</label>
+							<div>
+								<input type="text" class="form-control input-lg" name="editProjectProjectUrl" id="editProjectProjectUrl">
+							</div>
+						</div>
+						  <div class="form-group">
+							<label class="control-label">Code Url</label>
+							<div>
+								<input type="text" class="form-control input-lg" name="editProjectProjectCodeUrl" id="editProjectProjectCodeUrl">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">PDF Url</label>
+							<div>
+								<input type="text" class="form-control input-lg" name="editProjectProjectPdfUrl" id="editProjectProjectPdfUrl">
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<div>
+								<button type="submit" class="btn btn-success" onclick="saveChanges()">Save Changes</button>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<button type="submit" class="btn btn-success" onclick="cancelChanges()">Cancel</button>
+							</div>
+						</div>
+
+					</div>
+					
+				</div>
+				
 			</div> <!-- templates -->
 
 			<!-- Login -->
