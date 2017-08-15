@@ -9,6 +9,8 @@ var blogsResource = "blogs";
 var usersResource = "users";
 var tasksResource = "tasks";
 var kanbansResource = "kanbanslots";
+var trashsResource = "trash";
+
 var apiPath = "/api/";
 var dev=0;
 
@@ -193,6 +195,7 @@ function makeEditAndDeleteButtons(id,) {
 	return editButton;
 }
 
+// ##### main template area
 function getPayloadForResource(resource) {
 	var payload = {};
 	switch (resource) {
@@ -251,6 +254,109 @@ function clearRootNode() {
 function appendNodeToRoot(node) {
 	var root = document.getElementById("root");
 	root.append(node);
+}
+
+
+// ##### main template area
+//trash Template rendering
+function applyTrashTemplate() {
+	clearRootNode();
+	var cardrowTemplate = document.getElementById("cardRow-template");
+	var cardTemplate = document.getElementById("card-template");
+	
+	http_get_json(trashsResource,function (response) {
+		trashs = response;
+		
+		var rowcount=0;
+		var currentRow=null;
+		
+		trashs.forEach(function (trash) {
+			if ((rowcount % 3) == 0) {
+				currentRow = cardrowTemplate.cloneNode(true);
+			}
+			var node = cardTemplate.cloneNode(true);
+			updateField( node, "title", trash.title);
+			updateField( node, "id", trash._id);
+			updateField( node, "description", trash.description);
+			updateField( node, "year", trash.year);
+			updateField( node, "codeUrl", trash.codeUrl);
+			updateField( node, "siteUrl", trash.siteUrl);
+			updateField( node, "url", trash.url);
+			updateField( node, "pdfUrl", trash.pdfUrl);
+			updateField( node, "editButton", makeEditAndDeleteButtons(trash._id));
+			
+			//hide buttons with undefined href and onclick   --> first button (0) is used for title, so ignore
+			var allButtons = node.getElementsByClassName("btn");
+			for (var i = 1; i < allButtons.length; i++) {
+				
+				var href =allButtons[i].getAttribute("href");
+				var onclick = allButtons[i].getAttribute("onclick");
+				
+				var hrefNotFound = false;
+				if(href==null) {
+					hrefNotFound=true;
+				} else {
+					hrefNotFound = href.includes("undefined");
+				}
+				
+				var onclickNotFound = onclick==null;
+				if (href == "#"||href=="")
+					hrefNotFound = true;
+				if(onclick!=null) {
+					if (onclick.includes("undefined")||onclick.includes("loadHtmlFragmentToRoot('')")) {
+						onclickNotFound=true;
+					}
+				}
+				
+				if(hrefNotFound && onclickNotFound) {
+					var classAttribute = allButtons[i].getAttribute("class");
+					allButtons[i].className = classAttribute+" hidden";
+				}
+			}
+			
+			currentRow.append(node);
+			if ((rowcount % 3) == 0) {
+				appendNodeToRoot(currentRow);
+			}
+			rowcount++;
+		});
+	});
+}
+
+function applyAddTrashTemplate () {
+	applyEditTrashTemplate(null);
+}
+
+function applyEditTrashTemplate (id) {
+	clearRootNode();
+	var blogTemplate = document.getElementById("edit-trash-template");
+	var node = blogTemplate.cloneNode(true);
+	root.append(node);
+	var title = "";
+	var description = "";
+	var year="";
+	var codeUrl="";
+	var url="";
+	var pdfUrl="";
+	if(id!=null) {
+		trashs.forEach(function (item) {
+			if (item._id == id) {
+				title = item.title;
+				description = item.description;
+				year = item.year;
+				codeUrl = item.codeUrl;
+				url = item.url;
+				pdfUrl = item.pdfUrl;
+			}
+		});
+	}
+	updateFormField( "trashEditId", id);
+	updateFormField( "editTrashTrashName", title);
+	updateFormField( "editTrashTrashDescription", description);
+	updateFormField( "editTrashTrashYear", year);
+	updateFormField( "editTrashTrashCodeUrl", codeUrl);
+	updateFormField( "editTrashTrashUrl", url);
+	updateFormField( "editTrashTrashPdfUrl", pdfUrl);
 }
 
 //project Template rendering
@@ -606,6 +712,7 @@ function setApiPath() {
 	}
 }
 
+// ##### main template area
 function refresh(id) {
 
 	rewriteUrlFromRoute();	
@@ -678,6 +785,10 @@ function refresh(id) {
 		case "/user/add": navigateState("Add User", applyAddUsersTemplate ); break;
 		case "/user/edit": navigateState("Edit User", applyEditUsersTemplate, id ); break;
 
+		case "/trash":     navigateState("LoadOfRubbish.com", applyTrashTemplate ); break;
+		case "/trash/add": navigateState("Add Trash", applyAddTrashTemplate ); break;
+		case "/trash/edit": navigateState("Edit Trash", applyEditTrashTemplate, id ); break;
+		
 	} 
 		
 }
