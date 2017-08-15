@@ -9,7 +9,7 @@ var blogsResource = "blogs";
 var usersResource = "users";
 var tasksResource = "tasks";
 var kanbansResource = "kanbanslots";
-var trashsResource = "trash";
+var trashsResource = "trashs";
 
 var apiPath = "/api/";
 var dev=0;
