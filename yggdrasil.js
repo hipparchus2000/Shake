@@ -256,7 +256,7 @@ function appendNodeToRoot(node) {
 	root.append(node);
 }
 
-
+ 
 // ##### main template area
 //trash Template rendering
 function applyTrashTemplate() {
