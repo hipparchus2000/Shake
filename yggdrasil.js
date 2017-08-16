@@ -809,7 +809,9 @@ function http_get_json(url, callback) {
 	fetch(apiPath + url).then(function(response) {
 	  	return response.json();
 	}).then(function(data) {
-		cache.put(url, data);
+		caches.open('v1').then(function(cache) {
+			cache.put(url, data);
+		}
 		rewriteUrlFromRoute();	
 		callback(data);
 	}).catch(function(err) {
@@ -821,7 +823,9 @@ function http_get_html(url, callback) {
 	fetch(url, { mode: 'no-cors' }).then(function(response) {
 		return response;
 	}).then(function(data) {
-		cache.put(url, data);
+		caches.open('v1').then(function(cache) {
+			cache.put(url, data);
+		}
 		rewriteUrlFromRoute();	
 		callback(data.text());
 	}).catch(function(err) {
