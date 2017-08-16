@@ -807,7 +807,7 @@ function navigateState(stateTitle,templateFunction, id) {
 //http methods
 function http_get_json(url, callback) {
 	fetch(apiPath + url).then(function(response) {
-		response.clone().text().then(content => {
+		response.clone().then(content => {
 			caches.open('v1').then(function(cache) {
 				return cache.put(url, content);
 			});
@@ -823,7 +823,7 @@ function http_get_json(url, callback) {
 
 function http_get_html(url, callback) {
 	fetch(url, { mode: 'no-cors' }).then(function(response) {
-		response.clone().text().then(content => {
+		response.clone().then(content => {
 			caches.open('v1').then(function(cache) {
 				return cache.put(url, content);
 			});
