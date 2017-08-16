@@ -157,7 +157,7 @@ function getPayloadForResource(resource) {
 				"location": document.getElementById("editTrashTrashLocation").value,
 				"numberOfBags": document.getElementById("editTrashTrashNumberOfBags").value,
 				"wasteType" : document.getElementById("editTrashTrashWasteType").value,
-				"maxNumberOfHoursFromNow" : document.getElementById("editTrashTrashWasteType").value,
+				"maxNumberOfHoursFromNow" : document.getElementById("editTrashTrashMaxNumberOfHoursFromNowe").value,
 			};
 			break;
 			
