@@ -30,5 +30,13 @@
     "sizes": "152x152",
     "type": "image/png"
   }],
+  "app": {
+    "urls": [
+      "https://dev.talkisbetter.com/"
+    ],
+    "launch": {
+      "web_url": "https://dev.talkisbetter.com/"
+    }
+  }
   "related_applications": []
 }
