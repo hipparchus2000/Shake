@@ -156,7 +156,8 @@ function getPayloadForResource(resource) {
 			payload = {
 				"location": document.getElementById("editTrashTrashLocation").value,
 				"numberOfBags": document.getElementById("editTrashTrashNumberOfBags").value,
-				"wasteType" : document.getElementById("editTrashTrashWasteType").value
+				"wasteType" : document.getElementById("editTrashTrashWasteType").value,
+				"maxNumberOfHoursFromNow" : document.getElementById("editTrashTrashWasteType").value,
 			};
 			break;
 			
