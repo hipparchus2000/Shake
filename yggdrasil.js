@@ -809,6 +809,7 @@ function http_get_json(url, callback) {
 	fetch(apiPath + url).then(function(response) {
 	  	return response.json();
 	}).then(function(data) {
+		cache.put(url, data);
 		rewriteUrlFromRoute();	
 		callback(data);
 	}).catch(function(err) {
