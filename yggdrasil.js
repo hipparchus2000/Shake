@@ -240,12 +240,10 @@ function applyEditTrashTemplate (id) {
 	var blogTemplate = document.getElementById("edit-trash-template");
 	var node = blogTemplate.cloneNode(true);
 	root.append(node);
-	var title = "";
-	var description = "";
-	var year="";
-	var codeUrl="";
-	var url="";
-	var pdfUrl="";
+	var wasteType = "";
+	var numberOfBags = "";
+	var maxNumberOfHoursFromNow="";
+	var location="";
 	if(id!=null) {
 		trashs.forEach(function (item) {
 			if (item._id == id) {
@@ -259,12 +257,10 @@ function applyEditTrashTemplate (id) {
 		});
 	}
 	updateFormField( "trashEditId", id);
-	updateFormField( "editTrashTrashName", title);
-	updateFormField( "editTrashTrashDescription", description);
-	updateFormField( "editTrashTrashYear", year);
-	updateFormField( "editTrashTrashCodeUrl", codeUrl);
-	updateFormField( "editTrashTrashUrl", url);
-	updateFormField( "editTrashTrashPdfUrl", pdfUrl);
+	updateFormField( "editTrashTrashWasteType", wasteType);
+	updateFormField( "editTrashTrashNumberOfBags", numberOfBags);
+	updateFormField( "editTrashTrashMaxNumberOfHoursFromNow", maxNumberOfHoursFromNow);
+	updateFormField( "editTrashTrashLocation", location);
 }
 
 //project Template 
