@@ -10,6 +10,20 @@
 		<script src="builddate.js" type="text/javascript"> </script>
 		<script src="yggdrasil.js" type="text/javascript"> </script>
 		<link rel="manifest" href="manifest.json">
+		<script>
+			//register the service worker
+			if ('serviceWorker' in navigator) {
+			  window.addEventListener('load', function() {
+				navigator.serviceWorker.register('sw.js').then(function(registration) {
+				  // Registration was successful
+				  console.log('ServiceWorker registration successful with scope: ', registration.scope);
+				}).catch(function(err) {
+				  // registration failed :(
+				  console.log('ServiceWorker registration failed: ', err);
+				});
+			  });
+			}
+		</script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"> </script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" type="text/javascript"> </script>
 		<!-- ****** faviconit.com favicons ****** -->
