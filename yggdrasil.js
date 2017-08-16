@@ -809,7 +809,7 @@ function http_get_json(url, callback) {
 	fetch(apiPath + url).then(function(response) {
 		var response2 = response.clone();
 		caches.open('v1').then(function(cache) {
-			return cache.put(url, response2);
+			return cache.put(apiPath + url, response2);
 		});		
 		return response.json();
 	}).then(function(data) {
