@@ -155,7 +155,7 @@ function getPayloadForResource(resource) {
 		case "trashs":
 			payload = {
 				"location": document.getElementById("editTrashTrashLocation").value,
-				"numberOfBags": document.getElementById("editTrashTrashNumberOfBags").value
+				"numberOfBags": document.getElementById("editTrashTrashNumberOfBags").value,
 				"wasteType" : document.getElementById("editTrashTrashWasteType").value
 			};
 			break;
