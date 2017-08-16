@@ -808,8 +808,9 @@ function navigateState(stateTitle,templateFunction, id) {
 function http_get_json(url, callback) {
 	fetch(apiPath + url).then(function(response) {
 		caches.open('v1').then(function(cache) {
-			cache.put(url, response);
-		});	  	return response.json();
+			return cache.put(url, response);
+		});	  	
+		//return response.json();
 	}).then(function(data) {
 		rewriteUrlFromRoute();	
 		callback(data);
@@ -821,9 +822,9 @@ function http_get_json(url, callback) {
 function http_get_html(url, callback) {
 	fetch(url, { mode: 'no-cors' }).then(function(response) {
 		caches.open('v1').then(function(cache) {
-			cache.put(url, response);
+			return cache.put(url, response);
 		});
-		return response;
+		//return response;
 	}).then(function(data) {
 		rewriteUrlFromRoute();	
 		callback(data.text());
