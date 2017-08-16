@@ -109,11 +109,15 @@
   						<input type="hidden" name="id" value="{{id}}" id="projectId">
 						<button type="button" class="btn btn-danger marginTop5">{{wasteType}}</button>
 						<p>
-						<table>
-							<tr><td>bags:</td><td>{{numberOfBags}}</td></tr>
-							<tr><td>max hours from now:</td><td>{{maxNumberOfHoursFromNow}}</td><tr>
-							<tr><td>location:</td><td>{{location}}</td></tr>
-						</table>	
+						<div class="row">
+							<div class="col-md-6">bags:</div><div class="col-md-6">{{numberOfBags}}</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">max hours from now:</div><div class="col-md-6">{{maxNumberOfHoursFromNow}}</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">location:</div><div class="col-md-6">{{location}}</div>
+						</div>
 						</p>
 						<div class="w3-section">
 						  
