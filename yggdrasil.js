@@ -811,7 +811,7 @@ function http_get_json(url, callback) {
 	}).then(function(data) {
 		caches.open('v1').then(function(cache) {
 			cache.put(url, data);
-		}
+		});
 		rewriteUrlFromRoute();	
 		callback(data);
 	}).catch(function(err) {
@@ -825,7 +825,7 @@ function http_get_html(url, callback) {
 	}).then(function(data) {
 		caches.open('v1').then(function(cache) {
 			cache.put(url, data);
-		}
+		});
 		rewriteUrlFromRoute();	
 		callback(data.text());
 	}).catch(function(err) {
