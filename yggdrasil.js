@@ -241,18 +241,16 @@ function applyEditTrashTemplate (id) {
 	var node = blogTemplate.cloneNode(true);
 	root.append(node);
 	var wasteType = "";
-	var numberOfBags = "";
-	var maxNumberOfHoursFromNow="";
+	var numberOfBags = 0;
+	var maxNumberOfHoursFromNow=0;
 	var location="";
 	if(id!=null) {
 		trashs.forEach(function (item) {
 			if (item._id == id) {
-				title = item.title;
-				description = item.description;
-				year = item.year;
-				codeUrl = item.codeUrl;
-				url = item.url;
-				pdfUrl = item.pdfUrl;
+				wasteType = item.wasteType;
+				numberOfBags = item.numberOfBags;
+				maxNumberOfHoursFromNow = item.maxNumberOfHoursFromNow;
+				location = item.location;
 			}
 		});
 	}
