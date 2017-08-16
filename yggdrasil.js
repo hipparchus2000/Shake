@@ -712,17 +712,17 @@ function loadHtmlFragmentToRoot(url) {
 
 function registerServiceWorker () {
 	//register the service worker
-	//if ('serviceWorker' in navigator) {
-	  //window.addEventListener('load', function() {
-		//navigator.serviceWorker.register('sw.js').then(function(registration) {
+	if ('serviceWorker' in navigator) {
+	  window.addEventListener('load', function() {
+		navigator.serviceWorker.register('sw.js').then(function(registration) {
 		  // Registration was successful
-		//  console.log('ServiceWorker registration successful with scope: ', registration.scope);
-		//}).catch(function(err) {
+		  console.log('ServiceWorker registration successful with scope: ', registration.scope);
+		}).catch(function(err) {
 		  // registration failed :(
-		//  console.log('ServiceWorker registration failed: ', err);
-		//});
-	  //});
-	//}
+		  console.log('ServiceWorker registration failed: ', err);
+		});
+	  });
+	}
 }
 
 function generateUUID(){
@@ -820,6 +820,7 @@ function http_get_html(url, callback) {
 	fetch(url, { mode: 'no-cors' }).then(function(response) {
 		return response;
 	}).then(function(data) {
+		cache.put(url, data);
 		rewriteUrlFromRoute();	
 		callback(data.text());
 	}).catch(function(err) {
