@@ -807,11 +807,10 @@ function navigateState(stateTitle,templateFunction, id) {
 //http methods
 function http_get_json(url, callback) {
 	fetch(apiPath + url).then(function(response) {
-		response.clone().then(content => {
-			caches.open('v1').then(function(cache) {
-				return cache.put(url, content);
-			});
-		});
+		var response2 = response.clone();
+		caches.open('v1').then(function(cache) {
+			return cache.put(url, response2);
+		});		
 		return response.json();
 	}).then(function(data) {
 		rewriteUrlFromRoute();	
@@ -823,10 +822,9 @@ function http_get_json(url, callback) {
 
 function http_get_html(url, callback) {
 	fetch(url, { mode: 'no-cors' }).then(function(response) {
-		response.clone().then(content => {
-			caches.open('v1').then(function(cache) {
-				return cache.put(url, content);
-			});
+		var response2 = response.clone();
+		caches.open('v1').then(function(cache) {
+			return cache.put(url, response2);
 		});		
 		return response;
 	}).then(function(data) {
