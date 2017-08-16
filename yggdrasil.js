@@ -807,10 +807,12 @@ function navigateState(stateTitle,templateFunction, id) {
 //http methods
 function http_get_json(url, callback) {
 	fetch(apiPath + url).then(function(response) {
-		caches.open('v1').then(function(cache) {
-			return cache.put(url, response);
-		});	  	
-		//return response.json();
+		response.clone().text().then(content => {
+			caches.open('v1').then(function(cache) {
+				return cache.put(url, content);
+			});
+		});
+		return response.json();
 	}).then(function(data) {
 		rewriteUrlFromRoute();	
 		callback(data);
@@ -821,10 +823,12 @@ function http_get_json(url, callback) {
 
 function http_get_html(url, callback) {
 	fetch(url, { mode: 'no-cors' }).then(function(response) {
-		caches.open('v1').then(function(cache) {
-			return cache.put(url, response);
-		});
-		//return response;
+		response.clone().text().then(content => {
+			caches.open('v1').then(function(cache) {
+				return cache.put(url, content);
+			});
+		});		
+		return response;
 	}).then(function(data) {
 		rewriteUrlFromRoute();	
 		callback(data.text());
