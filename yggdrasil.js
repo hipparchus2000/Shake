@@ -185,14 +185,11 @@ function applyTrashTemplate() {
 				currentRow = cardrowTemplate.cloneNode(true);
 			}
 			var node = cardTemplate.cloneNode(true);
-			updateField( node, "title", trash.title);
+			updateField( node, "location", trash.location);
 			updateField( node, "id", trash._id);
-			updateField( node, "description", trash.description);
-			updateField( node, "year", trash.year);
-			updateField( node, "codeUrl", trash.codeUrl);
-			updateField( node, "siteUrl", trash.siteUrl);
-			updateField( node, "url", trash.url);
-			updateField( node, "pdfUrl", trash.pdfUrl);
+			updateField( node, "wasteType", trash.wasteType);
+			updateField( node, "numberOfBags", trash.numberOfBags);
+			updateField( node, "maxNumberOfHoursFromNow", trash.maxNumberOfHoursFromNow);
 			updateField( node, "editButton", makeEditAndDeleteButtons(trash._id));
 			
 			//hide buttons with undefined href and onclick   --> first button (0) is used for title, so ignore
