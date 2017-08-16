@@ -1032,7 +1032,7 @@ window.onload = function(){
 	var loginBtn = document.getElementById("loginBtn");
 	loginBtn.onclick = function() {
 		loginModal.style.display = "block";
-	}
+	} 
 
 	var logoutBtn = document.getElementById("logoutBtn");
 	logoutBtn.onclick = function() {
