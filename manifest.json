@@ -32,10 +32,10 @@
   }],
   "app": {
     "urls": [
-      "https://dev.talkisbetter.com/"
+      "https://dev.talkisbetter.com/index.html"
     ],
     "launch": {
-      "web_url": "https://dev.talkisbetter.com/"
+      "web_url": "https://dev.talkisbetter.com/index.html"
     }
   }
   "related_applications": []
