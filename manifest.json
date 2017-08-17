@@ -1,7 +1,7 @@
 {
   "name": "Yggdrasil Projects",
   "short_name": "Yggdrasil",
-  "start_url": ".",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#fff",
   "description": "Examples of work by Jeff Davies.",
@@ -30,13 +30,8 @@
     "sizes": "152x152",
     "type": "image/png"
   }],
-  "app": {
-    "urls": [
-      "https://dev.talkisbetter.com/index.html"
-    ],
-    "launch": {
-      "web_url": "https://dev.talkisbetter.com/index.html"
-    }
-  }
-  "related_applications": []
+  "theme_color": "#000000",
+  "background_color": "#FFFFFF",
+  "display": "fullscreen",
+  "orientation": "portrait"
 }
