@@ -1030,9 +1030,6 @@ function fetchJwt() {
 
 window.onload = function(){
 	registerServiceWorker();
-
-	var builddateNode = document.getElementById('builddate');
-	updateField(builddateNode, "builddate",builddate());
 	
 	jwtToken=emptyJwt();
 	
