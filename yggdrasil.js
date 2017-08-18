@@ -755,7 +755,7 @@ function updateFormButtonClick(id,value) {
 	field.onclick=value;
 }
 
-function makeEditAndDeleteButtons(id,) {
+function makeEditAndDeleteButtons(id) {
 	var requiredRole = route.replace("/","")+"-editor";
 	var editButton="";
 	if (jwtToken.roles.includes(requiredRole))
