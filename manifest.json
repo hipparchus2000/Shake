@@ -37,6 +37,10 @@
     "src": "favicons/favicon-310.png",
     "sizes": "310x310",
     "type": "image/png"
+  }, {
+    "src": "favicons/favicon-746.png",
+    "sizes": "746x746",
+    "type": "image/png"
   }
   ],
   "theme_color": "#000000",
