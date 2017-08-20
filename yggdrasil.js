@@ -1028,7 +1028,7 @@ function fetchJwt() {
 }
 
 function initialise_websocketConnection() {
-	var serviceUrl = "ws://www.talkisbetter.com:58951";
+	var serviceUrl = "wss://www.talkisbetter.com:58951";
         var socket = new WebSocket(serviceUrl);
 
         socket.onopen = function () {
