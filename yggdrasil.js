@@ -1098,6 +1098,8 @@ window.onload = function(){
 		route = parts[1];	
 	}
 	
+	initialise_websocketConnection();
+	
 	refresh();
 
 }
