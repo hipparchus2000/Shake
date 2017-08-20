@@ -1027,6 +1027,39 @@ function fetchJwt() {
 	return jwtToken;
 }
 
+function initialise_websocketConnection() {
+	var serviceUrl = "ws://www.talkisbetter.com:58951";
+        var socket = new WebSocket(serviceUrl);
+
+        socket.onopen = function () {
+            console.log('Connection Established!');
+            socket.send("Hello WebSocket!");
+            //socket.close();
+        };
+
+        socket.onclose = function () {
+            console.log('Connection Closed!');
+        };
+
+        socket.onerror = function (error) {
+            console.log('Error Occured: ' + error);
+        };
+
+        socket.onmessage = function (e) {
+            if (typeof e.data === "string") {
+                console.log('String message received: ' + e.data);
+                var res = e.data.split("~");
+                document.getElementById(res[0]).innerHTML = '<p>' + res[1] + '</p>';
+            }
+            else if (e.data instanceof ArrayBuffer) {
+                console.log('ArrayBuffer received: ' + e.data);
+            }
+            else if (e.data instanceof Blob) {
+                console.log('Blob received: ' + e.data);
+            }
+        };
+
+}
 
 window.onload = function(){
 	registerServiceWorker();
