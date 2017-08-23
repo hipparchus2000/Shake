@@ -38,11 +38,11 @@ function refresh(id) {
 		storeJwt();
 	}
 	
-	var hideButtons = route.includes("edit") || route.includes("add");
+	var hideButtons = route.contains("edit") || route.contains("add");
 	var addButton = document.getElementById("addButton"); 
 	if (hideButtons == false) {
 		var requiredRole = route.replace("/","")+"-editor";
-		if (jwtToken.roles.includes(requiredRole)) {
+		if (jwtToken.roles.contains(requiredRole)) {
 			addButton.style.display = "block";
 		} else {
 			addButton.style.display = "none";
@@ -65,7 +65,7 @@ function refresh(id) {
 	var slotButton = document.getElementById("slotButton"); 
 	if (hideButtons == false) {
 		var requiredRole = "slot-editor";
-		if (jwtToken.roles.includes(requiredRole)) {
+		if (jwtToken.roles.contains(requiredRole)) {
 			addButton.style.display = "block";
 		} else {
 			addButton.style.display = "none";
@@ -204,14 +204,14 @@ function applyTrashTemplate() {
 				if(href==null) {
 					hrefNotFound=true;
 				} else {
-					hrefNotFound = href.includes("undefined");
+					hrefNotFound = href.contains("undefined");
 				}
 				
 				var onclickNotFound = onclick==null;
 				if (href == "#"||href=="")
 					hrefNotFound = true;
 				if(onclick!=null) {
-					if (onclick.includes("undefined")||onclick.includes("loadHtmlFragmentToRoot('')")) {
+					if (onclick.contains("undefined")||onclick.contains("loadHtmlFragmentToRoot('')")) {
 						onclickNotFound=true;
 					}
 				}
@@ -299,14 +299,14 @@ function applyProjectsTemplate() {
 				if(href==null) {
 					hrefNotFound=true;
 				} else {
-					hrefNotFound = href.includes("undefined");
+					hrefNotFound = href.contains("undefined");
 				}
 				
 				var onclickNotFound = onclick==null;
 				if (href == "#"||href=="")
 					hrefNotFound = true;
 				if(onclick!=null) {
-					if (onclick.includes("undefined")||onclick.includes("loadHtmlFragmentToRoot('')")) {
+					if (onclick.contains("undefined")||onclick.contains("loadHtmlFragmentToRoot('')")) {
 						onclickNotFound=true;
 					}
 				}
@@ -680,7 +680,7 @@ function deleteFailed() {
 function drop(ev) {
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
-	if(route.includes("task")) {
+	if(route.contains("task")) {
 		var newState = ev.currentTarget.childNodes[1].innerText.replace("/n/n","").replace("/r","").trim();
 		var id = ev.srcElement.id;
 		var task = null;
@@ -758,7 +758,7 @@ function updateFormButtonClick(id,value) {
 function makeEditAndDeleteButtons(id) {
 	var requiredRole = route.replace("/","")+"-editor";
 	var editButton="";
-	if (jwtToken.roles.includes(requiredRole))
+	if (jwtToken.roles.contains(requiredRole))
 		editButton='<i class="fa fa-trash fa-3x pull-right" onclick="deleteButton(\''+id+'\')" aria-hidden="true"></i><i class="fa fa-pencil fa-3x pull-right" onclick="editButton(\''+id+'\')" aria-hidden="true"></i>';
 	return editButton;
 }
@@ -785,7 +785,7 @@ function rewriteUrlFromRoute() {
 
 function setApiPath() {
 	var url=window.location.href;
-	if (url.includes("dev.")) {
+	if (url.contains("dev.")) {
 		dev=1;
 		apiPath="/devapi/";
 	}
