@@ -808,7 +808,7 @@ function navigateState(stateTitle,templateFunction, id) {
 function http_get_json(url, callback) {
 	fetch(apiPath + url).then(function(response) {
 		var response2 = response.clone();
-		if(caches!=null && caches!=undefined) {
+		if(typeof caches != 'undefined' && caches!=null) {
 			caches.open('v1').then(function(cache) {
 				return cache.put(apiPath + url, response2);
 			});		
@@ -825,7 +825,7 @@ function http_get_json(url, callback) {
 function http_get_html(url, callback) {
 	fetch(url, { mode: 'no-cors' }).then(function(response) {
 		var response2 = response.clone();
-		if(caches!=null && caches!=undefined) {
+		if(typeof caches != 'undefined' && caches!=null) {
 			caches.open('v1').then(function(cache) {
 				return cache.put(url, response2);
 			});		
