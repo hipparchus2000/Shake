@@ -755,7 +755,7 @@ function updateFormButtonClick(id,value) {
 	field.onclick=value;
 }
 
-function makeEditAndDeleteButtons(id,) {
+function makeEditAndDeleteButtons(id) {
 	var requiredRole = route.replace("/","")+"-editor";
 	var editButton="";
 	if (jwtToken.roles.includes(requiredRole))
@@ -808,9 +808,11 @@ function navigateState(stateTitle,templateFunction, id) {
 function http_get_json(url, callback) {
 	fetch(apiPath + url).then(function(response) {
 		var response2 = response.clone();
-		caches.open('v1').then(function(cache) {
-			return cache.put(apiPath + url, response2);
-		});		
+		if(typeof caches != 'undefined' && caches!=null) {
+			caches.open('v1').then(function(cache) {
+				return cache.put(apiPath + url, response2);
+			});		
+		}
 		return response.json();
 	}).then(function(data) {
 		rewriteUrlFromRoute();	
@@ -823,9 +825,11 @@ function http_get_json(url, callback) {
 function http_get_html(url, callback) {
 	fetch(url, { mode: 'no-cors' }).then(function(response) {
 		var response2 = response.clone();
-		caches.open('v1').then(function(cache) {
-			return cache.put(url, response2);
-		});		
+		if(typeof caches != 'undefined' && caches!=null) {
+			caches.open('v1').then(function(cache) {
+				return cache.put(url, response2);
+			});		
+		}
 		return response;
 	}).then(function(data) {
 		rewriteUrlFromRoute();	
@@ -1027,8 +1031,746 @@ function fetchJwt() {
 	return jwtToken;
 }
 
+function initialise_websocketConnection() {
+	var serviceUrl = "wss://wss.talkisbetter.com";
+        var socket = new WebSocket(serviceUrl);
+
+        socket.onopen = function () {
+            console.log('Connection Established!');
+            socket.send("Hello WebSocket!");
+            //socket.close();
+        };
+
+        socket.onclose = function () {
+            console.log('Connection Closed!');
+        };
+
+        socket.onerror = function (error) {
+            console.log('Error Occured: ' + error);
+        };
+
+        socket.onmessage = function (e) {
+            if (typeof e.data === "string") {
+                console.log('String message received: ' + e.data);
+                var res = e.data.split("~");
+                document.getElementById(res[0]).innerHTML = '<p>' + res[1] + '</p>';
+            }
+            else if (e.data instanceof ArrayBuffer) {
+                console.log('ArrayBuffer received: ' + e.data);
+            }
+            else if (e.data instanceof Blob) {
+                console.log('Blob received: ' + e.data);
+            }
+        };
+
+}
+
+function polyFillForIE() {
+	if (!String.prototype.includes) {
+	  String.prototype.includes = function(search, start) {
+		'use strict';
+		if (typeof start !== 'number') {
+		  start = 0;
+		}
+		
+		if (start + search.length > this.length) {
+		  return false;
+		} else {
+		  return this.indexOf(search, start) !== -1;
+		}
+	  };
+	}
+	
+	//append polyfill
+	// Source: https://github.com/jserz/js_piece/blob/master/DOM/ParentNode/append()/append().md
+	(function (arr) {
+	  arr.forEach(function (item) {
+		if (item.hasOwnProperty('append')) {
+		  return;
+		}
+		Object.defineProperty(item, 'append', {
+		  configurable: true,
+		  enumerable: true,
+		  writable: true,
+		  value: function append() {
+			var argArr = Array.prototype.slice.call(arguments),
+			  docFrag = document.createDocumentFragment();
+			
+			argArr.forEach(function (argItem) {
+			  var isNode = argItem instanceof Node;
+			  docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)));
+			});
+			
+			this.appendChild(docFrag);
+		  }
+		});
+	  });
+	})([Element.prototype, Document.prototype, DocumentFragment.prototype]);
+	
+	//fetch polyfill from https://github.com/camsong/fetch-ie8/blob/master/fetch.js
+(function(self) {
+  'use strict';
+
+  // if __disableNativeFetch is set to true, the it will always polyfill fetch
+  // with Ajax.
+  if (!self.__disableNativeFetch && self.fetch) {
+    return
+  }
+
+  function normalizeName(name) {
+    if (typeof name !== 'string') {
+      name = String(name)
+    }
+    if (/[^a-z0-9\-#$%&'*+.\^_`|~]/i.test(name)) {
+      throw new TypeError('Invalid character in header field name')
+    }
+    return name.toLowerCase()
+  }
+
+  function normalizeValue(value) {
+    if (typeof value !== 'string') {
+      value = String(value)
+    }
+    return value
+  }
+
+  function Headers(headers) {
+    this.map = {}
+
+    if (headers instanceof Headers) {
+      headers.forEach(function(value, name) {
+        this.append(name, value)
+      }, this)
+
+    } else if (headers) {
+      Object.getOwnPropertyNames(headers).forEach(function(name) {
+        this.append(name, headers[name])
+      }, this)
+    }
+  }
+
+  Headers.prototype.append = function(name, value) {
+    name = normalizeName(name)
+    value = normalizeValue(value)
+    var list = this.map[name]
+    if (!list) {
+      list = []
+      this.map[name] = list
+    }
+    list.push(value)
+  }
+
+  Headers.prototype['delete'] = function(name) {
+    delete this.map[normalizeName(name)]
+  }
+
+  Headers.prototype.get = function(name) {
+    var values = this.map[normalizeName(name)]
+    return values ? values[0] : null
+  }
+
+  Headers.prototype.getAll = function(name) {
+    return this.map[normalizeName(name)] || []
+  }
+
+  Headers.prototype.has = function(name) {
+    return this.map.hasOwnProperty(normalizeName(name))
+  }
+
+  Headers.prototype.set = function(name, value) {
+    this.map[normalizeName(name)] = [normalizeValue(value)]
+  }
+
+  Headers.prototype.forEach = function(callback, thisArg) {
+    Object.getOwnPropertyNames(this.map).forEach(function(name) {
+      this.map[name].forEach(function(value) {
+        callback.call(thisArg, value, name, this)
+      }, this)
+    }, this)
+  }
+
+  function consumed(body) {
+    if (body.bodyUsed) {
+      return Promise.reject(new TypeError('Already read'))
+    }
+    body.bodyUsed = true
+  }
+
+  function fileReaderReady(reader) {
+    return new Promise(function(resolve, reject) {
+      reader.onload = function() {
+        resolve(reader.result)
+      }
+      reader.onerror = function() {
+        reject(reader.error)
+      }
+    })
+  }
+
+  function readBlobAsArrayBuffer(blob) {
+    var reader = new FileReader()
+    reader.readAsArrayBuffer(blob)
+    return fileReaderReady(reader)
+  }
+
+  function readBlobAsText(blob, options) {
+    var reader = new FileReader()
+    var contentType = options.headers.map['content-type'] ? options.headers.map['content-type'].toString() : ''
+    var regex = /charset\=[0-9a-zA-Z\-\_]*;?/
+    var _charset = blob.type.match(regex) || contentType.match(regex)
+    var args = [blob]
+
+    if(_charset) {
+      args.push(_charset[0].replace(/^charset\=/, '').replace(/;$/, ''))
+    }
+
+    reader.readAsText.apply(reader, args)
+    return fileReaderReady(reader)
+  }
+
+  var support = {
+    blob: 'FileReader' in self && 'Blob' in self && (function() {
+      try {
+        new Blob();
+        return true
+      } catch(e) {
+        return false
+      }
+    })(),
+    formData: 'FormData' in self,
+    arrayBuffer: 'ArrayBuffer' in self
+  }
+
+  function Body() {
+    this.bodyUsed = false
+
+
+    this._initBody = function(body, options) {
+      this._bodyInit = body
+      if (typeof body === 'string') {
+        this._bodyText = body
+      } else if (support.blob && Blob.prototype.isPrototypeOf(body)) {
+        this._bodyBlob = body
+        this._options = options
+      } else if (support.formData && FormData.prototype.isPrototypeOf(body)) {
+        this._bodyFormData = body
+      } else if (!body) {
+        this._bodyText = ''
+      } else if (support.arrayBuffer && ArrayBuffer.prototype.isPrototypeOf(body)) {
+        // Only support ArrayBuffers for POST method.
+        // Receiving ArrayBuffers happens via Blobs, instead.
+      } else {
+        throw new Error('unsupported BodyInit type')
+      }
+    }
+
+    if (support.blob) {
+      this.blob = function() {
+        var rejected = consumed(this)
+        if (rejected) {
+          return rejected
+        }
+
+        if (this._bodyBlob) {
+          return Promise.resolve(this._bodyBlob)
+        } else if (this._bodyFormData) {
+          throw new Error('could not read FormData body as blob')
+        } else {
+          return Promise.resolve(new Blob([this._bodyText]))
+        }
+      }
+
+      this.arrayBuffer = function() {
+        return this.blob().then(readBlobAsArrayBuffer)
+      }
+
+      this.text = function() {
+        var rejected = consumed(this)
+        if (rejected) {
+          return rejected
+        }
+
+        if (this._bodyBlob) {
+          return readBlobAsText(this._bodyBlob, this._options)
+        } else if (this._bodyFormData) {
+          throw new Error('could not read FormData body as text')
+        } else {
+          return Promise.resolve(this._bodyText)
+        }
+      }
+    } else {
+      this.text = function() {
+        var rejected = consumed(this)
+        return rejected ? rejected : Promise.resolve(this._bodyText)
+      }
+    }
+
+    if (support.formData) {
+      this.formData = function() {
+        return this.text().then(decode)
+      }
+    }
+
+    this.json = function() {
+      return this.text().then(JSON.parse)
+    }
+
+    return this
+  }
+
+  // HTTP methods whose capitalization should be normalized
+  var methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT']
+
+  function normalizeMethod(method) {
+    var upcased = method.toUpperCase()
+    return (methods.indexOf(upcased) > -1) ? upcased : method
+  }
+
+  function Request(input, options) {
+    options = options || {}
+    var body = options.body
+    if (Request.prototype.isPrototypeOf(input)) {
+      if (input.bodyUsed) {
+        throw new TypeError('Already read')
+      }
+      this.url = input.url
+      this.credentials = input.credentials
+      if (!options.headers) {
+        this.headers = new Headers(input.headers)
+      }
+      this.method = input.method
+      this.mode = input.mode
+      if (!body) {
+        body = input._bodyInit
+        input.bodyUsed = true
+      }
+    } else {
+      this.url = input
+    }
+
+    this.credentials = options.credentials || this.credentials || 'omit'
+    if (options.headers || !this.headers) {
+      this.headers = new Headers(options.headers)
+    }
+    this.method = normalizeMethod(options.method || this.method || 'GET')
+    this.mode = options.mode || this.mode || null
+    this.referrer = null
+
+    if ((this.method === 'GET' || this.method === 'HEAD') && body) {
+      throw new TypeError('Body not allowed for GET or HEAD requests')
+    }
+    this._initBody(body, options)
+  }
+
+  Request.prototype.clone = function() {
+    return new Request(this)
+  }
+
+  function decode(body) {
+    var form = new FormData()
+    body.trim().split('&').forEach(function(bytes) {
+      if (bytes) {
+        var split = bytes.split('=')
+        var name = split.shift().replace(/\+/g, ' ')
+        var value = split.join('=').replace(/\+/g, ' ')
+        form.append(decodeURIComponent(name), decodeURIComponent(value))
+      }
+    })
+    return form
+  }
+
+  function headers(xhr) {
+    var head = new Headers()
+    var pairs = xhr.getAllResponseHeaders().trim().split('\n')
+    pairs.forEach(function(header) {
+      var split = header.trim().split(':')
+      var key = split.shift().trim()
+      var value = split.join(':').trim()
+      head.append(key, value)
+    })
+    return head
+  }
+
+  Body.call(Request.prototype)
+
+  function Response(bodyInit, options) {
+    if (!options) {
+      options = {}
+    }
+
+    this._initBody(bodyInit, options)
+    this.type = 'default'
+    this.status = options.status
+    this.ok = this.status >= 200 && this.status < 300
+    this.statusText = options.statusText
+    this.headers = options.headers instanceof Headers ? options.headers : new Headers(options.headers)
+    this.url = options.url || ''
+  }
+
+  Body.call(Response.prototype)
+
+  Response.prototype.clone = function() {
+    return new Response(this._bodyInit, {
+      status: this.status,
+      statusText: this.statusText,
+      headers: new Headers(this.headers),
+      url: this.url
+    })
+  }
+
+  Response.error = function() {
+    var response = new Response(null, {status: 0, statusText: ''})
+    response.type = 'error'
+    return response
+  }
+
+  var redirectStatuses = [301, 302, 303, 307, 308]
+
+  Response.redirect = function(url, status) {
+    if (redirectStatuses.indexOf(status) === -1) {
+      throw new RangeError('Invalid status code')
+    }
+
+    return new Response(null, {status: status, headers: {location: url}})
+  }
+
+  self.Headers = Headers;
+  self.Request = Request;
+  self.Response = Response;
+
+  self.fetch = function(input, init) {
+    return new Promise(function(resolve, reject) {
+      var request
+      if (Request.prototype.isPrototypeOf(input) && !init) {
+        request = input
+      } else {
+        request = new Request(input, init)
+      }
+
+      var xhr = new XMLHttpRequest()
+
+      function responseURL() {
+        if ('responseURL' in xhr) {
+          return xhr.responseURL
+        }
+
+        // Avoid security warnings on getResponseHeader when not allowed by CORS
+        if (/^X-Request-URL:/m.test(xhr.getAllResponseHeaders())) {
+          return xhr.getResponseHeader('X-Request-URL')
+        }
+
+        return;
+      }
+
+      var __onLoadHandled = false;
+
+      function onload() {
+        if (xhr.readyState !== 4) {
+          return
+        }
+        var status = (xhr.status === 1223) ? 204 : xhr.status
+        if (status < 100 || status > 599) {
+          if (__onLoadHandled) { return; } else { __onLoadHandled = true; }
+          reject(new TypeError('Network request failed'))
+          return
+        }
+        var options = {
+          status: status,
+          statusText: xhr.statusText,
+          headers: headers(xhr),
+          url: responseURL()
+        }
+        var body = 'response' in xhr ? xhr.response : xhr.responseText;
+
+        if (__onLoadHandled) { return; } else { __onLoadHandled = true; }
+        resolve(new Response(body, options))
+      }
+      xhr.onreadystatechange = onload;
+      xhr.onload = onload;
+      xhr.onerror = function() {
+        if (__onLoadHandled) { return; } else { __onLoadHandled = true; }
+        reject(new TypeError('Network request failed'))
+      }
+
+      xhr.open(request.method, request.url, true)
+
+      // `withCredentials` should be setted after calling `.open` in IE10
+      // http://stackoverflow.com/a/19667959/1219343
+      try {
+        if (request.credentials === 'include') {
+          if ('withCredentials' in xhr) {
+            xhr.withCredentials = true;
+          } else {
+            console && console.warn && console.warn('withCredentials is not supported, you can ignore this warning');
+          }
+        }
+      } catch (e) {
+        console && console.warn && console.warn('set withCredentials error:' + e);
+      }
+
+      if ('responseType' in xhr && support.blob) {
+        xhr.responseType = 'blob'
+      }
+
+      request.headers.forEach(function(value, name) {
+        xhr.setRequestHeader(name, value)
+      })
+
+      xhr.send(typeof request._bodyInit === 'undefined' ? null : request._bodyInit)
+    })
+  }
+  self.fetch.polyfill = true
+
+  // Support CommonJS
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = self.fetch;
+  }
+})(typeof self !== 'undefined' ? self : this);
+
+//polyfill for Promise from https://github.com/taylorhakes/promise-polyfill/blob/master/promise.js
+
+(function (root) {
+
+  // Store setTimeout reference so promise-polyfill will be unaffected by
+  // other code modifying setTimeout (like sinon.useFakeTimers())
+  var setTimeoutFunc = setTimeout;
+
+  function noop() {}
+  
+  // Polyfill for Function.prototype.bind
+  function bind(fn, thisArg) {
+    return function () {
+      fn.apply(thisArg, arguments);
+    };
+  }
+
+  function Promise(fn) {
+    if (typeof this !== 'object') throw new TypeError('Promises must be constructed via new');
+    if (typeof fn !== 'function') throw new TypeError('not a function');
+    this._state = 0;
+    this._handled = false;
+    this._value = undefined;
+    this._deferreds = [];
+
+    doResolve(fn, this);
+  }
+
+  function handle(self, deferred) {
+    while (self._state === 3) {
+      self = self._value;
+    }
+    if (self._state === 0) {
+      self._deferreds.push(deferred);
+      return;
+    }
+    self._handled = true;
+    Promise._immediateFn(function () {
+      var cb = self._state === 1 ? deferred.onFulfilled : deferred.onRejected;
+      if (cb === null) {
+        (self._state === 1 ? resolve : reject)(deferred.promise, self._value);
+        return;
+      }
+      var ret;
+      try {
+        ret = cb(self._value);
+      } catch (e) {
+        reject(deferred.promise, e);
+        return;
+      }
+      resolve(deferred.promise, ret);
+    });
+  }
+
+  function resolve(self, newValue) {
+    try {
+      // Promise Resolution Procedure: https://github.com/promises-aplus/promises-spec#the-promise-resolution-procedure
+      if (newValue === self) throw new TypeError('A promise cannot be resolved with itself.');
+      if (newValue && (typeof newValue === 'object' || typeof newValue === 'function')) {
+        var then = newValue.then;
+        if (newValue instanceof Promise) {
+          self._state = 3;
+          self._value = newValue;
+          finale(self);
+          return;
+        } else if (typeof then === 'function') {
+          doResolve(bind(then, newValue), self);
+          return;
+        }
+      }
+      self._state = 1;
+      self._value = newValue;
+      finale(self);
+    } catch (e) {
+      reject(self, e);
+    }
+  }
+
+  function reject(self, newValue) {
+    self._state = 2;
+    self._value = newValue;
+    finale(self);
+  }
+
+  function finale(self) {
+    if (self._state === 2 && self._deferreds.length === 0) {
+      Promise._immediateFn(function() {
+        if (!self._handled) {
+          Promise._unhandledRejectionFn(self._value);
+        }
+      });
+    }
+
+    for (var i = 0, len = self._deferreds.length; i < len; i++) {
+      handle(self, self._deferreds[i]);
+    }
+    self._deferreds = null;
+  }
+
+  function Handler(onFulfilled, onRejected, promise) {
+    this.onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : null;
+    this.onRejected = typeof onRejected === 'function' ? onRejected : null;
+    this.promise = promise;
+  }
+
+  /**
+   * Take a potentially misbehaving resolver function and make sure
+   * onFulfilled and onRejected are only called once.
+   *
+   * Makes no guarantees about asynchrony.
+   */
+  function doResolve(fn, self) {
+    var done = false;
+    try {
+      fn(function (value) {
+        if (done) return;
+        done = true;
+        resolve(self, value);
+      }, function (reason) {
+        if (done) return;
+        done = true;
+        reject(self, reason);
+      });
+    } catch (ex) {
+      if (done) return;
+      done = true;
+      reject(self, ex);
+    }
+  }
+
+  Promise.prototype['catch'] = function (onRejected) {
+    return this.then(null, onRejected);
+  };
+
+  Promise.prototype.then = function (onFulfilled, onRejected) {
+    var prom = new (this.constructor)(noop);
+
+    handle(this, new Handler(onFulfilled, onRejected, prom));
+    return prom;
+  };
+
+  Promise.all = function (arr) {
+    var args = Array.prototype.slice.call(arr);
+
+    return new Promise(function (resolve, reject) {
+      if (args.length === 0) return resolve([]);
+      var remaining = args.length;
+
+      function res(i, val) {
+        try {
+          if (val && (typeof val === 'object' || typeof val === 'function')) {
+            var then = val.then;
+            if (typeof then === 'function') {
+              then.call(val, function (val) {
+                res(i, val);
+              }, reject);
+              return;
+            }
+          }
+          args[i] = val;
+          if (--remaining === 0) {
+            resolve(args);
+          }
+        } catch (ex) {
+          reject(ex);
+        }
+      }
+
+      for (var i = 0; i < args.length; i++) {
+        res(i, args[i]);
+      }
+    });
+  };
+
+  Promise.resolve = function (value) {
+    if (value && typeof value === 'object' && value.constructor === Promise) {
+      return value;
+    }
+
+    return new Promise(function (resolve) {
+      resolve(value);
+    });
+  };
+
+  Promise.reject = function (value) {
+    return new Promise(function (resolve, reject) {
+      reject(value);
+    });
+  };
+
+  Promise.race = function (values) {
+    return new Promise(function (resolve, reject) {
+      for (var i = 0, len = values.length; i < len; i++) {
+        values[i].then(resolve, reject);
+      }
+    });
+  };
+
+  // Use polyfill for setImmediate for performance gains
+  Promise._immediateFn = (typeof setImmediate === 'function' && function (fn) { setImmediate(fn); }) ||
+    function (fn) {
+      setTimeoutFunc(fn, 0);
+    };
+
+  Promise._unhandledRejectionFn = function _unhandledRejectionFn(err) {
+    if (typeof console !== 'undefined' && console) {
+      console.warn('Possible Unhandled Promise Rejection:', err); // eslint-disable-line no-console
+    }
+  };
+
+  /**
+   * Set the immediate function to execute callbacks
+   * @param fn {function} Function to execute
+   * @deprecated
+   */
+  Promise._setImmediateFn = function _setImmediateFn(fn) {
+    Promise._immediateFn = fn;
+  };
+
+  /**
+   * Change the function to execute on unhandled rejection
+   * @param {function} fn Function to execute on unhandled rejection
+   * @deprecated
+   */
+  Promise._setUnhandledRejectionFn = function _setUnhandledRejectionFn(fn) {
+    Promise._unhandledRejectionFn = fn;
+  };
+  
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = Promise;
+  } else if (!root.Promise) {
+    root.Promise = Promise;
+  }
+
+})(this);
+
+
+	
+	
+} //end of polyfill
+
 
 window.onload = function(){
+	polyFillForIE();
 	registerServiceWorker();
 	
 	jwtToken=emptyJwt();
@@ -1064,6 +1806,8 @@ window.onload = function(){
 	} else {
 		route = parts[1];	
 	}
+	
+	initialise_websocketConnection();
 	
 	refresh();
 
