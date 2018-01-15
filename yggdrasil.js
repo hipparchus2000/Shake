@@ -541,6 +541,8 @@ function applyEditBlogTemplate (id) {
 	updateFormField( "editBlogStoryname", storyName);
 	updateFormField( "editBlogStorytext", storyText);
 	updateFormField( "editBlogStorydate", date);
+	tinymce.init({ selector:'#editBlogStorytext', theme:'modern', readonly: 0 });
+
 }
 
 //User Template Rendering
@@ -1807,7 +1809,6 @@ window.onload = function(){
 		route = parts[1];	
 	}
 	
-  tinymce.init({ selector:'#editBlogStorytext', theme:'modern', readonly: 0 });
 	initialise_websocketConnection();
 	
 	refresh();
