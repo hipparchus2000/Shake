@@ -538,7 +538,7 @@ function applyEditBlogTemplate (id) {
 	var blogTemplate = document.getElementById("edit-blog-template");
 	var node = blogTemplate.cloneNode(true);
 	root.append(node);
-	tinymce.init({ selector:'#editBlogStorytext', theme:'modern', readonly: 0 });
+	//{ selector:'#editBlogStorytext', theme:'modern', readonly: 0 }
   tinymce.EditorManager.execCommand('mceRemoveControl',true, "editBlogStorytext");
 	updateFormField( "blogEditId", id);
 	updateFormField( "editBlogStoryname", storyName);
@@ -1814,6 +1814,8 @@ window.onload = function(){
 	}
 	
 	initialise_websocketConnection();
+	
+	tinymce.init();
 	
 	refresh();
 
