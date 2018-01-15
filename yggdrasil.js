@@ -126,7 +126,8 @@ function getPayloadForResource(resource) {
 		case "blogs":
 			payload = {
 				"storyName": document.getElementById("editBlogStoryname").value,
-				"storyText": document.getElementById("editBlogStorytext").value,
+				//"storyText": document.getElementById("editBlogStorytext").value,
+				"storyText": tinyMCE.get('editBlogStorytext').getContent(),
 				"date":      document.getElementById("editBlogStorydate").value
 			};
 			break;
