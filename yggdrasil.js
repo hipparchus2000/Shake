@@ -538,13 +538,13 @@ function applyEditBlogTemplate (id) {
 	var blogTemplate = document.getElementById("edit-blog-template");
 	var node = blogTemplate.cloneNode(true);
 	root.append(node);
-	//{ selector:'#editBlogStorytext', theme:'modern', readonly: 0 }
-  tinymce.EditorManager.execCommand('mceRemoveControl',true, "editBlogStorytext");
+	tinymce.init({ selector:'#editBlogStorytext', theme:'modern', readonly: 0 });
+  //tinymce.EditorManager.execCommand('mceRemoveControl',true, "editBlogStorytext");
 	updateFormField( "blogEditId", id);
 	updateFormField( "editBlogStoryname", storyName);
 	//updateFormField( "editBlogStorytext", storyText);
 	updateFormField( "editBlogStorydate", date);
-	tinymce.EditorManager.execCommand('mceAddControl',true, "editBlogStorytext");
+	//tinymce.EditorManager.execCommand('mceAddControl',true, "editBlogStorytext");
 	tinyMCE.get('editBlogStorytext').setContent(storyText);
 
 }
@@ -1814,8 +1814,6 @@ window.onload = function(){
 	}
 	
 	initialise_websocketConnection();
-	
-	tinymce.init();
 	
 	refresh();
 
