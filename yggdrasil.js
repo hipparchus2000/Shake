@@ -539,10 +539,12 @@ function applyEditBlogTemplate (id) {
 	var node = blogTemplate.cloneNode(true);
 	root.append(node);
 	tinymce.init({ selector:'#editBlogStorytext', theme:'modern', readonly: 0 });
+  tinymce.EditorManager.execCommand('mceRemoveControl',true, "editBlogStorytext");
 	updateFormField( "blogEditId", id);
 	updateFormField( "editBlogStoryname", storyName);
 	//updateFormField( "editBlogStorytext", storyText);
 	updateFormField( "editBlogStorydate", date);
+	tinymce.EditorManager.execCommand('mceAddControl',true, "editBlogStorytext");
 	tinyMCE.get('editBlogStorytext').setContent(storyText);
 
 }
