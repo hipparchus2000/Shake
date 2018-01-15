@@ -1807,6 +1807,7 @@ window.onload = function(){
 		route = parts[1];	
 	}
 	
+  tinymce.init({ selector:'#editBlogStorytext', theme:'modern', readonly: 0 });
 	initialise_websocketConnection();
 	
 	refresh();
