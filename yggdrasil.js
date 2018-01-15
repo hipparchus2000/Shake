@@ -542,8 +542,8 @@ function applyEditBlogTemplate (id) {
 	updateFormField( "blogEditId", id);
 	updateFormField( "editBlogStoryname", storyName);
 	//updateFormField( "editBlogStorytext", storyText);
-	tinyMCE.get('editBlogStorytext').setContent(storyText);
 	updateFormField( "editBlogStorydate", date);
+	tinyMCE.get('editBlogStorytext').setContent(storyText);
 
 }
 
