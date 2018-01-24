@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="dupes.exe" version="1.0.0.0" publicKeyToken="c19c83ac2f97ba65" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="dupes" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="dupes.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          UAC Manifest Options
+          If you want to change the Windows User Account Control level replace the 
+          requestedExecutionLevel node with one of the following.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         If you want to utilize File and Registry Virtualization for backward 
+         compatibility then delete the requestedExecutionLevel node.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="dupes.exe" size="19880">
+      <assemblyIdentity name="dupes" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>JzkoMonsPQ1c2o7l5yrbM46JvLTOu6PKDcF0xNCdMj4=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="dupes.exe.config" size="189">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>rl5/qDc7Jz+tB+BIbOv9iMGPlRe6YJwrjmU09dnlPcs=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=User-PC\User" issuerKeyHash="b4960aa3867457e92df84f9c2afc57af4876a3c5" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>p+X62iXspd/ZxK6EV+e0ly3lSb58rolK0Z9hvh8M1to=</DigestValue></Reference></SignedInfo><SignatureValue>jFpFAg6e6DaapWgc+cVAkvOyE2RFr+3f9UoPH3+FCFfIgDs6wNrQNVCBFuueFVf+YAL4/o9/2J0r96ejiXtj+Hng3Kaf6/ZzPMFGxWbfPKrXc3aYk90odQ41kOEM4ohm1xdC0P5FCTleKm2hxfrRbf1kLyMkIbfhEDfZHwyHyDs=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>5uYsNrfMbvqIKfPir7Qq4Q+on+3SaxPLA7NkKzRp/6rJ98IzD3s9TC1VXfTwaaJlxCSTm4dApLvj/ScOyhxKPgrVHtHdAyjBqmiarTMZBXtxk/KKdSsLEcd9HtSEPweXUJaINcckT5itRYMQ4MXVNIYV+maHTBv6xHXxlIA/9pk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="dad60c1fbe619fd14a89ae7cbe49e52d97b4e75784aec4d9dfa5ec25dafae5a7" Description="" Url=""><as:assemblyIdentity name="dupes.exe" version="1.0.0.0" publicKeyToken="c19c83ac2f97ba65" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=User-PC\User</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>M7bkOKuSdRMOIk7XwIK78rDBei5AedQjrrjKxpjfv0E=</DigestValue></Reference></SignedInfo><SignatureValue>KjPi3LYIHjC9wDBCLfska1I5CTg1Wsu/nTdbyIxUNigu4k04QjCLe/WXYq+/UzVVS0lN4MJMQ8/hqhmzlFvoSyalQGQZ32AkhFmquAZAdHEhb7oZbpsYcMzgofpw3EnI9DNTMJQESKrgs9WlnpEpFk1GDgHjmkm9At6j8Q+J9D4=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>5uYsNrfMbvqIKfPir7Qq4Q+on+3SaxPLA7NkKzRp/6rJ98IzD3s9TC1VXfTwaaJlxCSTm4dApLvj/ScOyhxKPgrVHtHdAyjBqmiarTMZBXtxk/KKdSsLEcd9HtSEPweXUJaINcckT5itRYMQ4MXVNIYV+maHTBv6xHXxlIA/9pk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIByTCCATKgAwIBAgIQTAvg+/yrTLdKnp7vS0re7zANBgkqhkiG9w0BAQsFADAjMSEwHwYDVQQDHhgAVQBzAGUAcgAtAFAAQwBcAFUAcwBlAHIwHhcNMTgwMTI0MjE0NDM0WhcNMTkwMTI1MDM0NDM0WjAjMSEwHwYDVQQDHhgAVQBzAGUAcgAtAFAAQwBcAFUAcwBlAHIwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAObmLDa3zG76iCnz4q+0KuEPqJ/t0msTywOzZCs0af+qyffCMw97PUwtVV308GmiZcQkk5uHQKS74/0nDsocSj4K1R7R3QMowapomq0zGQV7cZPyinUrCxHHfR7UhD8Hl1CWiDXHJE+YrUWDEODF1TSGFfpmh0wb+sR18ZSAP/aZAgMBAAEwDQYJKoZIhvcNAQELBQADgYEAdjQhF97jmGtzmxZQley8+PpCnnex3FbSnH565BHE5C2Yn8NedszLqd+aqoo//80pnyXbKYQzPj+8b7SvxEaOPYgNnMVTMbziBcxISkfrtUUBvoPvAzTDmXbblQILTfya4jm0u5Ad2aaXZQesHxgxxc1l/++Adhtyq+CF0kGRMoM=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
