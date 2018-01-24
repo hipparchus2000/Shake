@@ -126,7 +126,8 @@ function getPayloadForResource(resource) {
 		case "blogs":
 			payload = {
 				"storyName": document.getElementById("editBlogStoryname").value,
-				"storyText": document.getElementById("editBlogStorytext").value,
+				//"storyText": document.getElementById("editBlogStorytext").value,
+				"storyText": tinyMCE.get('editBlogStorytext').getContent(),
 				"date":      document.getElementById("editBlogStorydate").value
 			};
 			break;
@@ -537,10 +538,15 @@ function applyEditBlogTemplate (id) {
 	var blogTemplate = document.getElementById("edit-blog-template");
 	var node = blogTemplate.cloneNode(true);
 	root.append(node);
+	tinymce.init({ selector:'#editBlogStorytext', theme:'modern', readonly: 0 });
+  //tinymce.EditorManager.execCommand('mceRemoveControl',true, "editBlogStorytext");
 	updateFormField( "blogEditId", id);
 	updateFormField( "editBlogStoryname", storyName);
-	updateFormField( "editBlogStorytext", storyText);
+	//updateFormField( "editBlogStorytext", storyText);
 	updateFormField( "editBlogStorydate", date);
+	//tinymce.EditorManager.execCommand('mceAddControl',true, "editBlogStorytext");
+	tinyMCE.get('editBlogStorytext').setContent(storyText, {format: 'raw'});
+
 }
 
 //User Template Rendering
